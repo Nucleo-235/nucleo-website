@@ -1,0 +1,82 @@
+#main {
+  @include mq($from: tablet) {
+    min-height: 294px;
+    height: auto;
+    text-align: center;
+    vertical-align: bottom;
+    background-image: image_url('pattern-nucleo-header.png');
+    background-repeat: repeat-x;
+    background-position-y: 10px;
+    @include bg_size(auto 294px);
+
+    h1, h2, h3 {
+      font-family: $body-text-font-family;
+    }
+
+    &:after {
+      clear: both;
+    }
+
+    .content {
+      text-align: center;
+      max-width: 720px;
+      margin: auto;
+      padding-top: 310px;
+    }
+
+    h1 {
+      float: left;
+      width: 50%;
+      img {
+        max-width: 100%;
+      }
+    }
+    h2, h3 {
+      float: right;
+      display: block;
+      width: 50%;
+      text-align: left;
+      padding-left: 30px;
+      padding-right: 0px;
+    }
+    h2 {
+      margin-top: 50px;
+      margin-bottom: 0px;
+    }
+    h3 {
+      color: $base-blue-greenish;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-weight: normal;
+    }
+    .more {
+      margin-top: 50px;
+      margin-bottom: 50px;
+      padding-left: 30px;
+      padding-right: 30px;
+
+      float: right;
+      width: 50%;
+      text-align: left;
+
+      a {
+        color: $base-black;
+        border: $base-gray-light solid 3px;
+        border-top: none;
+        text-transform: uppercase;
+        display: inline-block;
+        width: auto;
+
+        font-size: $button-main-font-size;
+        line-height: $button-main-font-size;
+        padding-bottom: $button-main-padding-bottom;
+        padding-left: $button-standard-padding-side;
+        padding-right: $button-standard-padding-side;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

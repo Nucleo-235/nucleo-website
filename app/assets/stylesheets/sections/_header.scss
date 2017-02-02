@@ -1,0 +1,25 @@
+header {
+  @include mq($from: tablet) {
+    width: 100%;
+    height: $header-height;
+    background-image: image_url('bg-bar-header.png');
+    position: fixed;
+    top: 0px;
+
+    & > * {
+      height: 100%;
+      img {
+        margin: 13px $sections-margin-side;
+      }
+    }
+
+    .current {
+      float: left;
+    }
+
+    .menu {
+      float: right;
+      height: 100%;
+    }
+  }
+}

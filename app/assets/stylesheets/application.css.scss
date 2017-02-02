@@ -17,3 +17,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+
+@import "fonts";
+@import "mixins";
+@import "mq";
+@import "variables";
+@import "global";
+
+@import "sections/header";
+@import "sections/nav";
+@import "sections/main";

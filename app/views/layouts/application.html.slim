@@ -1,10 +1,14 @@
 doctype html
 html
   head
-    title
-      | NucleoWebsite
+    title Nucleo - Creative Development
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
   body
+    = render 'shared/header'
+    = render 'shared/nav'
+
     = yield
+
+    = render 'shared/footer'

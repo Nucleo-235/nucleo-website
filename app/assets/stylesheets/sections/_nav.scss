@@ -1,0 +1,5 @@
+nav {
+  @include mq($from: tablet) {
+    display: none;
+  }
+}

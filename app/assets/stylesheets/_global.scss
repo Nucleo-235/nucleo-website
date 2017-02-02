@@ -1,0 +1,16 @@
+body {
+  font-family: $body-text-font-family;
+}
+
+@include mq($from: tablet) {
+  section {
+    margin-left: $sections-margin-side;
+    margin-right: $sections-margin-side;
+    clear: both;
+    margin-top: 50px;
+
+    &#main {
+      margin-top: $header-height;
+    }
+  }
+}
