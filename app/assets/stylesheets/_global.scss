@@ -1,16 +1,31 @@
 body {
   font-family: $body-text-font-family;
+  font-size: 16px;
 }
 
 @include mq($from: tablet) {
   section {
-    margin-left: $sections-margin-side;
-    margin-right: $sections-margin-side;
+    padding-left: $sections-margin-side;
+    padding-right: $sections-margin-side;
     clear: both;
-    margin-top: 50px;
+    // margin-bottom: 70px;
+
+    .content {
+      max-width: 100%;
+      width: 900px;
+      margin: auto;
+      padding-top: $sections-margin-vertical;
+      padding-bottom: $sections-margin-vertical;
+    }
 
     &#main {
       margin-top: $header-height;
     }
+  }
+}
+
+.best_in_place {
+  input {
+    color: $base-black !important;
   }
 }

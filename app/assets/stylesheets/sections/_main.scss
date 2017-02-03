@@ -1,12 +1,18 @@
 #main {
   @include mq($from: tablet) {
+    padding-top: 10px;
+
     min-height: 294px;
     height: auto;
+
     text-align: center;
     vertical-align: bottom;
+    overflow: hidden;
+
     background-image: image_url('pattern-nucleo-header.png');
-    background-repeat: repeat-x;
-    background-position-y: 10px;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-origin: content-box;
     @include bg_size(auto 294px);
 
     h1, h2, h3 {
@@ -22,6 +28,7 @@
       max-width: 720px;
       margin: auto;
       padding-top: 310px;
+      overflow: hidden;
     }
 
     h1 {
@@ -42,6 +49,7 @@
     h2 {
       margin-top: 50px;
       margin-bottom: 0px;
+      font-weight: normal;
     }
     h3 {
       color: $base-blue-greenish;
@@ -50,8 +58,8 @@
       font-weight: normal;
     }
     .more {
-      margin-top: 50px;
-      margin-bottom: 50px;
+      margin-top: $sections-margin-vertical;
+      margin-bottom: 0px;
       padding-left: 30px;
       padding-right: 30px;
 

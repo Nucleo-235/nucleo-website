@@ -1,5 +1,63 @@
 nav {
   @include mq($from: tablet) {
     display: none;
+    opacity: 0;
+    transition: opacity 1s ease-out;
+
+    background-color: transparentize($base-green, 0.1);
+
+    position: fixed;
+    height: auto;
+    top: 0px;
+    right: 0px;
+    width: 90%;
+
+    overflow: hidden;
+
+    &.shown {
+      opacity: 1;
+      display: block;
+    }
+
+    .close-menu {
+      float: right;
+      img {
+        margin: 13px $sections-margin-side;
+      }
+    }
+    ul {
+      clear: both;
+      float: right;
+      margin-right: $sections-margin-side;
+      margin-top: $menu-margin-vertical;
+      list-style: none;
+
+      &:last-child {
+        margin-bottom: 2 * $menu-margin-vertical;
+      }
+
+      li {
+        text-align: right;
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+
+        a {
+          @include standard_link_button(transparent, $base-gray-light);
+
+          margin-right: -10px;
+          padding: 5px 5px 0px 15px;
+          font-family: $title-text-font-family;
+          font-size: 50px;
+          line-height: 50px;
+          letter-spacing: $title-letter-spacing;
+
+          &.active {
+            background-color: $base-gray-light;
+            color: $base-black;
+          }
+        }
+      }
+    }
   }
 }

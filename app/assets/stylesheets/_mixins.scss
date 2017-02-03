@@ -1,15 +1,19 @@
 @mixin standard_link_button($bgcolor, $textcolor) {
   background-color: $bgcolor;
   color: $textcolor;
+  text-decoration: none;
   &:visited {
     color: $textcolor;
+    text-decoration: none;
   }
   &:hover {
     color: $textcolor;   
     background-color: darken($bgcolor, 10%);
+    text-decoration: none;
   }
   &:active {
     color: $textcolor;
+    text-decoration: none;
   }
 }
 

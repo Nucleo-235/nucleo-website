@@ -1,0 +1,38 @@
+#about {
+  @include mq($from: tablet) {
+    background-color: $base-black;
+    color: $base-white;
+
+    h2, h2 span {
+      color: $base-yellow;
+      font-family: $title-text-font-family;
+      font-size: 65px;
+      width: 100%;
+      letter-spacing: $title-letter-spacing;
+    }
+    strong {
+      font-family: $title-2-text-font-family;
+      font-size: 30px;
+      font-weight: light;
+      letter-spacing: 3px;
+      font-weight: normal;
+
+      color: $base-white;
+    }
+    .text {
+      margin-top: $sections-margin-vertical;
+      max-width: 100%;
+      padding-left: 160px;
+
+      background-image: image_url('pattern-about.png');
+      background-repeat: no-repeat;
+      background-position: top left;
+      // background-origin: content-box;
+      @include bg_size(135px auto);
+
+      p {
+        color: $base-text-white;
+      }
+    }
+  }
+}

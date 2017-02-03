@@ -22,5 +22,29 @@
 $(document).ready(function() {
   /* Activating Best In Place */
   jQuery(".best_in_place").best_in_place();
+
+  $('.open-menu').click(function(e) {
+    e.preventDefault();
+
+    $('nav#menu').show()
+    $('nav#menu').addClass('shown');
+    return false;
+  });
+
+  $('.close-menu').click(function(e) {
+    e.preventDefault();
+
+    $('nav#menu').hide();
+    $('nav#menu').removeClass('shown');
+    return false;
+  });
+
+  $('nav#menu .internal a').click(function(e) {
+    $('nav#menu').hide();
+    $('nav#menu').removeClass('shown');
+
+    $('nav#menu .internal a').removeClass('active');
+    $(this).addClass('active');
+  });
 });
 

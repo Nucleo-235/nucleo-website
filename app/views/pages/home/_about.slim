@@ -1,7 +1,6 @@
 section#about
-  h2 Quem Somos
-  h3 = localized_value_string(@current_page, 'about.subtitle', 'Empresa Livre de Tecnologia')
-  p
-    strong É assim como nos vemos:
-    br
-    |  fabricantes de aplicativos, artistas, cientistas, aspirantes a guitarristas e bateristas, tecnólogos, antropólogos. Nós gostamos de dar um mergulho profundo em sua marca, nadar ao redor de seus números, repensar sua experiência ou até seu negócio do zero. Porque nosso pensamento é livre, mas preparado para enfrentar qualquer desafio.
+  .content
+    h2 = localized_value_string(@current_page, 'about.subtitle', 'Tecnologia + Empresa Livre')
+    div.text
+      = localized_value_text(@current_page, 'about.content', "**É assim como nos vemos:**\
+        fabricantes de aplicativos, artistas, cientistas, aspirantes a guitarristas e bateristas, tecnólogos, antropólogos. Nós gostamos de dar um mergulho profundo em sua marca, nadar ao redor de seus números, repensar sua experiência ou até seu negócio do zero. Porque nosso pensamento é livre, mas preparado para enfrentar qualquer desafio.")

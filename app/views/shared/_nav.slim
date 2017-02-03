@@ -1,4 +1,7 @@
-nav
+nav#menu
+  a.close-menu href="" title="#{t('global.close')}"
+    img src="#{image_path('icon-close-menu.png')}" alt="#{t('global.close')}"
+
   ul.internal
     li
       a href="#main" = localized_value_string_read(@global_page, 'titles.main', 'Home')
