@@ -18,6 +18,7 @@
 //= require jquery_ujs
 //= require best_in_place
 //= require inplace_editing
+//= require slick.min
 
 $(document).ready(function() {
   /* Activating Best In Place */
@@ -45,6 +46,19 @@ $(document).ready(function() {
 
     $('nav#menu .internal a').removeClass('active');
     $(this).addClass('active');
+  });
+
+  $('section#people ul').slick({
+    autoplay: true,
+    arrows: false,
+  });
+
+  $('section#people .goto-next').click(function(e) {
+    e.preventDefault();
+
+    $('section#people ul').slick('slickNext');
+
+    return false;
   });
 });
 

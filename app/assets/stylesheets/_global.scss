@@ -21,6 +21,10 @@ body {
     &#main {
       margin-top: $header-height;
     }
+
+    .slick-disabled {
+      display: none !important;
+    }
   }
 }
 

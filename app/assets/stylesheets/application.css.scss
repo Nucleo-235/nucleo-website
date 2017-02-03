@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require_self
+ *= require slick
  */
 
 @import "bourbon";
@@ -28,3 +29,4 @@
 @import "sections/nav";
 @import "sections/main";
 @import "sections/about";
+@import "sections/people";
