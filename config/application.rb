@@ -10,6 +10,7 @@ module NucleoWebsite
   class Application < Rails::Application
     config.i18n.default_locale = 'pt-BR'
     config.i18n.available_locales = ['pt-BR', :en, :es]
+    config.i18n.fallbacks = true
     config.time_zone = 'Brasilia'
 
     config.assets.paths << Rails.root.join("app", "assets", "fonts")

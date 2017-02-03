@@ -62,3 +62,21 @@ $(document).ready(function() {
   });
 });
 
+function setImagePreview(input, imageElement, noImageElement) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            if (noImageElement)
+              noImageElement.hide();
+            imageElement.attr('src', e.target.result);
+            imageElement.show();
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    } else {
+      if (noImageElement)
+        noImageElement.show();
+      imageElement.hide();
+    }
+}

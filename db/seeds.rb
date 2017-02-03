@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Partner.create_if_new('Lucas Cordeiro', 'Sócio Designer, Artista, Skatista entre outros', '')
+Partner.create_if_new('Henrique Rangel', 'Sócio Programador, Geek e corredor', '')
+Customer.create_if_new('Mariana Pellicciari', 'Cliente, parceira, amante da sustentabilidade na moda', '')
+Customer.create_if_new('Victor Morganti', 'Cliente, Parceiro, inquieto, "hacker de vida" ...', '')

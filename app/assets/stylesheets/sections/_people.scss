@@ -39,13 +39,16 @@
               color: $base-green;
 
             }
-            & > img {
+            & > .avatar {
               float: right;
               z-index: 5;
               margin-bottom: 0px;
-              max-width: 190px;
-              height: auto;
               margin-right: 30px;
+              min-height: 150px;
+              img {
+                max-width: 190px;
+                height: auto;
+              }
             }
           }
           .details {
