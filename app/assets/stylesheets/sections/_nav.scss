@@ -38,6 +38,11 @@ nav {
       &:last-child {
         margin-bottom: 2 * $menu-margin-vertical;
       }
+      &.social {
+        a {
+          margin-right: 0px;
+        }
+      }
 
       li {
         text-align: right;
