@@ -2,7 +2,7 @@ header {
   @include mq($from: tablet) {
     width: 100%;
     height: $header-height;
-    background-image: image_url('bg-bar-header.png');
+    background-color: $base-bg-header;
     position: fixed;
     z-index: 1000;
     top: 0px;
