@@ -23,19 +23,16 @@ class ApplicationController < ActionController::Base
   def set_location
     @location = { id: 'pt_BR', name: 'SP', lat: -23.5733838, lng: -46.651777700000025 }
     @location_id = @location[:id]
-    begin
-      temperature_date_s = Rails.cache.fetch('forecast_time_' + @location_id) do
-        set_temperature_from_api
-        Time.new
-      end
-      temperature_date = temperature_date_s.to_time
 
-      if (Time.new - temperature_date) > 1.hour
-        set_temperature_from_api
-      else
-        set_temperature_from_cache
-      end
-    rescue
+    temperature_date_s = Rails.cache.fetch('forecast_time_' + @location_id) do
+      set_temperature_from_api
+      Time.new
+    end
+    temperature_date = temperature_date_s.to_time
+
+    if (Time.new - temperature_date) > 1.hour
+      set_temperature_from_api
+    else
       set_temperature_from_cache
     end
 
@@ -47,29 +44,35 @@ class ApplicationController < ActionController::Base
   private
     def set_temperature_from_api
       logger.debug "--------SET_TEMPERATURE_FROM_API----------"
-      temperature = ForecastIO.forecast(@location[:lat], @location[:lng], language: I18n.locale.to_s, exclude: "minutely,hourly,alerts,flags")
-      current_temperature = temperature.currently
+      begin
+        temperature = ForecastIO.forecast(@location[:lat], @location[:lng], language: I18n.locale.to_s, exclude: "minutely,hourly,alerts,flags")
+        current_temperature = temperature.currently
 
-      @temperature = current_temperature.temperature
-      @celsius_temperature = (5*(@temperature.to_f - 32))/9
-      @forecast_type = current_temperature.icon
-      @forecast_sunrise = Time.at(temperature.daily.data[0].sunriseTime.to_time)
-      @forecast_sunset = Time.at(temperature.daily.data[0].sunsetTime)
-      @forecast_is_night = Time.new < @forecast_sunrise || Time.new > @forecast_sunset
+        @temperature = current_temperature.temperature
+        @celsius_temperature = (5*(@temperature.to_f - 32))/9
+        @forecast_type = current_temperature.icon
+        @forecast_sunrise = Time.at(temperature.daily.data[0].sunriseTime)
+        @forecast_sunset = Time.at(temperature.daily.data[0].sunsetTime)
+        @forecast_is_night = Time.new < @forecast_sunrise || Time.new > @forecast_sunset
 
-      current_time = Time.new
-      Rails.cache.write('forecast_far_' + @location_id, @temperature.to_s)
-      Rails.cache.write('forecast_cel_' + @location_id, @celsius_temperature.to_s)
-      Rails.cache.write('forecast_type_' + @location_id, @forecast_type)
-      Rails.cache.write('forecast_sunrise' + @location_id, @forecast_sunrise.to_s)
-      Rails.cache.write('forecast_sunset' + @location_id, @forecast_sunset.to_s)
-      Rails.cache.write('forecast_time_' + @location_id, current_time.to_s)
+        current_time = Time.new
+        Rails.cache.write('forecast_far_' + @location_id, @temperature.to_s)
+        Rails.cache.write('forecast_cel_' + @location_id, @celsius_temperature.to_s)
+        Rails.cache.write('forecast_type_' + @location_id, @forecast_type)
+        Rails.cache.write('forecast_sunrise' + @location_id, @forecast_sunrise.to_s)
+        Rails.cache.write('forecast_sunset' + @location_id, @forecast_sunset.to_s)
+        Rails.cache.write('forecast_time_' + @location_id, current_time.to_s)
 
-      # logger.debug @temperature.to_s
-      # logger.debug @celsius_temperature.to_s
-      # logger.debug @forecast_type.to_s
-      # logger.debug @forecast_sunrise.to_s
-      # logger.debug @forecast_sunset.to_s
+        # logger.debug @temperature.to_s
+        # logger.debug @celsius_temperature.to_s
+        # logger.debug @forecast_type.to_s
+        # logger.debug @forecast_sunrise.to_s
+        # logger.debug @forecast_sunset.to_s
+      rescue => e
+        # se mesmo assim der erro ai fazemos o log
+        Rollbar.error(e, params: params.to_json)
+        raise e
+      end
     end
 
     def set_temperature_from_cache
@@ -87,7 +90,10 @@ class ApplicationController < ActionController::Base
         # logger.debug @forecast_type.to_s
         # logger.debug @forecast_sunrise.to_s
         # logger.debug @forecast_sunset.to_s
-      rescue
+      rescue => e
+        # se mesmo assim der erro ai fazemos o log
+        Rollbar.error(e, params: params.to_json)
+        raise e
       end
     end
 
