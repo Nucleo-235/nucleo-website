@@ -5,14 +5,14 @@
       &.with-clouds {
         .weather {
           i:before {
-            content: $day-icon;
+            content: $day-cloud-icon;
           }
         }
       }
       &.no-clouds {
         .weather {
           i:before {
-            content: $day-cloud-icon;
+            content: $day-icon;
           }
         }
       }
@@ -22,14 +22,14 @@
       &.with-clouds {
         .weather {
           i:before {
-            content: $night-icon;
+            content: $night-cloud-icon;
           }
         }
       }
       &.no-clouds {
         .weather {
           i:before {
-            content: $night-cloud-icon;
+            content: $night-icon;
           }
         }
       }
