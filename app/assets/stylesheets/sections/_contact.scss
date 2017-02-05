@@ -1,24 +1,143 @@
+@mixin weather($weather-class, $weather-bg-type, $day-icon, $day-cloud-icon, $night-icon, $night-cloud-icon) {
+  &.#{$weather-class} {
+    &.day {
+      // background-image: $day-background-image;
+      &.with-clouds {
+        .weather {
+          i:before {
+            content: $day-icon;
+          }
+        }
+      }
+      &.no-clouds {
+        .weather {
+          i:before {
+            content: $day-cloud-icon;
+          }
+        }
+      }
+    }
+    &.night {
+      // background-image: $night-background-image;
+      &.with-clouds {
+        .weather {
+          i:before {
+            content: $night-icon;
+          }
+        }
+      }
+      &.no-clouds {
+        .weather {
+          i:before {
+            content: $night-cloud-icon;
+          }
+        }
+      }
+    }
+  }
+}
 #contact {
   @include mq($from: tablet) {
+    font-family: $title-text-font-family;
+    color: $base-white;
+    overflow: hidden;
+
     &.forecast {
       &.day{
-        background-color: yellow;
-        color: black;
+        background-color: #ee7600;
+        // color: black;
       }
       &.night{
         background-color: black;
-        color: white;
+        
       }
-      &.clear-day { }
-      &.clear-night { }
-      &.rain { }
-      &.snow { }
-      &.sleet { }
-      &.wind { }
-      &.fog { }
-      &.cloudy { }
-      &.partly-cloudy-day { }
-      &.partly-cloudy-night { }
+      @include weather(clear-day, clear,"\f00d","\f00c","\f00d","\f00c");
+      @include weather(clear-night, clear,"\f02e","\f","\f02e","\f086");
+      @include weather(rain, rain,"\f008","\f019","\ff036","\ff019");
+      @include weather(snow, snow,"\f00a","\f01b","\f067","\f01b");
+      @include weather(sleet, sleet,"\f0b2","\f0b5","\f0b3","\f0b5");
+      @include weather(wind, wind,"\f0c4","\f021","\f030","\f021");
+      @include weather(fog, fog,"\f003","\f014","\f04a","\f014");
+      @include weather(cloudy, cloudy,"\f002","\f013","\f086","\f013");
+      @include weather(partly-cloudy-day, partly-cloudy,"\f002","\f041","\f002","\f041");
+      @include weather(partly-cloudy-night, partly-cloudy,"\f086","\f041","\f086","\f041");
+    }
+
+    .content {
+      position: relative;
+      .location {
+        position: absolute;
+        z-index: 11;
+        top:$sections-margin-vertical;
+        bottom:0px;
+        left:0px;
+        right:0px;
+        overflow: hidden;
+
+        h3 {
+          float: left;
+          font-size: 145px;
+          color: $base-white;
+          margin: 0px;
+          padding: 0px;
+        }
+        .weather {
+          float: right;
+          font-size: 80px;
+          font-family: $title-text-font-family;
+          margin-right: 15px;
+          margin-top: 15px;
+          text-align: right;
+          i {
+            text-align: right;
+          }
+        }
+        .temperature {
+          clear: right;
+          float: right;
+          font-size: 80px;
+          font-family: $title-text-font-family;
+        }
+      }
+      .address, .links {
+        position: relative;
+        margin: 0px;
+        z-index: 12;
+        font-size: 20px;
+        background-color: transparentize($base-black, 0.8);
+      }
+      .address {
+        padding: 15px 30px;
+        margin-top: 160px;
+        display: block;
+        width: 60%;
+
+        border: $base-white 3px solid;
+      }
+      .links {
+        padding: 0px;
+        display: block;
+        width: 60%;
+        border-right: $base-white 3px solid;
+        border-left: $base-white 3px solid;
+        border-bottom: $base-white 3px solid;
+        a {
+          @include standard_link_button(transparent, $base-white);
+        }
+
+        & > * {
+          padding: 15px 30px;
+          width: 50%;
+          display: inline-block;
+          text-align: center;
+          vertical-align: top;
+
+          &:first-child {
+            border-right: $base-white 3px solid;
+            width: calc(50% - 4px);
+          }
+        }
+      }
     }
   }
 }

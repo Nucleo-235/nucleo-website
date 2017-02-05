@@ -51,6 +51,7 @@ class ApplicationController < ActionController::Base
         @temperature = current_temperature.temperature
         @celsius_temperature = (5*(@temperature.to_f - 32))/9
         @forecast_type = current_temperature.icon
+        @forecast_cloud = current_temperature.cloudCover
         @forecast_sunrise = Time.at(temperature.daily.data[0].sunriseTime)
         @forecast_sunset = Time.at(temperature.daily.data[0].sunsetTime)
         @forecast_is_night = Time.new < @forecast_sunrise || Time.new > @forecast_sunset
@@ -59,6 +60,7 @@ class ApplicationController < ActionController::Base
         Rails.cache.write('forecast_far_' + @location_id, @temperature.to_s)
         Rails.cache.write('forecast_cel_' + @location_id, @celsius_temperature.to_s)
         Rails.cache.write('forecast_type_' + @location_id, @forecast_type)
+        Rails.cache.write('forecast_cloud_' + @location_id, @forecast_cloud.to_s)
         Rails.cache.write('forecast_sunrise' + @location_id, @forecast_sunrise.to_s)
         Rails.cache.write('forecast_sunset' + @location_id, @forecast_sunset.to_s)
         Rails.cache.write('forecast_time_' + @location_id, current_time.to_s)
@@ -81,6 +83,7 @@ class ApplicationController < ActionController::Base
         @temperature = Rails.cache.fetch('forecast_far_' + @location_id).to_f
         @celsius_temperature = Rails.cache.fetch('forecast_cel_' + @location_id).to_f
         @forecast_type = Rails.cache.fetch('forecast_type_' + @location_id)
+        @forecast_cloud = Rails.cache.fetch('forecast_cloud_' + @location_id).to_f
         @forecast_sunrise = Rails.cache.fetch('forecast_sunrise' + @location_id).to_time
         @forecast_sunset = Rails.cache.fetch('forecast_sunset' + @location_id).to_time
         @forecast_is_night = Time.new < @forecast_sunrise || Time.new > @forecast_sunset

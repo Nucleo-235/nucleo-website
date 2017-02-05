@@ -30,6 +30,7 @@ gem 'jquery-rails'
 gem 'jquery-easing-rails'
 gem 'font-awesome-rails'
 gem 'bourbon'
+gem 'weather-icons-rails'
 
 gem 'noty-rails'
 gem 'simple_form'
