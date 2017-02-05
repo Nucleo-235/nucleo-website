@@ -148,6 +148,10 @@ GEM
       multipart-post (>= 1.2, < 3)
     font-awesome-rails (4.7.0.1)
       railties (>= 3.2, < 5.1)
+    forecast_io (2.0.1)
+      faraday
+      hashie
+      multi_json
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     globalize (5.0.1)
@@ -192,7 +196,7 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.4.1)
       launchy (~> 2.2)
-    localizable_value (0.1.20)
+    localizable_value (0.1.25)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     madmimi (1.1.2)
@@ -398,6 +402,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   font-awesome-rails
+  forecast_io
   globalize (~> 5.0.0)
   google-analytics-rails
   high_voltage (~> 2.2.1)

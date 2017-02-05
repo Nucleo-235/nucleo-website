@@ -2,19 +2,23 @@ source 'https://rubygems.org'
 
 ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.4'
 gem 'rails', '4.2.5'
+
 gem 'pg'
 gem 'actionmailer'
 gem 'active_model_serializers'
 gem 'http_accept_language'
 gem 'globalize', '~> 5.0.0'
 gem 'responders'
+
 gem 'redis'
 gem 'redis-namespace'
 gem 'sidekiq', '~> 3.2.6'
+
 gem 'kaminari'
 gem 'carrierwave'
 gem 'carrierwave-aws'
 gem 'carrierwave_backgrounder'
+
 gem 'high_voltage', '~> 2.2.1'
 gem 'slim'
 gem 'slim-rails'
@@ -26,15 +30,18 @@ gem 'jquery-rails'
 gem 'jquery-easing-rails'
 gem 'font-awesome-rails'
 gem 'bourbon'
+
 gem 'noty-rails'
 gem 'simple_form'
 gem 'mail_form'
 gem 'country_select'
 gem 'cocoon'
+
 gem 'best_in_place', '~> 3.0.1'
 gem 'redcarpet', '>= 3.0.0'
 gem 'inplace_editing'
 gem 'localizable_value'
+
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -42,9 +49,13 @@ gem 'omniauth-instagram'
 gem 'omniauth-twitter'
 gem 'omniauth-linkedin'
 gem 'omniauth-google-oauth2'
+
 gem 'madmimi'
 gem 'google-analytics-rails'
 gem 'rollbar'
+
+gem 'forecast_io'
+
 group :development do
   gem 'annotate', '>=2.6.0'
   gem 'pry-rails'

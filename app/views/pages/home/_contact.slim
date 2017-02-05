@@ -1,0 +1,14 @@
+section#contact class="#{@forecast_type ? 'forecast '+ @forecast_type : ''} #{@forecast_is_night ? 'night' : 'day'}"
+  .content
+    .location
+      h3 = @location[:name]
+      - if @celsius_temperature
+        span.temperature = number_with_precision(@celsius_temperature, precision: 0) + 'ºC'
+    .address
+      = localized_value_text(@current_page, 'contact.address', "Rua Tutóia, 235 - CJ 54\
+        CEP: 04007-000\
+        São Paulo\
+        Brasil")
+    .links
+      = localized_value_link_attr(@current_page, 'contact.email', 'Mande-nos um e-mail', { href: 'mailto:contato@nucleo235.com.br', class: 'email' })
+      = localized_value_link_attr(@current_page, 'contact.telephone', '+55 11 3042-2354', { href: 'tel:+55 11 3042-2354', class: 'telephone' })

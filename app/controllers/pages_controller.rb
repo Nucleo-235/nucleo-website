@@ -6,5 +6,7 @@ class PagesController < ApplicationController
   def home
     @partners = Partner.all
     @people = Person.where.not(type: Partner.name)
+
+    set_location
   end
 end

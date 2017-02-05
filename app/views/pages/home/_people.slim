@@ -1,6 +1,6 @@
 section#people
   .content
-    h2 Pessoas
+    h2 = localized_value_string(@current_page, 'people.title', 'Pessoas')
     ul
       - @partners.to_a.shuffle!.each_with_index do |person, index|
         li class="#{index > 0 ? '' : 'active'} #{person.type.downcase}"

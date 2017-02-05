@@ -1,0 +1,24 @@
+#contact {
+  @include mq($from: tablet) {
+    &.forecast {
+      &.day{
+        background-color: yellow;
+        color: black;
+      }
+      &.night{
+        background-color: black;
+        color: white;
+      }
+      &.clear-day { }
+      &.clear-night { }
+      &.rain { }
+      &.snow { }
+      &.sleet { }
+      &.wind { }
+      &.fog { }
+      &.cloudy { }
+      &.partly-cloudy-day { }
+      &.partly-cloudy-night { }
+    }
+  }
+}
