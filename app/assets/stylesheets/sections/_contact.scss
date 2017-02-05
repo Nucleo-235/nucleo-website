@@ -52,15 +52,15 @@
         
       }
       @include weather(clear-day, clear,"\f00d","\f00c","\f00d","\f00c");
-      @include weather(clear-night, clear,"\f02e","\f","\f02e","\f086");
+      @include weather(clear-night, clear,"\f02e","\f031","\f02e","\f031");
       @include weather(rain, rain,"\f008","\f019","\ff036","\ff019");
-      @include weather(snow, snow,"\f00a","\f01b","\f067","\f01b");
+      @include weather(snow, snow,"\f00a","\f01b","\f066","\f01b");
       @include weather(sleet, sleet,"\f0b2","\f0b5","\f0b3","\f0b5");
       @include weather(wind, wind,"\f0c4","\f021","\f030","\f021");
       @include weather(fog, fog,"\f003","\f014","\f04a","\f014");
-      @include weather(cloudy, cloudy,"\f002","\f013","\f086","\f013");
+      @include weather(cloudy, cloudy,"\f002","\f013","\f031","\f013");
       @include weather(partly-cloudy-day, partly-cloudy,"\f002","\f041","\f002","\f041");
-      @include weather(partly-cloudy-night, partly-cloudy,"\f086","\f041","\f086","\f041");
+      @include weather(partly-cloudy-night, partly-cloudy,"\f031","\f041","\f031","\f041");
     }
 
     .content {
