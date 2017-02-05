@@ -6,7 +6,7 @@ section#contact class="#{@forecast_type ? 'forecast '+ @forecast_type : ''} #{@f
         span.weather
           i.wi
       - if @celsius_temperature
-        span.temperature = number_with_precision(@celsius_temperature, precision: 0) + 'ºC'
+        span.temperature = number_with_precision(@celsius_temperature, precision: 0) + '°C'
     .address
       = localized_value_text(@current_page, 'contact.address', "Rua Tutóia, 235 - CJ 54\
         CEP: 04007-000\
