@@ -81,8 +81,8 @@ class ApplicationController < ActionController::Base
         @temperature = Rails.cache.fetch('forecast_far_' + @location_id).to_f
         @celsius_temperature = Rails.cache.fetch('forecast_cel_' + @location_id).to_f
         @forecast_type = Rails.cache.fetch('forecast_type_' + @location_id)
-        @forecast_sunrise = Rails.cache.write('forecast_sunrise' + @location_id).to_time
-        @forecast_sunset = Rails.cache.write('forecast_sunset' + @location_id).to_time
+        @forecast_sunrise = Rails.cache.fetch('forecast_sunrise' + @location_id).to_time
+        @forecast_sunset = Rails.cache.fetch('forecast_sunset' + @location_id).to_time
         @forecast_is_night = Time.new < @forecast_sunrise || Time.new > @forecast_sunset
 
         # logger.debug @temperature.to_s
