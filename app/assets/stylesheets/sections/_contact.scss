@@ -53,7 +53,7 @@
       }
       @include weather(clear-day, clear,"\f00d","\f00c","\f00d","\f00c");
       @include weather(clear-night, clear,"\f02e","\f031","\f02e","\f031");
-      @include weather(rain, rain,"\f008","\f019","\ff036","\ff019");
+      @include weather(rain, rain,"\f008","\f019","\f036","\f019");
       @include weather(snow, snow,"\f00a","\f01b","\f066","\f01b");
       @include weather(sleet, sleet,"\f0b2","\f0b5","\f0b3","\f0b5");
       @include weather(wind, wind,"\f0c4","\f021","\f030","\f021");
