@@ -7,8 +7,12 @@ section#portfolio
         - @projects.each do |project|
           li.project class="#{@can_edit ? 'admin' : ''}"
             a.open-project href="##{project.slug}"
-              .name
-                strong = project.name
+              .info
+                .name
+                  strong = project.name
+                span.producer 
+                  | by&nbsp;
+                  span.nucleo nucleo
               img src="#{project.thumb_image}"
         - if @can_edit
           li.new
@@ -23,10 +27,16 @@ section#portfolio
       .project-list
         // Só o primeiro será carregado, os demais serão carregados via JS
         .project-item id="#{first_project.slug}" class="#{@can_edit ? 'admin' : ''}"
-          .name
-            strong.name-value = string_editor(first_project, :name)
-          .summary.summary-value
-             = text_editor(first_project, :summary)
+          .info
+            .name
+              strong.name-value = string_editor(first_project, :name)
+            span.producer 
+              | by&nbsp;
+              span.nucleo nucleo
+            .summary.summary-value
+               = text_editor(first_project, :summary)
+          - if @can_edit
+            .thumb_image.thumb_image-value = image_editor(first_project, :thumb_image)
           .categories
             ul
               - first_project.categories.each do |category|
@@ -34,6 +44,4 @@ section#portfolio
                   span = category.name
             - if @can_edit
               // TODO categories drop down
-          - if @can_edit
-            .thumb.thumb_image-value = image_editor(first_project, :thumb_image)
           .image.image-value = image_editor(first_project, :image)

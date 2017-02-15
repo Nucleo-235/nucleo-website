@@ -1,6 +1,7 @@
 #portfolio {
   @include mq($from: tablet) {
-    display: block;
+    transition: margin-right 0.5s ease-out;
+    margin-right: -100vw;
 
     // background-color: transparentize($base-white, 0.1);
 
@@ -45,6 +46,9 @@
     }
 
     &.shown {
+      transition: margin-right 0s ease-in;
+      margin-right: 0px;
+
       .content {
         transition: margin-right 0.5s ease-in;
         margin-right: 0px;
@@ -90,8 +94,12 @@
           width: 100%;
           height: auto;
         }
-        .name {
+        .info {
           display: none;
+          position: absolute;
+          width: 100%;
+          top:0px;
+          bottom:0px;
 
           &:before {
             content: "";
@@ -100,19 +108,40 @@
             top:0px;
             bottom:0px;
             background-color: transparentize($base-green, 0.1);
+          }
+          .name {
+            display: block;
+            position: relative;
+            width: 80%;
+            margin: auto;
+            margin-top: 30%;
+            border-bottom: 1px solid $base-white;
 
-            padding-top: 50%;
+            font-family: $title-text-font-family;
+            font-size: 40px;
+            font-weight: normal;
+            color: $base-white;
           }
           strong {
-            position: absolute;
-            top: 60%;
-            width: 100%;
-            text-align: center;
+            font-weight: inherit;
+          }
+          .producer {
+            display: block;
+            position: relative;
+            width: 80%;
+            margin: auto;
+            margin-top: 15px;
+
+            font-family: $body-text-font-family;
+            font-size: 25px;
+            line-height: 25px;
+            font-weight: normal;
+            color: $base-white;
           }
         }
 
         &:hover {
-          .name {
+          .info {
             display: block;
           }
         }
@@ -122,9 +151,60 @@
     .project-list {
       display: none;
       z-index: 102;
+      padding-left: $sections-margin-side;
+      padding-right: $sections-margin-side;
 
       .project-item, .template {
         display: none;
+        position: relative;
+
+        max-width: 100%;
+        width: 1080px;
+        margin: auto;
+        padding-top: $sections-margin-side;
+
+        .info {
+          width: 70%;
+          float: left;
+          padding-right: 10px;
+        }
+
+        .categories {
+          width: 30%;
+          float: right;
+        }
+
+        .name {
+          font-family: $body-text-font-family;
+          font-size: 45px;
+        }
+        .summary {
+          width: 100%;
+        }
+        .producer {
+          font-family: $body-text-font-family;
+          font-size: 25px;
+          .nucleo {
+            font-weight: bold;
+          }
+        }
+        .thumb_image {
+          float: right;
+          width: 30%;
+          text-align: right;
+          img {
+            max-width: 100%;
+          }
+        }
+        .image {
+          clear: both;
+          img {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+          }
+        }
       }
     }
 

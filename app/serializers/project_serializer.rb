@@ -18,12 +18,14 @@ class ProjectSerializer < ActiveModel::Serializer
   include InplaceEditingHelper
   attributes :id, :name, :type, :image, :summary, :summary_html, :thumb_image, :sort_order, :slug
 
+  has_many :categories
+
   def thumb_image
     self.object.thumb_image ? self.object.thumb_image_url : nil
   end
 
   def image
-    self.object.thumb_image ? self.object.thumb_image_url : nil
+    self.object.image ? self.object.image_url : nil
   end
 
   def summary_html
