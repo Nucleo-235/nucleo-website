@@ -1,5 +1,5 @@
 @mixin weather($weather-class, $weather-bg-type, $day-icon, $day-cloud-icon, $night-icon, $night-cloud-icon) {
-  &.#{$weather-class} {
+  &.#{""+$weather-class} {
     &.day {
       // background-image: $day-background-image;
       &.with-clouds {

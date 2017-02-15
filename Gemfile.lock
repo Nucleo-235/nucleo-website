@@ -152,13 +152,15 @@ GEM
       faraday
       hashie
       multi_json
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     globalize (5.0.1)
       activemodel (>= 4.2.0, < 4.3)
       activerecord (>= 4.2.0, < 4.3)
     google-analytics-rails (1.1.0)
-    hashie (3.5.1)
+    hashie (3.4.4)
     high_voltage (2.2.1)
     http_accept_language (2.1.0)
     httparty (0.14.0)
@@ -406,8 +408,10 @@ DEPENDENCIES
   factory_girl_rails
   font-awesome-rails
   forecast_io
+  friendly_id (~> 5.1.0)
   globalize (~> 5.0.0)
   google-analytics-rails
+  hashie (= 3.4.4)
   high_voltage (~> 2.2.1)
   http_accept_language
   inplace_editing

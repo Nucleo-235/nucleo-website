@@ -10,3 +10,11 @@ Partner.create_if_new('Lucas Cordeiro', 'Sócio Designer, Artista, Skatista entr
 Partner.create_if_new('Henrique Rangel', 'Sócio Programador, Geek e corredor', '')
 Customer.create_if_new('Mariana Pellicciari', 'Cliente, parceira, amante da sustentabilidade na moda', '')
 Customer.create_if_new('Victor Morganti', 'Cliente, Parceiro, inquieto, "hacker de vida" ...', '')
+
+Category.create_if_new('design', 'Design')
+Category.create_if_new('ux', 'Usabilidade')
+Category.create_if_new('content', 'Conteúdo')
+Category.create_if_new('design', 'Design')
+Category.create_if_new('development', 'Programação')
+Category.create_if_new('front-end-dev', 'Front-End')
+Category.create_if_new('back-end-dev', 'Back-End')

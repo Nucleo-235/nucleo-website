@@ -1,0 +1,135 @@
+#portfolio {
+  @include mq($from: tablet) {
+    display: block;
+
+    // background-color: transparentize($base-white, 0.1);
+
+    position: absolute;
+    height: auto;
+    top: $header-height;
+    right: 0px;
+    width: 100%;
+    bottom: 0px;
+
+    padding: 0px;
+    overflow: hidden;
+    overflow-y: visible;
+
+    &:before {
+      content: "";
+      position: fixed;
+      display: block;
+      width: 100%;
+      top: $header-height;
+      bottom: 0px;
+      padding: 0px;
+      background-color: transparentize($base-white, 0.1);
+      z-index: 101;
+
+      opacity: 1;
+      transition: right 0.5s ease-out;
+      right: -100vw;
+    }
+
+    .content {
+      display: block;
+      width: 100%;
+      height: auto;
+      padding: 0px;
+      z-index: 102;
+      position: relative;
+
+      opacity: 1;
+      transition: margin-right 0.5s ease-out;
+      margin-right: -100vw;
+    }
+
+    &.shown {
+      .content {
+        transition: margin-right 0.5s ease-in;
+        margin-right: 0px;
+      }
+
+      .close-portfolio {
+        display: block;
+      }
+
+      &:before {
+        transition: margin-right 0.5s ease-in;
+        right: 0px;
+      }
+    }
+
+    .close-portfolio {
+      @extend .close-section-button;
+      z-index: 10001;
+      display: none;
+      position: fixed;
+      top: 0px;
+      right: 0px;
+      background-color: $base-bg-header;
+    }
+
+    ul.projects {
+      list-style-type: none;
+      padding-left: 0px;
+      & > li.project {
+        padding-left: 0px;
+        position: relative;
+        display: inline-block;
+        width: 50%;
+        max-width: 50%;
+        height: auto;
+
+        & > a, .fields {
+          position: relative;
+          display: block;
+        }
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+        .name {
+          display: none;
+
+          &:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            top:0px;
+            bottom:0px;
+            background-color: transparentize($base-green, 0.1);
+
+            padding-top: 50%;
+          }
+          strong {
+            position: absolute;
+            top: 60%;
+            width: 100%;
+            text-align: center;
+          }
+        }
+
+        &:hover {
+          .name {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .project-list {
+      display: none;
+      z-index: 102;
+
+      .project-item, .template {
+        display: none;
+      }
+    }
+
+    #new-project {
+      display: none;
+    }
+  }
+}

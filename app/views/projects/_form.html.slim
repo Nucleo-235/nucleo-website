@@ -1,0 +1,13 @@
+= simple_form_for(project) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    / = f.input :type
+    = f.input :image
+    = f.input :summary
+    = f.input :thumb_image
+    = f.input :sort_order
+
+  .form-actions
+    = f.button :submit

@@ -26,6 +26,13 @@ body {
       display: none !important;
     }
   }
+
+  .close-section-button {
+    float: right;
+    img {
+      margin: 13px $sections-margin-side;
+    }
+  }
 }
 
 .best_in_place, .form_in_place {
@@ -35,4 +42,8 @@ body {
   input:not([type=button]):not([type=reset]):not([type=submit]), textarea {
     width: 100%;
   }
+}
+
+.noscroll {
+  overflow: hidden;
 }

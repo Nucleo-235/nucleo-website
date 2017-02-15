@@ -20,5 +20,6 @@ class Customer < Person
       # admin.skip_confirmation!
       item.save!
     end
+    item
   end
 end

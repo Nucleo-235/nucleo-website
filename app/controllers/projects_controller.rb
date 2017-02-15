@@ -3,6 +3,14 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # POST /projects
+  def show
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json { respond_with(@project) }
+    end
+  end
+
+  # POST /projects
   def create
     @project = Project.new(project_params)
 
@@ -51,6 +59,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def project_params
-      params.require(:project).permit(:name, :type, :image, :image_cache, :summary)
+      params.require(:project).permit(:name, :type, :image, :image_cache, :thumb_image, :thumb_image_cache, :summary)
     end
 end

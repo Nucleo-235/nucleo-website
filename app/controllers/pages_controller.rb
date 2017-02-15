@@ -6,6 +6,12 @@ class PagesController < ApplicationController
   def home
     @partners = Partner.all
     @people = Person.where.not(type: Partner.name)
+    
+    @projects = Project.all
+    if @can_edit
+      @categories = Category.all
+      @new_project = Project.new
+    end
 
     set_location
   end

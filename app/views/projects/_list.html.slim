@@ -1,0 +1,39 @@
+section#portfolio
+  a.close-portfolio href="" title="#{t('global.close')}"
+    img src="#{image_path('icon-close-menu.png')}" alt="#{t('global.close')}"
+  .content
+    nav
+      ul.projects
+        - @projects.each do |project|
+          li.project class="#{@can_edit ? 'admin' : ''}"
+            a.open-project href="##{project.slug}"
+              .name
+                strong = project.name
+              img src="#{project.thumb_image}"
+        - if @can_edit
+          li.new
+            a.open-new-project href="#new-project" Novo Projeto
+
+    - if @can_edit
+      #new-project
+        = render partial: 'projects/form', locals: { project: @new_project }
+
+    - if @projects.length > 0
+      - first_project = @projects.first
+      .project-list
+        // Só o primeiro será carregado, os demais serão carregados via JS
+        .project-item id="#{first_project.slug}" class="#{@can_edit ? 'admin' : ''}"
+          .name
+            strong.name-value = string_editor(first_project, :name)
+          .summary.summary-value
+             = text_editor(first_project, :summary)
+          .categories
+            ul
+              - first_project.categories.each do |category|
+                li class="#{category.icon_klass}"
+                  span = category.name
+            - if @can_edit
+              // TODO categories drop down
+          - if @can_edit
+            .thumb.thumb_image-value = image_editor(first_project, :thumb_image)
+          .image.image-value = image_editor(first_project, :image)

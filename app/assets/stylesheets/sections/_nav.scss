@@ -1,4 +1,4 @@
-nav {
+nav#menu {
   @include mq($from: tablet) {
     display: block;
     opacity: 1;
@@ -12,7 +12,7 @@ nav {
     height: auto;
     top: 0px;
     right: 0px;
-    width: 90%;
+    width: 100%;
 
     overflow: hidden;
 
@@ -23,11 +23,9 @@ nav {
     }
 
     .close-menu {
-      float: right;
-      img {
-        margin: 13px $sections-margin-side;
-      }
+      @extend .close-section-button;
     }
+
     ul {
       clear: both;
       float: right;

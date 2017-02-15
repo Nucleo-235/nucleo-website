@@ -9,6 +9,7 @@ gem 'active_model_serializers'
 gem 'http_accept_language'
 gem 'globalize', '~> 5.0.0'
 gem 'responders'
+gem 'friendly_id', '~> 5.1.0'
 
 gem 'redis'
 gem 'redis-namespace'
@@ -56,6 +57,7 @@ gem 'google-analytics-rails'
 gem 'rollbar'
 
 gem 'forecast_io'
+gem 'hashie', '3.4.4'
 
 group :development do
   gem 'annotate', '>=2.6.0'
