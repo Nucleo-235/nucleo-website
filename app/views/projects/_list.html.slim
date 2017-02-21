@@ -1,6 +1,9 @@
 section#portfolio
-  a.close-portfolio href="" title="#{t('global.close')}"
-    img src="#{image_path('icon-close-menu.png')}" alt="#{t('global.close')}"
+  .sub-menu
+    a.open-related-portfolio href="#related-portfolio"
+      img src="#{image_path('icon-portfolio-related.png')}" title="#{@global_page.get_value('global.header.related_portfolio', 'Projetos Similares').value}"
+    a.close-portfolio href="" title="#{t('global.close')}"
+      img src="#{image_path('icon-close-menu.png')}" alt="#{t('global.close')}"
   .content
     nav
       ul.projects

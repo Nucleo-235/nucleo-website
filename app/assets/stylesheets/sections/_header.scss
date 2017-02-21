@@ -9,9 +9,7 @@ header {
 
     & > * {
       height: 100%;
-      img {
-        margin: 13px $sections-margin-side;
-      }
+      margin: 13px $sections-margin-side;
     }
 
     .current {
@@ -47,6 +45,12 @@ header {
     .menu {
       float: right;
       height: 100%;
+      img {
+        margin-left: 15px;
+      }
+      & > * {
+        display: inline-block;
+      }
     }
   }
 }

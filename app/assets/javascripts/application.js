@@ -54,11 +54,14 @@ $(document).ready(function() {
 
   $('.open-project').click(function(e) {
     return currentStrategy.openProject(e, this);
-  })
+  });
 
   $('.open-new-project').click(function(e) {
     return currentStrategy.openNewProject(e, this);
-  })
+  });
+  $('.open-related-portfolio').click(function(e) {
+    return currentStrategy.openRelatedPortfolio(e, this);
+  });
 
   $('nav#menu .internal a').click(function(e) {
     $('nav#menu').hide();

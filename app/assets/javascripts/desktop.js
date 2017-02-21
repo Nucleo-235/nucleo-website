@@ -19,6 +19,7 @@ var desktopStrategy = {
     $('#portfolio nav').show();
     $('.current-page').addClass('shown');
     $('.current-page .open-portfolio').addClass('shown');
+    $('.open-related-portfolio').removeClass('shown');
 
     $('#portfolio').show();
     $('#portfolio').addClass('shown');
@@ -26,12 +27,15 @@ var desktopStrategy = {
 
     return false;
   },
+  openRelatedPortfolio: function(e, self) {
+    this.openPortfolio(e, self);
+  },
   openProject: function(e, self) {
     var link = $(self);
     return this.openProjectWithLink(e, link, link.attr("href"));
   },
   openProjectWithLink: function(e, link, projectIDWithHash) {
-    preventDefaultWithHash(e, self);
+    preventDefaultWithHash(e, link);
 
     function doShow(projectID, element) {
       if (currentOpenProjectID) {
@@ -42,6 +46,7 @@ var desktopStrategy = {
       $('#portfolio nav').hide();
       $('#new-project').hide();
 
+      $('.open-related-portfolio').addClass('shown');
       $('.project-list').show();
       element.show();
       currentOpenProjectID = projectID;
@@ -85,6 +90,7 @@ var desktopStrategy = {
 
     $('.current-page').removeClass('shown');
     $('.current-page .open-portfolio').removeClass('shown');
+    $('.open-related-portfolio').removeClass('shown');
 
     window.location.hash = '';
 

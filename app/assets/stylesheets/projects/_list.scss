@@ -54,7 +54,7 @@
         margin-right: 0px;
       }
 
-      .close-portfolio {
+      .sub-menu {
         display: block;
       }
 
@@ -64,14 +64,31 @@
       }
     }
 
-    .close-portfolio {
-      @extend .close-section-button;
-      z-index: 10001;
+    .sub-menu {
       display: none;
+      z-index: 10001;
       position: fixed;
       top: 0px;
       right: 0px;
       background-color: $base-bg-header;
+      margin: 13px $sections-margin-side;
+
+      img {
+        margin-left: 15px;
+      }
+
+      .open-related-portfolio {
+        display: none;
+        &.shown {
+          display: inline-block;
+        }
+      }
+    }
+
+    .close-portfolio {
+      position: relative;
+      display: inline-block;
+      float: none;
     }
 
     ul.projects {
