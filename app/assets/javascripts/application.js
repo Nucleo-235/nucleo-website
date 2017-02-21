@@ -80,6 +80,10 @@ $(document).ready(function() {
 
     return false;
   });
+
+  if (window.location.hash == '#portfolio') {
+    currentStrategy.openPortfolio();
+  }
 });
 
 function preventDefaultIfPossible(e) {
@@ -90,7 +94,9 @@ function preventDefaultIfPossible(e) {
 
 function preventDefaultWithHash(e, self) {
   preventDefaultIfPossible(e);
-  window.location.hash = $(self).attr('href');
+  var link = $(self);
+  if (link && link.length > 0)
+    window.location.hash = link.attr('href');
 }
 
 function getProjectIDs() {

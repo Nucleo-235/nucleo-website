@@ -16,6 +16,32 @@ header {
 
     .current {
       float: left;
+      img {
+        margin-right: 15px;
+        display: inline-block;
+      }
+      .current-page {
+        display: none;
+        color: $base-yellow;
+        font-family: $body-text-font-family;
+        text-transform: uppercase;
+        &.shown {
+          display: inline-block;
+        }
+
+        a {
+          color: $base-yellow;
+          text-decoration: none;
+          &.shown {
+            display: inline-block;
+          }
+        }
+
+        & > * {
+          display: none;
+          vertical-align: middle;
+        }
+      }
     }
 
     .menu {

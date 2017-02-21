@@ -33,6 +33,10 @@ body {
       margin: 13px $sections-margin-side;
     }
   }
+
+  a {
+    text-decoration: none;
+  }
 }
 
 .best_in_place, .form_in_place {
