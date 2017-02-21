@@ -26,25 +26,26 @@ section#portfolio
         = render partial: 'projects/form', locals: { project: @new_project }
 
     - if @projects.length > 0
-      - first_project = @projects.first
       .project-list
-        // Só o primeiro será carregado, os demais serão carregados via JS
-        .project-item id="#{first_project.slug}" class="#{@can_edit ? 'admin' : ''}"
-          .info
-            .name
-              strong.name-value = string_editor(first_project, :name)
-            span.producer 
-              | by&nbsp;
-              span.nucleo nucleo
-            .summary.summary-value
-               = text_editor(first_project, :summary)
-          - if @can_edit
-            .thumb_image.thumb_image-value = image_editor(first_project, :thumb_image)
-          .categories
-            ul
-              - first_project.categories.each do |category|
-                li class="#{category.icon_klass}"
-                  span = category.name
+        // Só o primeiro será carregado (no caso do mobile), os demais serão carregados via JS
+        - projects_in_view = mobile_device? ? [@projects.first] : @projects
+        - projects_in_view.each do |project|
+          .project-item id="#{project.slug}" class="#{@can_edit ? 'admin' : ''}"
+            .info
+              .name
+                strong.name-value = string_editor(project, :name)
+              span.producer 
+                | by&nbsp;
+                span.nucleo nucleo
+              .summary.summary-value
+                 = text_editor(project, :summary)
             - if @can_edit
-              // TODO categories drop down
-          .image.image-value = image_editor(first_project, :image)
+              .thumb_image.thumb_image-value = image_editor(project, :thumb_image)
+            .categories
+              ul
+                - project.categories.each do |category|
+                  li class="#{category.icon_klass}"
+                    span = category.name
+              - if @can_edit
+                // TODO categories drop down
+            .image.image-value = image_editor(project, :image)
