@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   respond_to :html, :json
+  skip_before_action :authenticate_user!, only: [:show, :index]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # POST /projects
