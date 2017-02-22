@@ -103,7 +103,7 @@ class ApplicationController < ActionController::Base
     def redirect_to_locale_if_not_set
       if params[:locale]
         begin
-          I18n.locale = string_to_locale(params[:locale]).to_s
+          I18n.locale = string_to_locale(params[:locale]).to_sym
         rescue
           redirect_to url_for(request.params.merge({ locale: I18n.default_locale }))
         end
