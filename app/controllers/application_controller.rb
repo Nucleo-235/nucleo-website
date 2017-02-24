@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :persist_locale, unless: :devise_controller?
   before_action :authenticate_user!, unless: :devise_controller?
   before_action :set_editor_config, unless: :devise_controller?
-  before_action :set_localizable_page, unless: :devise_controller?
+  before_action :set_localizable_page
 
   def after_sign_up_path_for(resource)
     root_path
