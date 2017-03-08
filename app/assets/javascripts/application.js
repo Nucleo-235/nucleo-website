@@ -12,10 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery
 //= require bootstrap-sprockets
-//= require best_in_place
-//= require jquery_ujs
 //= require best_in_place
 //= require inplace_editing
 //= require slick.min

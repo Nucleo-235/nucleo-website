@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   resources :projects
   resources :partners
   resources :customers
-  resources :projects
 
   scope "(:locale)", locale: /pt-BR|en|es/ do
     root to: 'pages#home'
