@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
   before_action :set_editor_config, unless: :devise_controller?
   before_action :set_localizable_page
 
+  VisibleLocales = [ 'pt-BR' ]
+  # VisibleLocales = [:en, 'pt-BR']
+
   def after_sign_up_path_for(resource)
     root_path
   end
@@ -137,6 +140,8 @@ class ApplicationController < ActionController::Base
       extra_locales = [:pt]
       locale = http_accept_language.preferred_language_from(I18n.available_locales + extra_locales)
       locale = 'pt-BR' if locale == :pt || locale.to_s.downcase == 'pt-pt' || locale.to_s.downcase == 'pt-br'
+
+      locale = false if !ApplicationController::VisibleLocales.include?(locale) 
       locale
     end
 
@@ -156,7 +161,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_editor_config
-      @can_edit = current_user && current_user.type == Admin.name # or true
+      @can_edit = current_user && current_user.type == Admin.name && params[:view_as] != "user"
       @inplace_editing_mode = (@can_edit ? 'edit' : 'read')
     end
 
