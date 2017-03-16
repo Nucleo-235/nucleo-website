@@ -16,6 +16,7 @@
 //= require best_in_place
 //= require inplace_editing
 //= require slick
+//= require utils
 //= require cloning
 //= require desktop
 
@@ -60,6 +61,14 @@ $(document).ready(function() {
     return currentStrategy.openRelatedPortfolio(e, this);
   });
 
+  $('#portfolio .move-to-next').click(function(e) {
+    return currentStrategy.nextProject(e, this);
+  });
+
+  $('#portfolio .move-to-previous').click(function(e) {
+    return currentStrategy.previousProject(e, this);
+  });
+
   $('nav#menu .internal a').click(function(e) {
     $('nav#menu').hide();
     $('nav#menu').removeClass('shown');
@@ -83,21 +92,13 @@ $(document).ready(function() {
 
   if (window.location.hash == '#portfolio') {
     currentStrategy.openPortfolio();
+  } else if (window.location.hash.length > 1) {
+    var found = $(window.location.hash);
+    if (found && found.length > 0 && found.hasClass('project-item')) {
+      currentStrategy.openProjectWithLink(this, null, window.location.hash);
+    }
   }
 });
-
-function preventDefaultIfPossible(e) {
-  try {
-    e.preventDefault();
-  } catch(ex) { }
-}
-
-function preventDefaultWithHash(e, self) {
-  preventDefaultIfPossible(e);
-  var link = $(self);
-  if (link && link.length > 0)
-    window.location.hash = link.attr('href');
-}
 
 function getProjectIDs() {
   var links = $('#portfolio nav .projects .project a');
