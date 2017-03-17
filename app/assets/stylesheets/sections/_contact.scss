@@ -1,7 +1,8 @@
-@mixin weather($weather-class, $weather-bg-type, $day-icon, $day-cloud-icon, $night-icon, $night-cloud-icon) {
+@mixin weather($weather-class, $weather-bg-type, $day-icon, $day-cloud-icon, $night-icon, $night-cloud-icon, $day-background-image, $night-background-image) {
   &.#{""+$weather-class} {
+    @include bg_size(cover);
     &.day {
-      // background-image: $day-background-image;
+      background-image: image_url($day-background-image);
       &.with-clouds {
         .weather {
           i:before {
@@ -18,7 +19,7 @@
       }
     }
     &.night {
-      // background-image: $night-background-image;
+      background-image: image_url($night-background-image);
       &.with-clouds {
         .weather {
           i:before {
@@ -43,24 +44,24 @@
     overflow: hidden;
 
     &.forecast {
+      color: #3d3d3d;
       &.day{
         background-color: #ee7600;
-        // color: black;
       }
       &.night{
         background-color: black;
         
       }
-      @include weather(clear-day, clear,"\f00d","\f00c","\f00d","\f00c");
-      @include weather(clear-night, clear,"\f02e","\f031","\f02e","\f031");
-      @include weather(rain, rain,"\f008","\f019","\f036","\f019");
-      @include weather(snow, snow,"\f00a","\f01b","\f066","\f01b");
-      @include weather(sleet, sleet,"\f0b2","\f0b5","\f0b3","\f0b5");
-      @include weather(wind, wind,"\f0c4","\f021","\f030","\f021");
-      @include weather(fog, fog,"\f003","\f014","\f04a","\f014");
-      @include weather(cloudy, cloudy,"\f002","\f013","\f031","\f013");
-      @include weather(partly-cloudy-day, partly-cloudy,"\f002","\f041","\f002","\f041");
-      @include weather(partly-cloudy-night, partly-cloudy,"\f031","\f041","\f031","\f041");
+      @include weather(clear-day, clear,"\f00d","\f00c","\f00d","\f00c", 'weather-day-sunny.png', 'weather-day-sunny.png');
+      @include weather(clear-night, clear,"\f02e","\f031","\f02e","\f031", 'weather-day-morning.png', 'weather-day-morning.png');
+      @include weather(rain, rain,"\f008","\f019","\f036","\f019", 'weather-day-storm.png', 'weather-day-storm.png');
+      @include weather(snow, snow,"\f00a","\f01b","\f066","\f01b", 'weather-day-storm.png', 'weather-day-storm.png');
+      @include weather(sleet, sleet,"\f0b2","\f0b5","\f0b3","\f0b5", 'weather-day-storm.png', 'weather-day-storm.png');
+      @include weather(wind, wind,"\f0c4","\f021","\f030","\f021", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
+      @include weather(fog, fog,"\f003","\f014","\f04a","\f014", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
+      @include weather(cloudy, cloudy,"\f002","\f013","\f031","\f013", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
+      @include weather(partly-cloudy-day, partly-cloudy,"\f002","\f041","\f002","\f041", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
+      @include weather(partly-cloudy-night, partly-cloudy,"\f031","\f041","\f031","\f041", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
     }
 
     .content {
@@ -77,7 +78,7 @@
         h3 {
           float: left;
           font-size: 145px;
-          color: $base-white;
+          color: inherit;
           margin: 0px;
           padding: 0px;
         }
@@ -105,6 +106,7 @@
         z-index: 12;
         font-size: 20px;
         background-color: transparentize($base-black, 0.8);
+        color: $base-white;
       }
       .address {
         padding: 15px 30px;
