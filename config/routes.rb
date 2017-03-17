@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :projects
+  resources :projects do 
+    member do
+      get 'add_category/:category_id', :action => 'add_category', as: :add_category
+      get 'remove_category/:category_id', :action => 'remove_category', as: :remove_category
+    end
+  end
   resources :partners
   resources :customers
 

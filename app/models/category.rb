@@ -14,9 +14,13 @@ class Category < ActiveRecord::Base
   translates :name
 
   def self.create_if_new(identifier, name, icon_klass = nil)
+    icon_klass = 'category_' + identifier if !icon_klass
     item = Category.find_by(identifier: identifier)
-    if !item
-      icon_klass = identifier if !icon_klass
+    if item
+      item.name = name
+      item.icon_klass = icon_klass
+      item.save!
+    else
       item = Category.new(identifier: identifier, name: name, icon_klass: icon_klass)
       # admin.skip_confirmation!
       item.save!

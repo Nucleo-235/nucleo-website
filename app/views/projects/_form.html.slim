@@ -5,7 +5,8 @@
     = f.input :name
     / = f.input :type
     = f.input :image
-    = f.input :summary
+    = f.input :selected_categories, as: :check_boxes, collection: @categories, multiple: true
+    = f.input :summary, as: :text
     = f.input :thumb_image
     = f.input :sort_order
 

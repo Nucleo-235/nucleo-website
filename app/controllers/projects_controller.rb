@@ -1,12 +1,33 @@
 class ProjectsController < ApplicationController
   respond_to :html, :json
   skip_before_action :authenticate_user!, only: [:show, :index]
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_category, :remove_category]
 
   # POST /projects
   def show
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to root_path(anchor: @project.slug) }
+      format.json { respond_with(@project) }
+    end
+  end
+
+  # POST /projects/1/add_category?category_id=1
+  def add_category
+    @project_category = ProjectCategory.find_or_create_by(project: @project, category_id: params[:category_id])
+
+    respond_to do |format|
+      format.html { redirect_to root_path(anchor: @project.slug) }
+      format.json { respond_with(@project_category) }
+    end
+  end
+
+  # POST /projects/1/remove_category?category_id=1
+  def remove_category
+    @project_category = ProjectCategory.find_by(project: @project, category_id: params[:category_id])
+    @project_category.destroy if @project_category
+
+    respond_to do |format|
+      format.html { redirect_to root_path(anchor: @project.slug) }
       format.json { respond_with(@project) }
     end
   end
@@ -17,7 +38,7 @@ class ProjectsController < ApplicationController
 
     if @project.save
       respond_to do |format|
-        format.html { redirect_to root_path }
+        format.html { redirect_to root_path(anchor: @project.slug) }
         format.json { respond_with(@project) }
       end
     else
@@ -34,7 +55,7 @@ class ProjectsController < ApplicationController
       respond_with @project
     else
       respond_to do |format|
-        format.html { redirect_to root_path }
+        format.html { redirect_to root_path(anchor: @project.slug) }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
@@ -60,6 +81,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def project_params
-      params.require(:project).permit(:name, :type, :image, :image_cache, :thumb_image, :thumb_image_cache, :summary)
+      params.require(:project).permit(:name, :type, :image, :image_cache, :thumb_image, :thumb_image_cache, :summary, :sort_order, selected_categories: [])
     end
 end

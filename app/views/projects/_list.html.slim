@@ -40,15 +40,24 @@ section#portfolio
                       span.nucleo nucleo
                     .summary.summary-value
                        = text_editor(project, :summary)
-                  - if @can_edit
-                    .thumb_image.thumb_image-value = image_editor(project, :thumb_image)
                   .categories
                     ul
-                      - project.categories.each do |category|
-                        li class="#{category.icon_klass}"
-                          span = category.name
-                    - if @can_edit
-                      // TODO categories drop down
+                      - if @can_edit
+                        - @categories.each do |category|
+                          - has_category = project.has_category(category)
+                          - title = has_category ? "Remover #{category.name}" : "Adicionar #{category.name}"
+                          - toggle_url = has_category ? remove_category_project_path(id: project.id, category_id: category.id) : add_category_project_path(id: project.id, category_id: category.id)
+                          li.editable class="#{category.icon_klass} #{has_category ? 'active' : 'disabled'}"
+                            a href="#{toggle_url}" title="#{title}"
+                              span = category.name
+                              img src="#{image_path('category-icon.svg')}" alt="#{category.name}" /
+                      - else 
+                        - project.categories.each do |category|
+                          li.active class="#{category.icon_klass}"
+                            span = category.name
+                            img src="#{image_path('category-icon.svg')}" alt="#{category.name}" /
+                  - if @can_edit
+                    .thumb_image.thumb_image-value = image_editor(project, :thumb_image)
                   .image.image-value = image_editor(project, :image)
           .actions
             a.move-to-previous href="#previous" title="#{t('global.previous')}"

@@ -14,7 +14,7 @@ Customer.create_if_new('Victor Morganti', 'Cliente, Parceiro, inquieto, "hacker 
 Category.create_if_new('design', 'Design')
 Category.create_if_new('ux', 'Usabilidade')
 Category.create_if_new('content', 'Conteúdo')
-Category.create_if_new('design', 'Design')
 Category.create_if_new('development', 'Programação')
 Category.create_if_new('front-end-dev', 'Front-End')
 Category.create_if_new('back-end-dev', 'Back-End')
+Category.create_if_new('mobile', 'Apps p Celular')

@@ -95,7 +95,6 @@ var desktopStrategy = {
         stopVideos('#'+ currentOpenProjectID + ' .youtube_project_content iframe');
         $('#' + currentOpenProjectID).removeClass('shown');
       }
-      element.addClass('shown');
       currentOpenProjectID = projectID;
 
       var index = element.attr('data-slick-index');
