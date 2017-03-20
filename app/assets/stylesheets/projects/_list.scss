@@ -1,3 +1,11 @@
+@mixin category_svg($category_name, $bgcolor) {
+  &.#{"category_"+$category_name} {
+    img, svg, svg .cls-1, .cls-1 {
+      fill: $bgcolor;
+    }
+  }
+}
+
 #portfolio {
   @include mq($from: tablet) {
     transition: margin-right 0.5s ease-out;
@@ -231,6 +239,17 @@
               }
             }
 
+            @include category_svg('design', #004985);
+            @include category_svg('ux', #fca103);
+            @include category_svg('content', #6ac2e6);
+            @include category_svg('development', #009436);
+            @include category_svg('front-end-dev', #f77495);
+            @include category_svg('back-end-dev', #fac800);
+            @include category_svg('mobile', #63c7b8);
+            // @include category_svg('other', #a82828);
+            // @include category_svg('other', #ba9357);
+            // @include category_svg('other', #fc6500);
+
             a {
               text-decoration: none;
             }
@@ -240,11 +259,14 @@
               font-size: 0.8em;
             }
 
-            a, span, img {
+            a, span, img, svg {
               text-align: center;
             }
-            img {
+            img, svg {
+              display: block;
               margin: auto;
+              width: 50px;
+              height: 50px;
             }
           }
         }
