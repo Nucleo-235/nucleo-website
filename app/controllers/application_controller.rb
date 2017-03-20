@@ -147,6 +147,7 @@ class ApplicationController < ActionController::Base
 
     def default_url_options(options = {})
       args = { locale: get_locale }
+      args[:view_as] = params[:view_as] if params[:view_as].present?
       # logger.debug args.to_json
       args
     end
