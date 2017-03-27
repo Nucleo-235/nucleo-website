@@ -67,6 +67,13 @@ group :development do
   gem 'xray-rails'
   gem 'rails-erd', github: 'paulwittmann/rails-erd', branch: 'mavericks'
   gem 'letter_opener'
+
+  gem 'capistrano', '3.4.0'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm'
+  gem 'capistrano-sidekiq'
 end
 
 group :test do
