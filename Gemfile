@@ -59,6 +59,8 @@ gem 'rollbar'
 gem 'forecast_io'
 gem 'hashie', '3.4.4'
 
+gem 'figaro'
+gem 'puma'
 group :development do
   gem 'annotate', '>=2.6.0'
   gem 'pry-rails'
