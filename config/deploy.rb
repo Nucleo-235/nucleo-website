@@ -1,11 +1,11 @@
 # lock '3.7.2'
 lock '3.4.0'
 
-set :application, 'scinda-website'
-set :repo_url, 'git@bitbucket.org:nucleo235/scinda-website.git' # Edit this to match your repository
+set :application, 'nucleo-website'
+set :repo_url, 'git@github.com:Nucleo-235/nucleo-website.git' # Edit this to match your repository
 set :branch, :live
 
-set :deploy_to, '/home/deploy/scinda-website'
+set :deploy_to, '/home/deploy-nucleo/nucleo-website'
 set :pty, false
 set :linked_files, %w{config/database.yml config/application.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
