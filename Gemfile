@@ -75,6 +75,8 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rvm'
+  gem 'capistrano-rails-console', require: false
+  gem 'capistrano-rake', require: false
   # gem 'capistrano-sidekiq'
 end
 
