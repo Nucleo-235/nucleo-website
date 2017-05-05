@@ -76,7 +76,6 @@ class ApplicationController < ActionController::Base
       rescue => e
         # se mesmo assim der erro ai fazemos o log
         Rollbar.error(e, params: params.to_json)
-        raise e
       end
     end
 
@@ -99,7 +98,6 @@ class ApplicationController < ActionController::Base
       rescue => e
         # se mesmo assim der erro ai fazemos o log
         Rollbar.error(e, params: params.to_json)
-        raise e
       end
     end
 
