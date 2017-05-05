@@ -7,351 +7,381 @@
 }
 
 #portfolio {
-  @include mq($from: tablet) {
+  transition: margin-right 0.5s ease-out;
+  margin-right: -100vw;
+
+  // background-color: transparentize($base-white, 0.1);
+
+  display: none;
+  position: absolute;
+  height: auto;
+  top: $header-height;
+  right: 0px;
+  width: 100%;
+
+  padding: 0px;
+  overflow: hidden;
+  overflow-y: visible;
+
+  &:before {
+    content: "";
+    position: fixed;
+    display: block;
+    width: 100%;
+    top: $header-height;
+    bottom: 0px;
+    padding: 0px;
+    background-color: transparentize($base-white, 0.1);
+    z-index: 101;
+
+    opacity: 1;
+    transition: right 0.5s ease-out;
+    right: -100vw;
+  }
+
+  .content {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0px;
+    z-index: 102;
+    position: relative;
+
+    opacity: 1;
     transition: margin-right 0.5s ease-out;
     margin-right: -100vw;
+  }
 
-    // background-color: transparentize($base-white, 0.1);
-
-    display: none;
-    position: absolute;
-    height: auto;
-    top: $header-height;
-    right: 0px;
-    width: 100%;
-
-    padding: 0px;
-    overflow: hidden;
-    overflow-y: visible;
-
-    &:before {
-      content: "";
-      position: fixed;
-      display: block;
-      width: 100%;
-      top: $header-height;
-      bottom: 0px;
-      padding: 0px;
-      background-color: transparentize($base-white, 0.1);
-      z-index: 101;
-
-      opacity: 1;
-      transition: right 0.5s ease-out;
-      right: -100vw;
-    }
+  &.shown {
+    transition: margin-right 0s ease-in;
+    margin-right: 0px;
 
     .content {
-      display: block;
-      width: 100%;
-      height: auto;
-      padding: 0px;
-      z-index: 102;
-      position: relative;
-
-      opacity: 1;
-      transition: margin-right 0.5s ease-out;
-      margin-right: -100vw;
-    }
-
-    &.shown {
-      transition: margin-right 0s ease-in;
+      transition: margin-right 0.5s ease-in;
       margin-right: 0px;
-
-      .content {
-        transition: margin-right 0.5s ease-in;
-        margin-right: 0px;
-      }
-
-      .sub-menu {
-        display: block;
-      }
-
-      &:before {
-        transition: margin-right 0.5s ease-in;
-        right: 0px;
-      }
     }
 
     .sub-menu {
-      display: none;
-      z-index: 10001;
-      position: fixed;
-      top: 0px;
-      right: 0px;
-      background-color: $base-bg-header;
-      margin: 13px $sections-margin-side;
-
-      img {
-        margin-left: 15px;
-      }
-
-      .open-related-portfolio {
-        display: none;
-        &.shown {
-          display: inline-block;
-        }
-      }
+      display: block;
     }
 
-    .close-portfolio {
+    &:before {
+      transition: margin-right 0.5s ease-in;
+      right: 0px;
+    }
+  }
+
+  .sub-menu {
+    display: none;
+    z-index: 10001;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    background-color: $base-bg-header;
+    margin: 13px $sections-margin-side;
+
+    img {
+      margin-left: 15px;
+    }
+
+    .open-related-portfolio {
+      display: none;
+      &.shown {
+        display: inline-block;
+      }
+    }
+  }
+
+  .close-portfolio {
+    position: relative;
+    display: inline-block;
+    float: none;
+  }
+
+  ul.projects {
+    list-style-type: none;
+    padding-left: 0px;
+    &::after {
+      content: " ";
+       display: block; 
+       height: 0; 
+       clear: both;
+    }
+    & > li.project {
+      padding-left: 0px;
       position: relative;
       display: inline-block;
-      float: none;
-    }
 
-    ul.projects {
-      list-style-type: none;
-      padding-left: 0px;
-      & > li.project {
-        padding-left: 0px;
+      &.project-thumb {
+        float: left;
+
+        width: 100%;
+        max-width: 100%;
+        padding-top: 50%;
         position: relative;
-        display: inline-block;
-        width: 50%;
-        max-width: 50%;
-        height: auto;
+        overflow: hidden;
 
-        & > a, .fields {
-          position: relative;
-          display: block;
+        @include mq($from: tablet) {
+          width: 50%;
+          max-width: 50%;
+          padding-top: 25%;
         }
 
-        img {
+        & > .item-container {
+          position: absolute;
           width: 100%;
-          height: auto;
+          height: 100%;
+          top: 0%;
+          @include bg_size(cover);
+
+          img {
+            // vamos usar BG ao invés de imagem
+            display: none;
+          }
         }
-        .info {
-          display: none;
+      }
+
+      & > a, .fields {
+        position: relative;
+        display: block;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+      .info {
+        display: none;
+        position: absolute;
+        width: 100%;
+        top:0px;
+        bottom:0px;
+
+        &:before {
+          content: "";
           position: absolute;
           width: 100%;
           top:0px;
           bottom:0px;
-
-          &:before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            top:0px;
-            bottom:0px;
-            background-color: transparentize($base-green, 0.1);
-          }
-          .name {
-            display: block;
-            position: relative;
-            width: 80%;
-            margin: auto;
-            margin-top: 30%;
-            border-bottom: 1px solid $base-white;
-
-            font-family: $title-text-font-family;
-            font-size: 40px;
-            font-weight: normal;
-            color: $base-white;
-          }
-          strong {
-            font-weight: inherit;
-          }
-          .producer {
-            display: block;
-            position: relative;
-            width: 80%;
-            margin: auto;
-            margin-top: 15px;
-
-            font-family: $body-text-font-family;
-            font-size: 25px;
-            line-height: 25px;
-            font-weight: normal;
-            color: $base-white;
-          }
+          background-color: transparentize($base-green, 0.1);
         }
-
-        &:hover {
-          .info {
-            display: block;
-          }
-        }
-      }
-
-      li.new {
-        padding: 20px;
-        padding-bottom: 0px;
-      }
-    }
-
-    .project-container {
-      display: none;
-      z-index: 102;
-      padding-left: $sections-margin-side;
-      padding-right: $sections-margin-side;
-
-      .project-slick {
-        max-width: 100%;
-        overflow-x: hidden;
-      }
-
-      .list-container {
-        display: block;
-        width: 100%;
-        max-width: 1200px;
-        margin: auto;
-      }
-
-      .project-item, .template {
-        position: relative;
-
-        max-width: 100%;
-        width: 1080px;
-        margin: auto;
-        padding-top: $sections-margin-side;
-
-        .info {
-          width: 70%;
-          float: left;
-          padding-right: 10px;
-        }
-
-        .categories {
-          width: 30%;
-          float: right;
-          ul {
-            list-style: none;
-            margin: 0px;
-            padding: 0px;
-            text-align: center;
-          }
-
-          li {
-            margin: 0px;
-            padding: 0px;
-            display: inline-block;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            text-align: center;
-            min-width: 32%;
-            width: 32%;
-            max-width: 32%;
-            min-width: calc(33% - 10px);
-            width: calc(33% - 10px);
-            max-width: calc(33% - 10px);
-
-            &.disabled.editable {
-              opacity: 0.5;
-              &:hover {
-                opacity: 1;
-                span {
-                  font-weight: bold;
-                }
-              }
-            }
-
-            &.active.editable {
-              &:hover {
-                opacity: 0.8;
-              }
-            }
-
-            @include category_svg('design', #004985);
-            @include category_svg('ux', #fca103);
-            @include category_svg('content', #6ac2e6);
-            @include category_svg('development', #009436);
-            @include category_svg('front-end-dev', #f77495);
-            @include category_svg('back-end-dev', #fac800);
-            @include category_svg('mobile', #63c7b8);
-            // @include category_svg('other', #a82828);
-            // @include category_svg('other', #ba9357);
-            // @include category_svg('other', #fc6500);
-
-            a {
-              text-decoration: none;
-            }
-            span {
-              color: $base-black;
-              text-transform: uppercase;
-              font-size: 0.7em;
-              margin-bottom: 5px;
-              display: block;
-            }
-
-            a, span, img, svg {
-              text-align: center;
-            }
-            img, svg {
-              display: block;
-              margin: auto;
-              width: 50px;
-              height: 50px;
-            }
-          }
-        }
-
         .name {
-          font-family: $body-text-font-family;
-          font-size: 45px;
+          display: block;
+          position: relative;
+          width: 80%;
+          margin: auto;
+          margin-top: 30%;
+          border-bottom: 1px solid $base-white;
+
+          font-family: $title-text-font-family;
+          font-size: 40px;
+          font-weight: normal;
+          color: $base-white;
         }
-        .summary {
-          width: 100%;
+        strong {
+          font-weight: inherit;
         }
         .producer {
+          display: block;
+          position: relative;
+          width: 80%;
+          margin: auto;
+          margin-top: 15px;
+
           font-family: $body-text-font-family;
           font-size: 25px;
-          .nucleo {
-            font-weight: bold;
-          }
-        }
-        .thumb_image {
-          float: right;
-          width: 30%;
-          text-align: right;
-          img {
-            max-width: 100%;
-          }
-        }
-        .image {
-          clear: both;
-          img {
-            margin-top: 20px;
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-          }
+          line-height: 25px;
+          font-weight: normal;
+          color: $base-white;
         }
       }
 
-      .actions {
-        position: absolute;
-        z-index: 2003;
-        width: 100%;
-        max-width: 1200px;
-        margin: auto;
-        top: 30px;
-
-        .move-to-next, .move-to-previous {
-          position: absolute;
-          top: 250px;
-          top: 40vh;
-        }
-        .move-to-next {
-          right: -70px;
-        }
-        .move-to-previous {
-          left: -70px;
+      &:hover {
+        .info {
+          display: block;
         }
       }
     }
 
-    #new-project {
-      display: none;
-
+    li.new {
       padding: 20px;
+      padding-bottom: 0px;
+    }
+  }
 
-      label.check_boxes {
-        display: block;
+  .project-container {
+    display: none;
+    z-index: 102;
+    padding-left: $sections-margin-side;
+    padding-right: $sections-margin-side;
+
+    .project-slick {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .list-container {
+      display: block;
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .project-item, .template {
+      position: relative;
+
+      max-width: 100%;
+      width: 1080px;
+      margin: auto;
+      padding-top: $sections-margin-side;
+
+      .info {
+        width: 70%;
+        float: left;
+        padding-right: 10px;
       }
 
-      span.checkbox {
-        display: inline-block;
-        margin-right: 10px;
+      .categories {
+        width: 30%;
+        float: right;
+        ul {
+          list-style: none;
+          margin: 0px;
+          padding: 0px;
+          text-align: center;
+        }
+
+        li {
+          margin: 0px;
+          padding: 0px;
+          display: inline-block;
+          margin-right: 10px;
+          margin-bottom: 10px;
+          text-align: center;
+          min-width: 32%;
+          width: 32%;
+          max-width: 32%;
+          min-width: calc(33% - 10px);
+          width: calc(33% - 10px);
+          max-width: calc(33% - 10px);
+
+          &.disabled.editable {
+            opacity: 0.5;
+            &:hover {
+              opacity: 1;
+              span {
+                font-weight: bold;
+              }
+            }
+          }
+
+          &.active.editable {
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+
+          @include category_svg('design', #004985);
+          @include category_svg('ux', #fca103);
+          @include category_svg('content', #6ac2e6);
+          @include category_svg('development', #009436);
+          @include category_svg('front-end-dev', #f77495);
+          @include category_svg('back-end-dev', #fac800);
+          @include category_svg('mobile', #63c7b8);
+          // @include category_svg('other', #a82828);
+          // @include category_svg('other', #ba9357);
+          // @include category_svg('other', #fc6500);
+
+          a {
+            text-decoration: none;
+          }
+          span {
+            color: $base-black;
+            text-transform: uppercase;
+            font-size: 0.7em;
+            margin-bottom: 5px;
+            display: block;
+          }
+
+          a, span, img, svg {
+            text-align: center;
+          }
+          img, svg {
+            display: block;
+            margin: auto;
+            width: 50px;
+            height: 50px;
+          }
+        }
       }
+
+      .name {
+        font-family: $body-text-font-family;
+        font-size: 45px;
+      }
+      .summary {
+        width: 100%;
+      }
+      .producer {
+        font-family: $body-text-font-family;
+        font-size: 25px;
+        .nucleo {
+          font-weight: bold;
+        }
+      }
+      .thumb_image {
+        float: right;
+        width: 30%;
+        text-align: right;
+        img {
+          max-width: 100%;
+        }
+      }
+      .image {
+        clear: both;
+        img {
+          margin-top: 20px;
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+
+    .actions {
+      position: absolute;
+      z-index: 2003;
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      top: 30px;
+
+      .move-to-next, .move-to-previous {
+        position: absolute;
+        top: 250px;
+        top: 40vh;
+      }
+      .move-to-next {
+        right: -70px;
+      }
+      .move-to-previous {
+        left: -70px;
+      }
+    }
+  }
+
+  #new-project {
+    display: none;
+
+    padding: 20px;
+
+    label.check_boxes {
+      display: block;
+    }
+
+    span.checkbox {
+      display: inline-block;
+      margin-right: 10px;
     }
   }
 }
