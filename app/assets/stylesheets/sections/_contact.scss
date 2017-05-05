@@ -38,106 +38,103 @@
   }
 }
 #contact {
-  @include mq($from: tablet) {
-    font-family: $title-text-font-family;
-    color: $base-white;
-    overflow: hidden;
+  font-family: $title-text-font-family;
+  color: $base-white;
+  overflow: hidden;
 
-    &.forecast {
-      color: #3d3d3d;
-      &.day{
-        background-color: #ee7600;
-      }
-      &.night{
-        background-color: black;
-        
-      }
-      @include weather(clear-day, clear,"\f00d","\f00c","\f00d","\f00c", 'weather-day-sunny.png', 'weather-day-sunny.png');
-      @include weather(clear-night, clear,"\f02e","\f031","\f02e","\f031", 'weather-day-morning.png', 'weather-day-morning.png');
-      @include weather(rain, rain,"\f008","\f019","\f036","\f019", 'weather-day-storm.png', 'weather-day-storm.png');
-      @include weather(snow, snow,"\f00a","\f01b","\f066","\f01b", 'weather-day-storm.png', 'weather-day-storm.png');
-      @include weather(sleet, sleet,"\f0b2","\f0b5","\f0b3","\f0b5", 'weather-day-storm.png', 'weather-day-storm.png');
-      @include weather(wind, wind,"\f0c4","\f021","\f030","\f021", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
-      @include weather(fog, fog,"\f003","\f014","\f04a","\f014", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
-      @include weather(cloudy, cloudy,"\f002","\f013","\f031","\f013", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
-      @include weather(partly-cloudy-day, partly-cloudy,"\f002","\f041","\f002","\f041", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
-      @include weather(partly-cloudy-night, partly-cloudy,"\f031","\f041","\f031","\f041", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
+  &.forecast {
+    color: #3d3d3d;
+    &.day{
+      background-color: #ee7600;
     }
+    &.night{
+      background-color: black;
+    }
+    @include weather(clear-day, clear,"\f00d","\f00c","\f00d","\f00c", 'weather-day-sunny.png', 'weather-day-sunny.png');
+    @include weather(clear-night, clear,"\f02e","\f031","\f02e","\f031", 'weather-day-morning.png', 'weather-day-morning.png');
+    @include weather(rain, rain,"\f008","\f019","\f036","\f019", 'weather-day-storm.png', 'weather-day-storm.png');
+    @include weather(snow, snow,"\f00a","\f01b","\f066","\f01b", 'weather-day-storm.png', 'weather-day-storm.png');
+    @include weather(sleet, sleet,"\f0b2","\f0b5","\f0b3","\f0b5", 'weather-day-storm.png', 'weather-day-storm.png');
+    @include weather(wind, wind,"\f0c4","\f021","\f030","\f021", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
+    @include weather(fog, fog,"\f003","\f014","\f04a","\f014", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
+    @include weather(cloudy, cloudy,"\f002","\f013","\f031","\f013", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
+    @include weather(partly-cloudy-day, partly-cloudy,"\f002","\f041","\f002","\f041", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
+    @include weather(partly-cloudy-night, partly-cloudy,"\f031","\f041","\f031","\f041", 'weather-day-cloudy.png', 'weather-day-cloudy.png');
+  }
 
-    .content {
-      position: relative;
-      .location {
-        position: absolute;
-        z-index: 11;
-        top:$sections-margin-vertical;
-        bottom:0px;
-        left:0px;
-        right:0px;
-        overflow: hidden;
+  .content {
+    position: relative;
+    .location {
+      position: absolute;
+      z-index: 11;
+      top:$sections-margin-vertical;
+      bottom:0px;
+      left:0px;
+      right:0px;
+      overflow: hidden;
 
-        h3 {
-          float: left;
-          font-size: 145px;
-          color: inherit;
-          margin: 0px;
-          padding: 0px;
-        }
-        .weather {
-          float: right;
-          font-size: 80px;
-          font-family: $title-text-font-family;
-          margin-right: 15px;
-          margin-top: 15px;
-          text-align: right;
-          i {
-            text-align: right;
-          }
-        }
-        .temperature {
-          clear: right;
-          float: right;
-          font-size: 80px;
-          font-family: $title-text-font-family;
-        }
-      }
-      .address, .links {
-        position: relative;
+      h3 {
+        float: left;
+        font-size: 145px;
+        color: inherit;
         margin: 0px;
-        z-index: 12;
-        font-size: 20px;
-        background-color: transparentize($base-black, 0.8);
-        color: $base-white;
-      }
-      .address {
-        padding: 15px 30px;
-        margin-top: 160px;
-        display: block;
-        width: 60%;
-
-        border: $base-white 3px solid;
-      }
-      .links {
         padding: 0px;
-        display: block;
-        width: 60%;
-        border-right: $base-white 3px solid;
-        border-left: $base-white 3px solid;
-        border-bottom: $base-white 3px solid;
-        a {
-          @include standard_link_button(transparent, $base-white);
+      }
+      .weather {
+        float: right;
+        font-size: 80px;
+        font-family: $title-text-font-family;
+        margin-right: 15px;
+        margin-top: 15px;
+        text-align: right;
+        i {
+          text-align: right;
         }
+      }
+      .temperature {
+        clear: right;
+        float: right;
+        font-size: 80px;
+        font-family: $title-text-font-family;
+      }
+    }
+    .address, .links {
+      position: relative;
+      margin: 0px;
+      z-index: 12;
+      font-size: 20px;
+      background-color: transparentize($base-black, 0.8);
+      color: $base-white;
+    }
+    .address {
+      padding: 15px 30px;
+      margin-top: 160px;
+      display: block;
+      width: 60%;
 
-        & > * {
-          padding: 15px 30px;
-          width: 50%;
-          display: inline-block;
-          text-align: center;
-          vertical-align: top;
+      border: $base-white 3px solid;
+    }
+    .links {
+      padding: 0px;
+      display: block;
+      width: 60%;
+      border-right: $base-white 3px solid;
+      border-left: $base-white 3px solid;
+      border-bottom: $base-white 3px solid;
+      a {
+        @include standard_link_button(transparent, $base-white);
+      }
 
-          &:first-child {
-            border-right: $base-white 3px solid;
-            width: calc(50% - 4px);
-          }
+      & > * {
+        padding: 15px 30px;
+        width: 50%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: top;
+
+        &:first-child {
+          border-right: $base-white 3px solid;
+          width: calc(50% - 4px);
         }
       }
     }

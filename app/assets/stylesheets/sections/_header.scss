@@ -1,56 +1,54 @@
 header {
-  @include mq($from: tablet) {
-    width: 100%;
-    height: $header-height;
-    background-color: $base-bg-header;
-    position: fixed;
-    z-index: 1000;
-    top: 0px;
+  width: 100%;
+  height: $header-height;
+  background-color: $base-bg-header;
+  position: fixed;
+  z-index: 1000;
+  top: 0px;
 
-    & > * {
-      height: 100%;
-      margin: 13px $sections-margin-side;
+  & > * {
+    height: 100%;
+    margin: 13px $sections-margin-side;
+  }
+
+  .current {
+    float: left;
+    img {
+      margin-right: 15px;
+      display: inline-block;
     }
-
-    .current {
-      float: left;
-      img {
-        margin-right: 15px;
+    .current-page {
+      display: none;
+      color: $base-yellow;
+      font-family: $body-text-font-family;
+      text-transform: uppercase;
+      &.shown {
         display: inline-block;
       }
-      .current-page {
-        display: none;
+
+      a {
         color: $base-yellow;
-        font-family: $body-text-font-family;
-        text-transform: uppercase;
+        text-decoration: none;
         &.shown {
           display: inline-block;
         }
+      }
 
-        a {
-          color: $base-yellow;
-          text-decoration: none;
-          &.shown {
-            display: inline-block;
-          }
-        }
-
-        & > * {
-          display: none;
-          vertical-align: middle;
-        }
+      & > * {
+        display: none;
+        vertical-align: middle;
       }
     }
+  }
 
-    .menu {
-      float: right;
-      height: 100%;
-      img {
-        margin-left: 15px;
-      }
-      & > * {
-        display: inline-block;
-      }
+  .menu {
+    float: right;
+    height: 100%;
+    img {
+      margin-left: 15px;
+    }
+    & > * {
+      display: inline-block;
     }
   }
 }

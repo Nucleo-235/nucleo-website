@@ -1,89 +1,87 @@
 #main {
-  @include mq($from: tablet) {
-    padding-top: 10px;
+  padding-top: 10px;
 
-    min-height: 294px;
-    height: auto;
+  min-height: 294px;
+  height: auto;
 
+  text-align: center;
+  vertical-align: bottom;
+  overflow: hidden;
+
+  background-image: image_url('pattern-nucleo-header.png');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-origin: content-box;
+  @include bg_size(auto 294px);
+
+  h1, h2, h3 {
+    font-family: $body-text-font-family;
+  }
+
+  &:after {
+    clear: both;
+  }
+
+  .content {
     text-align: center;
-    vertical-align: bottom;
+    max-width: 720px;
+    margin: auto;
+    padding-top: 310px;
     overflow: hidden;
+  }
 
-    background-image: image_url('pattern-nucleo-header.png');
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-origin: content-box;
-    @include bg_size(auto 294px);
-
-    h1, h2, h3 {
-      font-family: $body-text-font-family;
+  h1 {
+    float: left;
+    width: 50%;
+    img {
+      max-width: 100%;
     }
+  }
+  h2, h3 {
+    float: right;
+    display: block;
+    width: 50%;
+    text-align: left;
+    padding-left: 30px;
+    padding-right: 0px;
+  }
+  h2 {
+    margin-top: 50px;
+    margin-bottom: 0px;
+    font-weight: normal;
+  }
+  h3 {
+    color: $base-blue-greenish;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: normal;
+  }
+  .more {
+    margin-top: $sections-margin-vertical;
+    margin-bottom: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
 
-    &:after {
-      clear: both;
-    }
+    float: right;
+    width: 50%;
+    text-align: left;
 
-    .content {
-      text-align: center;
-      max-width: 720px;
-      margin: auto;
-      padding-top: 310px;
-      overflow: hidden;
-    }
+    a {
+      color: $base-black;
+      border: $base-gray-light solid 3px;
+      border-top: none;
+      text-transform: uppercase;
+      display: inline-block;
+      width: auto;
 
-    h1 {
-      float: left;
-      width: 50%;
-      img {
-        max-width: 100%;
-      }
-    }
-    h2, h3 {
-      float: right;
-      display: block;
-      width: 50%;
-      text-align: left;
-      padding-left: 30px;
-      padding-right: 0px;
-    }
-    h2 {
-      margin-top: 50px;
-      margin-bottom: 0px;
-      font-weight: normal;
-    }
-    h3 {
-      color: $base-blue-greenish;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      font-weight: normal;
-    }
-    .more {
-      margin-top: $sections-margin-vertical;
-      margin-bottom: 0px;
-      padding-left: 30px;
-      padding-right: 30px;
+      font-size: $button-main-font-size;
+      line-height: $button-main-font-size;
+      padding-bottom: $button-main-padding-bottom;
+      padding-left: $button-standard-padding-side;
+      padding-right: $button-standard-padding-side;
 
-      float: right;
-      width: 50%;
-      text-align: left;
-
-      a {
-        color: $base-black;
-        border: $base-gray-light solid 3px;
-        border-top: none;
-        text-transform: uppercase;
-        display: inline-block;
-        width: auto;
-
-        font-size: $button-main-font-size;
-        line-height: $button-main-font-size;
-        padding-bottom: $button-main-padding-bottom;
-        padding-left: $button-standard-padding-side;
-        padding-right: $button-standard-padding-side;
-
-        &:hover {
-          text-decoration: none;
-        }
+      &:hover {
+        text-decoration: none;
       }
     }
   }

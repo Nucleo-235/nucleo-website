@@ -3,40 +3,38 @@ body {
   font-size: 16px;
 }
 
-@include mq($from: tablet) {
-  section {
-    padding-left: $sections-margin-side;
-    padding-right: $sections-margin-side;
-    clear: both;
-    // margin-bottom: 70px;
+section {
+  padding-left: $sections-margin-side;
+  padding-right: $sections-margin-side;
+  clear: both;
+  // margin-bottom: 70px;
 
-    .content {
-      max-width: 100%;
-      width: 900px;
-      margin: auto;
-      padding-top: $sections-margin-vertical;
-      padding-bottom: $sections-margin-vertical;
-    }
-
-    &#main {
-      margin-top: $header-height;
-    }
-
-    .slick-disabled {
-      display: none !important;
-    }
+  .content {
+    max-width: 100%;
+    width: 900px;
+    margin: auto;
+    padding-top: $sections-margin-vertical;
+    padding-bottom: $sections-margin-vertical;
   }
 
-  .close-section-button {
-    float: right;
-    img {
-      margin: 13px $sections-margin-side;
-    }
+  &#main {
+    margin-top: $header-height;
   }
 
-  a {
-    text-decoration: none;
+  .slick-disabled {
+    display: none !important;
   }
+}
+
+.close-section-button {
+  float: right;
+  img {
+    margin: 13px $sections-margin-side;
+  }
+}
+
+a {
+  text-decoration: none;
 }
 
 .noscroll {

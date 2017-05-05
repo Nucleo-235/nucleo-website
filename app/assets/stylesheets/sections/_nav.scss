@@ -1,67 +1,65 @@
 nav#menu {
-  @include mq($from: tablet) {
-    display: block;
+  display: block;
+  opacity: 1;
+  transition: margin-right 0.5s ease-out;
+  margin-right: -100vw;
+  z-index: 1001;
+
+  background-color: transparentize($base-green, 0.1);
+
+  position: fixed;
+  height: auto;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+
+  overflow: hidden;
+
+  &.shown {
     opacity: 1;
-    transition: margin-right 0.5s ease-out;
-    margin-right: -100vw;
-    z-index: 1001;
+    display: block;
+    margin-right: 0px;
+  }
 
-    background-color: transparentize($base-green, 0.1);
+  .close-menu {
+    @extend .close-section-button;
+  }
 
-    position: fixed;
-    height: auto;
-    top: 0px;
-    right: 0px;
-    width: 100%;
+  ul {
+    clear: both;
+    float: right;
+    margin-right: $sections-margin-side;
+    margin-top: $menu-margin-vertical;
+    list-style: none;
 
-    overflow: hidden;
-
-    &.shown {
-      opacity: 1;
-      display: block;
-      margin-right: 0px;
+    &:last-child {
+      margin-bottom: 2 * $menu-margin-vertical;
+    }
+    &.social {
+      a {
+        margin-right: 0px;
+      }
     }
 
-    .close-menu {
-      @extend .close-section-button;
-    }
-
-    ul {
-      clear: both;
-      float: right;
-      margin-right: $sections-margin-side;
-      margin-top: $menu-margin-vertical;
-      list-style: none;
-
-      &:last-child {
-        margin-bottom: 2 * $menu-margin-vertical;
-      }
-      &.social {
-        a {
-          margin-right: 0px;
-        }
+    li {
+      text-align: right;
+      &:not(:last-child) {
+        margin-bottom: 20px;
       }
 
-      li {
-        text-align: right;
-        &:not(:last-child) {
-          margin-bottom: 20px;
-        }
+      a {
+        @include standard_link_button(transparent, $base-gray-light);
 
-        a {
-          @include standard_link_button(transparent, $base-gray-light);
+        margin-right: -10px;
+        padding: 5px 5px 0px 15px;
+        font-family: $title-text-font-family;
+        font-size: 50px;
+        line-height: 50px;
+        letter-spacing: $title-letter-spacing;
 
-          margin-right: -10px;
-          padding: 5px 5px 0px 15px;
-          font-family: $title-text-font-family;
-          font-size: 50px;
-          line-height: 50px;
-          letter-spacing: $title-letter-spacing;
-
-          &.active {
-            background-color: $base-gray-light;
-            color: $base-black;
-          }
+        &.active {
+          background-color: $base-gray-light;
+          color: $base-black;
         }
       }
     }
