@@ -10,7 +10,7 @@ section#people
           .details
             span.summary = string_editor(person, :summary)
             desc.bio
-              = text_editor(person, :bio, '[BIO]')
+              = text_editor(person, :bio, '[BIO]', { link_attributes: { rel: '', target: '_self' } })
       - @people.to_a.shuffle!.each_with_index do |person, index|
         li class="#{person.type.downcase}"
           .main
@@ -19,7 +19,7 @@ section#people
           .details
             span.summary = string_editor(person, :summary)
             desc.bio
-              = text_editor(person, :bio, '[BIO]')
+              = text_editor(person, :bio, '[BIO]', { link_attributes: { rel: nil, target: '_self' } })
       / li.partner
       /   strong Miguel Ayoub
       /   img src=""
