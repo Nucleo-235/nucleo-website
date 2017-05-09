@@ -6,18 +6,14 @@ body {
 section {
   clear: both;
   padding-left: $sections-margin-side-mobile;
-    padding-right: $sections-margin-side-mobile;
-  @include above_mobile_portrait() {
-    padding-left: $sections-margin-side;
-    padding-right: $sections-margin-side;
-  }
+  padding-right: $sections-margin-side-mobile;
 
   .content {
     max-width: 100%;
     width: 900px;
     margin: auto;
-    padding-top: $sections-margin-vertical;
-    padding-bottom: $sections-margin-vertical;
+    padding-top: $sections-margin-vertical-mobile;
+    padding-bottom: $sections-margin-vertical-mobile;
   }
 
   &#main {
@@ -33,6 +29,16 @@ section {
   float: right;
   img {
     margin: 13px $sections-margin-side;
+  }
+
+  @include above_mobile_portrait() {
+    padding-left: $sections-margin-side;
+    padding-right: $sections-margin-side;
+
+    .content {
+      padding-top: $sections-margin-vertical;
+      padding-bottom: $sections-margin-vertical;
+    }
   }
 }
 
