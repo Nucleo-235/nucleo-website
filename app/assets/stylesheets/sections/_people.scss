@@ -42,10 +42,11 @@
             float: right;
             z-index: 5;
             margin-bottom: 0px;
-            margin-right: 30px;
-            min-height: 150px;
+            margin-right: 10px;
+            min-height: 0px;
             img {
-              max-width: 190px;
+              float: right;
+              max-width: 35%;
               height: auto;
             }
           }
@@ -61,7 +62,7 @@
             font-weight: normal;
             color: $base-green;
 
-            margin-bottom: 30px;
+            margin-bottom: 10px;
           }
 
           & > * {
@@ -76,6 +77,27 @@
       position: absolute;
       right: -100px;
       top: 50%;
+    }
+  }
+  @include above_mobile_portrait() {
+    .content {
+      ul {
+        li {
+          .main {
+            & > .avatar {
+              min-height: 150px;
+              img {
+                max-width: 190px;
+              }
+            }
+          }
+          .details {
+            .summary {
+              margin-bottom: 30px;
+            }
+          }
+        }
+      }
     }
   }
 }
