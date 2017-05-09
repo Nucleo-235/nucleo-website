@@ -4,10 +4,13 @@ body {
 }
 
 section {
-  padding-left: $sections-margin-side;
-  padding-right: $sections-margin-side;
   clear: both;
-  // margin-bottom: 70px;
+  padding-left: $sections-margin-side-mobile;
+    padding-right: $sections-margin-side-mobile;
+  @include above_mobile_portrait() {
+    padding-left: $sections-margin-side;
+    padding-right: $sections-margin-side;
+  }
 
   .content {
     max-width: 100%;
