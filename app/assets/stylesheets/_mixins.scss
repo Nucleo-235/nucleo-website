@@ -52,3 +52,12 @@
        -o-box-shadow:$shadow;
           box-shadow:$shadow;
 }
+
+@mixin above_mobile_portrait() {
+  @include mq($until: tablet, $and: '(orientation: landscape)') {
+    @content;
+  }
+  @include mq($from: tablet) {
+    @content;
+  }
+}

@@ -1,8 +1,12 @@
 #main {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
   padding-top: 10px;
 
-  min-height: 294px;
-  height: auto;
+  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
 
   text-align: center;
   vertical-align: bottom;
@@ -24,15 +28,15 @@
 
   .content {
     text-align: center;
-    max-width: 720px;
+    max-width: 100%;
     margin: auto;
-    padding-top: 310px;
+    padding-top: 290px;
     overflow: hidden;
   }
 
   h1 {
     float: left;
-    width: 50%;
+    width: 100%;
     img {
       max-width: 100%;
     }
@@ -40,13 +44,13 @@
   h2, h3 {
     float: right;
     display: block;
-    width: 50%;
-    text-align: left;
-    padding-left: 30px;
+    width: 100%;
+    text-align: center;
+    padding-left: 0px;
     padding-right: 0px;
   }
   h2 {
-    margin-top: 50px;
+    margin-top: 10px;
     margin-bottom: 0px;
     font-weight: normal;
   }
@@ -57,14 +61,14 @@
     font-weight: normal;
   }
   .more {
-    margin-top: $sections-margin-vertical;
+    margin-top: 20px;
     margin-bottom: 0px;
     padding-left: 30px;
     padding-right: 30px;
 
     float: right;
-    width: 50%;
-    text-align: left;
+    width: 100%;
+    text-align: center;
 
     a {
       color: $base-black;
@@ -83,6 +87,39 @@
       &:hover {
         text-decoration: none;
       }
+    }
+  }
+
+  @include above_mobile_portrait() {
+    min-height: 294px;
+    height: auto;
+    max-height: auto;
+    padding: inherit;
+    padding-left: inherit;
+    padding-right: inherit;
+
+    .content {
+      max-width: 720px;
+      padding-top: 310px;
+    }
+
+    h1 {
+      width: 50%;
+    }
+
+    h2, h3 {
+      width: 50%;
+      padding-left: 30px;
+      text-align: left;
+    }
+    h2 {
+      margin-top: 50px;
+    }
+
+    .more {
+      margin-top: $sections-margin-vertical;
+      width: 50%;
+      text-align: left;
     }
   }
 }
