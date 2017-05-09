@@ -156,11 +156,11 @@
           padding: 15px 30px;
           width: 50%;
           border: none;
-        }
 
-        &:first-child {
-          border-right: $base-white 3px solid;
-          width: calc(50% - 4px);
+          &:first-child {
+            border-right: $base-white 3px solid;
+            width: calc(50% - 4px);
+          }
         }
       }
     }

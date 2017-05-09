@@ -2,23 +2,25 @@ nav#menu {
   display: block;
   opacity: 1;
   transition: margin-right 0.5s ease-out;
-  margin-right: -100vw;
+  margin-left: 100vw;
   z-index: 1001;
 
   background-color: transparentize($base-green, 0.1);
 
   position: fixed;
-  height: auto;
+  height: 100%;
+  height: 100vh;
   top: 0px;
-  right: 0px;
+  // right: 0px;
   width: 100%;
+  width: 100vw;
 
   overflow: hidden;
 
   &.shown {
     opacity: 1;
     display: block;
-    margin-right: 0px;
+    margin-left: 0px;
   }
 
   .close-menu {
@@ -28,12 +30,12 @@ nav#menu {
   ul {
     clear: both;
     float: right;
-    margin-right: $sections-margin-side;
-    margin-top: $menu-margin-vertical;
+    margin-right: $sections-margin-side-mobile;
+    margin-top: $menu-margin-vertical-mobile;
     list-style: none;
 
     &:last-child {
-      margin-bottom: 2 * $menu-margin-vertical;
+      margin-bottom: 2 * $menu-margin-vertical-mobile;
     }
     &.social {
       a {
@@ -61,6 +63,17 @@ nav#menu {
           background-color: $base-gray-light;
           color: $base-black;
         }
+      }
+    }
+  }
+  @include above_mobile_portrait() {
+    height: auto;
+    width: 100%;
+    ul {
+      margin-right: $sections-margin-side;
+      margin-top: $menu-margin-vertical;
+      &:last-child {
+        margin-bottom: 2 * $menu-margin-vertical;
       }
     }
   }

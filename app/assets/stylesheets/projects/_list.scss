@@ -18,6 +18,7 @@
   top: $header-height;
   right: 0px;
   width: 100%;
+  width: 100vw;
 
   padding: 0px;
   overflow: hidden;
@@ -76,9 +77,14 @@
     z-index: 10001;
     position: fixed;
     top: 0px;
-    right: 0px;
-    background-color: $base-bg-header;
-    margin: 13px $sections-margin-side;
+    left: 50vw;
+    width: 50vw;
+    padding: 13px $sections-margin-side-mobile;
+
+    .sub-menu-links {
+      float: right;
+      background-color: $base-bg-header;
+    }
 
     img {
       margin-left: 15px;
@@ -212,8 +218,8 @@
   .project-container {
     display: none;
     z-index: 102;
-    padding-left: $sections-margin-side;
-    padding-right: $sections-margin-side;
+    padding-left: 25px;
+    padding-right: 25px;
 
     .project-slick {
       max-width: 100%;
@@ -236,14 +242,16 @@
       padding-top: $sections-margin-side;
 
       .info {
-        width: 70%;
+        width: 100%;
         float: left;
-        padding-right: 10px;
+        padding-bottom: 5px;
       }
 
       .categories {
-        width: 30%;
+        width: 100%;
         float: right;
+        padding-bottom: 10px;
+
         ul {
           list-style: none;
           margin: 0px;
@@ -255,15 +263,15 @@
           margin: 0px;
           padding: 0px;
           display: inline-block;
-          margin-right: 10px;
-          margin-bottom: 10px;
+          margin-right: 5px;
+          margin-bottom: 3px;
           text-align: center;
           min-width: 32%;
           width: 32%;
           max-width: 32%;
-          min-width: calc(33% - 10px);
-          width: calc(33% - 10px);
-          max-width: calc(33% - 10px);
+          min-width: calc(33% - 5px);
+          width: calc(33% - 5px);
+          max-width: calc(33% - 5px);
 
           &.disabled.editable {
             opacity: 0.5;
@@ -299,8 +307,15 @@
             color: $base-black;
             text-transform: uppercase;
             font-size: 0.7em;
-            margin-bottom: 5px;
+            margin-bottom: 0px;
             display: block;
+
+            // padding-left: 5px;
+            // float:right;
+            float:none;
+            // width: auto;
+            max-width: 100%;
+            word-wrap:break-word;
           }
 
           a, span, img, svg {
@@ -310,7 +325,10 @@
             display: block;
             margin: auto;
             width: 50px;
-            height: 50px;
+            height: auto;
+            max-width: 100%;
+            // float:left;
+            float:none;
           }
         }
       }
@@ -362,10 +380,10 @@
         top: 40vh;
       }
       .move-to-next {
-        right: -70px;
+        right: 36px;
       }
       .move-to-previous {
-        left: -70px;
+        left: -18px;
       }
     }
   }
@@ -382,6 +400,65 @@
     span.checkbox {
       display: inline-block;
       margin-right: 10px;
+    }
+  }
+
+  @include above_mobile_portrait() {
+    width: 100%;
+    .sub-menu {
+      padding: 13px $sections-margin-side;
+    }
+    .project-container {
+      padding-left: $sections-margin-side;
+      padding-right: $sections-margin-side;
+      .project-item, .template {
+        .info {
+          padding-bottom: 0px;
+          padding-right: 10px;
+          max-width: 70%;
+          width: 70%;
+        }
+        .categories {
+          padding-bottom: 0px;
+          max-width: 30%;
+          width: 30%;
+          li {
+            display: inline-block;
+            margin-top: 0px;
+            margin-left: 0px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+            min-width: 32%;
+            width: 32%;
+            max-width: 32%;
+            min-width: calc(33% - 10px);
+            width: calc(33% - 10px);
+            max-width: calc(33% - 10px);
+            span {
+              float:none;
+              margin-bottom: 5px;
+              padding-left: 0px;
+              width: auto;
+              max-width: 100%;
+            }
+            img {
+              float: none;
+              width: 50px;
+              max-width: 50px;
+            }
+          }
+        }
+      }
+
+      .actions { 
+        .move-to-next {
+          right: -70px;
+        }
+        .move-to-previous {
+          left: -70px;
+        }
+      }
     }
   }
 }

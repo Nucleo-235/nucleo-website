@@ -38,7 +38,10 @@ section {
 .close-section-button {
   float: right;
   img {
-    margin: 13px $sections-margin-side;
+    margin: 13px $sections-margin-side-mobile;
+    @include above_mobile_portrait() {
+      margin: 13px $sections-margin-side;
+    }
   }
 }
 
