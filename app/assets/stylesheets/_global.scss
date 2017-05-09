@@ -23,13 +23,6 @@ section {
   .slick-disabled {
     display: none !important;
   }
-}
-
-.close-section-button {
-  float: right;
-  img {
-    margin: 13px $sections-margin-side;
-  }
 
   @include above_mobile_portrait() {
     padding-left: $sections-margin-side;
@@ -39,6 +32,13 @@ section {
       padding-top: $sections-margin-vertical;
       padding-bottom: $sections-margin-vertical;
     }
+  }
+}
+
+.close-section-button {
+  float: right;
+  img {
+    margin: 13px $sections-margin-side;
   }
 }
 
