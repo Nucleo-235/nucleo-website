@@ -43,7 +43,8 @@
   overflow: hidden;
 
   &.forecast {
-    color: #3d3d3d;
+    // color: #3d3d3d;
+    color: $base-white;
     &.day{
       background-color: #ee7600;
     }
