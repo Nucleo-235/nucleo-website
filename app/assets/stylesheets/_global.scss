@@ -24,6 +24,19 @@ section {
     display: none !important;
   }
 
+  .spin-loading {
+    position: absolute;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    justify-content: center;
+    align-items: flex-start;
+    display: none;
+  }
+
   @include above_mobile_portrait() {
     padding-left: $sections-margin-side;
     padding-right: $sections-margin-side;
