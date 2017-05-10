@@ -30,16 +30,20 @@ $(document).ready(function() {
   $('.open-menu').click(function(e) {
     e.preventDefault();
 
-    $('nav#menu').show()
+    // $('nav#menu').show()
     $('nav#menu').addClass('shown');
+    $('html').css('overflow', 'hidden');
+    $('body').css('overflow', 'hidden');
     return false;
   });
 
   $('.close-menu').click(function(e) {
     e.preventDefault();
 
-    $('nav#menu').hide();
+    // $('nav#menu').hide();
     $('nav#menu').removeClass('shown');
+    $('html').css('overflow', 'visible');
+    $('body').css('overflow', 'visible');
     return false;
   });
 
@@ -72,6 +76,8 @@ $(document).ready(function() {
   $('nav#menu .internal a').click(function(e) {
     $('nav#menu').hide();
     $('nav#menu').removeClass('shown');
+    $('html').css('overflow', 'visible');
+    $('body').css('overflow', 'visible');
 
     $('nav#menu .internal a').removeClass('active');
     $(this).addClass('active');

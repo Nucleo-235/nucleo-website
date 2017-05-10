@@ -109,8 +109,8 @@
     padding-left: 0px;
     &::after {
       content: " ";
-       display: block; 
-       height: 0; 
+       display: block;
+       height: 0;
        clear: both;
     }
     & > li.project {
@@ -176,7 +176,7 @@
           position: relative;
           width: 80%;
           margin: auto;
-          margin-top: 30%;
+          margin-top: 25%;
           border-bottom: 1px solid $base-white;
 
           font-family: $title-text-font-family;
@@ -451,7 +451,7 @@
         }
       }
 
-      .actions { 
+      .actions {
         .move-to-next {
           right: -70px;
         }
