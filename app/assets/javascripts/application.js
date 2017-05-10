@@ -87,6 +87,12 @@ $(document).ready(function() {
     autoplay: true,
     arrows: false,
   });
+  $('section#people ul').slick('slickPause');
+  $(document).on( 'scroll', function(){
+     if (($('section#people ul').offset().top - window.innerHeight + 100) < window.pageYOffset) {
+        $('section#people ul').slick('slickPlay');
+     }
+   });
 
   $('section#people .goto-next').click(function(e) {
     e.preventDefault();
