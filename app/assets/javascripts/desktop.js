@@ -6,6 +6,7 @@ var slickStarted = false;
 
 function startSlick() {
   if (!slickStarted) {
+    // $('.spin-loading').css('display', 'flex');
     $('#portfolio .project-list .project-slick').slick({
       autoplay: false,
       arrows: false,
@@ -17,6 +18,7 @@ function startSlick() {
       if (currentOpenProjectID) {
         window.location.hash = '#' + currentOpenProjectID;
         $(window).scrollTop(0);
+        $('.spin-loading').css('display', 'none');
       }
     });
      slickStarted = true;
@@ -24,6 +26,7 @@ function startSlick() {
 }
 
 function doOpenPortfolio() {
+
   $('.current-page').addClass('shown');
   $('.current-page .open-portfolio').addClass('shown');
   $('.open-related-portfolio').removeClass('shown');
@@ -70,6 +73,7 @@ var desktopStrategy = {
   },
   openProject: function(e, self) {
     preventDefaultWithHash(e, link);
+    $('.spin-loading').css('display', 'flex');
     var link = $(self);
     return this.openProjectWithLink(e, link, link.attr("href"));
   },
