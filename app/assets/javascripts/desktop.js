@@ -168,6 +168,41 @@ var desktopStrategy = {
 
     return false;
   },
+  initBackToTop() {
+    // browser window scroll (in pixels) after which the "back to top" link is shown
+    var offset = 300,
+    //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+    offset_opacity = 1200,
+    offset_hide_element = $('#footer')[0].getBoundingClientRect().top,
+    //duration of the top scrolling animation (in ms)
+    scroll_top_duration = 700,
+    //grab the "back to top" link
+    $back_to_top = $('.cd-top');
+
+    //hide or show the "back to top" link
+    $(window).scroll(function(){
+      ( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+      offset_hide_element = $('#footer')[0].getBoundingClientRect().top;
+      if( $(this).scrollTop() > offset_hide_element ) { 
+        $back_to_top.addClass('cd-hide');
+      } else if( $(this).scrollTop() > offset_opacity ) { 
+        $back_to_top.addClass('cd-fade-out');
+        $back_to_top.removeClass('cd-hide');
+      } else {
+        $back_to_top.removeClass('cd-fade-out');
+        $back_to_top.removeClass('cd-hide');
+      }
+    });
+
+    //smooth scroll to top
+    $back_to_top.on('click', function(event){
+      event.preventDefault();
+      $('body,html').animate({
+        scrollTop: 0 ,
+        }, scroll_top_duration
+      );
+    });
+  },
   onTurningOn: function() {
     projectListContainer = $('#portfolio .project-list .project-slick');
     projectIDs = getProjectIDs();
@@ -181,6 +216,8 @@ var desktopStrategy = {
 
       return false;
     });
+
+    this.initBackToTop();
   },
   onTurningOff: function() {
 
