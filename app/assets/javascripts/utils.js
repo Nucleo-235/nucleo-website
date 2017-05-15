@@ -7,8 +7,11 @@ function preventDefaultIfPossible(e) {
 function preventDefaultWithHash(e, self) {
   preventDefaultIfPossible(e);
   var link = $(self);
-  if (link && link.length > 0)
-    window.location.hash = link.attr('href');
+  if (link && link.length > 0) {
+    var newHash = link.attr('href');
+    if (newHash && newHash.length > 0)
+      window.location.hash = newHash;
+  }
 }
 
 function nextOrFirst(item, selector) {

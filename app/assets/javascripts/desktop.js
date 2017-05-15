@@ -39,6 +39,16 @@ function doOpenPortfolio() {
 }
 
 var desktopStrategy = {
+  closeMenu: function(e, self) {
+    preventDefaultWithHash(e, self);
+
+    // $('nav#menu').hide();
+    $('nav#menu').removeClass('shown');
+    $('html').css('overflow', '');
+    $('body').css('overflow', '');
+
+    return false;
+  },
   openNewProject: function(e, self) {
     preventDefaultWithHash(e, self);
 
@@ -153,7 +163,8 @@ var desktopStrategy = {
     $('.current-page .open-portfolio').removeClass('shown');
     $('.open-related-portfolio').removeClass('shown');
 
-    window.location.hash = '';
+    if (self)
+      window.location.hash = '';
 
     return false;
   },
