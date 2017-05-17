@@ -38,13 +38,7 @@ $(document).ready(function() {
   });
 
   $('.close-menu').click(function(e) {
-    e.preventDefault();
-
-    // $('nav#menu').hide();
-    $('nav#menu').removeClass('shown');
-    $('html').css('overflow', '');
-    $('body').css('overflow', '');
-    return false;
+    return currentStrategy.closeMenu(e);
   });
 
   $('.open-portfolio').click(function(e) {
@@ -52,6 +46,12 @@ $(document).ready(function() {
   });
   $('.close-portfolio').click(function(e) {
     return currentStrategy.closePortfolio(e, this);
+  });
+  $('.close-all').click(function(e) {
+    var menuEventResult = currentStrategy.closeMenu(e, this);
+    var portfolioEventResult = currentStrategy.closePortfolio( { }, null);
+
+    return menuEventResult && portfolioEventResult;
   });
 
   $('.open-project').click(function(e) {

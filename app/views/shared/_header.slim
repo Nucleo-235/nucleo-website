@@ -1,6 +1,7 @@
-header
+header#header
   .current
-    img src="#{image_path('logo-header.png')}"
+    a.close-all href="#main"
+      img src="#{image_path('logo-header.png')}"
     div.current-page
       = localized_value_link_attr(@global_page, 'menu.items.portfolio', 'Trabalho', { href: "#portfolio", class: "open-portfolio" })
 
