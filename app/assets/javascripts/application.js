@@ -74,13 +74,11 @@ $(document).ready(function() {
   });
 
   $('nav#menu .internal a').click(function(e) {
-    $('nav#menu').hide();
     $('nav#menu').removeClass('shown');
     $('html').css('overflow', '');
     $('body').css('overflow', '');
 
     $('nav#menu .internal a').removeClass('active');
-    $(this).addClass('active');
   });
 
   $('section#people ul').slick({
