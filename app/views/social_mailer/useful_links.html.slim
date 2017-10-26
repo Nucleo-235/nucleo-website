@@ -1,0 +1,19 @@
+h1 Links úteis da semana
+
+p Olá
+
+p Achamos alguns links legais para essa semana
+p TEXTO AQUI
+
+ul
+  - @links.each do |link|
+    li
+      a href="#{link.url}"
+        - if link.name
+          | #{link.name}: #{link.url}
+        - else
+          | #{link.url}
+
+p
+  | Link para a planilha:
+  a href="#{@spreadsheet_link}" = @spreadsheet_link

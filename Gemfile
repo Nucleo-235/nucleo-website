@@ -59,8 +59,15 @@ gem 'rollbar'
 gem 'forecast_io'
 gem 'hashie', '3.4.4'
 
+gem "aws-ses", "~> 0.6.0", :require => 'aws/ses'
+
 gem 'figaro'
 gem 'puma'
+
+gem 'google-api-client'
+
+gem 'dotenv-rails', groups: [:development, :test]
+
 group :development do
   gem 'annotate', '>=2.6.0'
   gem 'pry-rails'

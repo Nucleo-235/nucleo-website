@@ -46,3 +46,6 @@
 #sublime
 *.sublime-project
 *.sublime-workspace
+
+# Ignores google sheets credentials
+config/deploy/shared-config/*.*

@@ -1,0 +1,19 @@
+h1 Links bons para comentar
+
+p Olá
+
+p Esse link vale a pena falar sobre:
+p TEXTO AQUI
+
+ul
+  - @links.each do |link|
+    li
+      a href="#{link.url}"
+        - if link.name
+          | #{link.name}: #{link.url}
+        - else
+          | #{link.url}
+
+p
+  | Link para a planilha:
+  a href="#{@spreadsheet_link}" = @spreadsheet_link

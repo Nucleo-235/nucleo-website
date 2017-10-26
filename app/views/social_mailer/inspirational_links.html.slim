@@ -1,0 +1,19 @@
+h1 Links Inspiracionais
+
+p Olá
+
+p Esses links inpiraram a gente:
+p TEXTO AQUI
+
+ul
+  - @links.each do |link|
+    li
+      a href="#{link.url}"
+        - if link.name
+          | #{link.name}: #{link.url}
+        - else
+          | #{link.url}
+
+p
+  | Link para a planilha:
+  a href="#{@spreadsheet_link}" = @spreadsheet_link

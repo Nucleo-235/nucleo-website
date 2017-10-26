@@ -15,3 +15,16 @@ rake db:seed
 
 rake localizable:setup
 ```
+
+## Para Conectar ##
+
+```
+ssh root@174.138.92.213
+```
+
+
+```
+su - deploy-nucleo
+```
+
+Credentials at: https://trello.com/c/p7vBbCV1/101-digital-ocean-droplet-nucleo-websites
