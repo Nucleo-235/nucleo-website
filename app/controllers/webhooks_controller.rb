@@ -30,11 +30,14 @@ class WebhooksController < ApplicationController
   end
 
   def indexes
-    if Time.new.wday == 1
+    if Time.new.wday == 1 || params[:force] == "1"
       sales_indexes = calculate_sales_indexes(Time.new, 2.month)
       execution_indexes = calculate_execution_indexes(Time.new, 2.month)
 
       send_indexes(sales_indexes + execution_indexes)
+      render json: { message: "indexes sent" }, status: :ok
+    else
+      render json: { message: "no indexes sent, not today" }, status: :ok
     end
   end
 
