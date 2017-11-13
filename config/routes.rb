@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'webhooks/social_links', to: 'webhooks#social_links'
+  get 'webhooks/indexes', to: 'webhooks#indexes'
 
   match '*path', via: :all, to: redirect('/')
 end
