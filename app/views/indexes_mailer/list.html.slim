@@ -1,0 +1,7 @@
+h1 Índices da Semana Núcleo
+
+- @indexes.each do |index|
+  div
+    h4 style="display:inline;width:120px;margin-right:10px;" = index.name
+    h2 style="display:inline; color: blue;" = index.value.round(2)
+  p = index.description

@@ -65,6 +65,7 @@ gem 'figaro'
 gem 'puma'
 
 gem 'google-api-client'
+gem 'rest-client'
 
 gem 'dotenv-rails', groups: [:development, :test]
 
