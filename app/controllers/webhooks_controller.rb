@@ -63,7 +63,7 @@ class WebhooksController < ApplicationController
 
     started_index = CompanyIndex.find_or_create_by(code: "order_started", reference_date: base_date)
     started_index.name = "Índice Orçamentos"
-    started_index.description = "Entre 50 e 100 MELHOR, menor significa poucos orçamentos, acima de 100 significam orçamentos atrapalhando a produtividade"
+    started_index.description = "Entre 50 e 100 MELHOR, menor significa poucos orçamentos, acima de 100 significam orçamentos atrapalhando a produtividade (sendo #{ENV["ESTIMATE_IDEAL_COUNT"].to_f.ceil.to_i} o ideal o ideal a cada 2 meses)"
     started_index.value = (100.0 * started.count) / ENV["ESTIMATE_IDEAL_COUNT"].to_f
     started_index.calculation_params = { ESTIMATE_IDEAL_COUNT: ENV["ESTIMATE_IDEAL_COUNT"].to_f }
     started_index.save
@@ -71,7 +71,7 @@ class WebhooksController < ApplicationController
 
     approved_index = CompanyIndex.find_or_create_by(code: "order_approved", reference_date: base_date)
     approved_index.name = "Índice Fechados"
-    approved_index.description = "Entre 50 e 100 MELHOR, menor significa poucos projetos fechados, acima de 100 talvez signifique projetos demais fechados"
+    approved_index.description = "Entre 50 e 100 MELHOR, menor significa poucos projetos fechados, acima de 100 talvez signifique projetos demais fechados (sendo #{ENV["ORDER_IDEAL_COUNT"].to_f.ceil.to_i} o ideal a cada 2 meses)"
     approved_index.value = (100.0 * approved.count) / ENV["ORDER_IDEAL_COUNT"].to_f
     approved_index.calculation_params = { ORDER_IDEAL_COUNT: ENV["ORDER_IDEAL_COUNT"].to_f }
     approved_index.save
