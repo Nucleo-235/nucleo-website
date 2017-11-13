@@ -61,16 +61,20 @@ class WebhooksController < ApplicationController
     auth = "Bearer #{ENV['AIRTABLE_API']}"
     approved = get_from_airtable(url)
 
-    started_index = CompanyIndex.new
+    started_index = CompanyIndex.find_or_create_by(code: "order_started", reference_date: base_date)
     started_index.name = "Índice Orçamentos"
     started_index.description = "Entre 50 e 100 MELHOR, menor significa poucos orçamentos, acima de 100 significam orçamentos atrapalhando a produtividade"
     started_index.value = (100.0 * started.count) / ENV["ESTIMATE_IDEAL_COUNT"].to_f
+    started_index.calculation_params = { ESTIMATE_IDEAL_COUNT: ENV["ESTIMATE_IDEAL_COUNT"].to_f }
+    started_index.save
     # puts customer_happyness_index.to_json
 
-    approved_index = CompanyIndex.new
+    approved_index = CompanyIndex.find_or_create_by(code: "order_approved", reference_date: base_date)
     approved_index.name = "Índice Fechados"
     approved_index.description = "Entre 50 e 100 MELHOR, menor significa poucos projetos fechados, acima de 100 talvez signifique projetos demais fechados"
     approved_index.value = (100.0 * approved.count) / ENV["ORDER_IDEAL_COUNT"].to_f
+    approved_index.calculation_params = { ORDER_IDEAL_COUNT: ENV["ORDER_IDEAL_COUNT"].to_f }
+    approved_index.save
     # puts hours_rate_index.to_json
 
     [started_index, approved_index]
@@ -122,18 +126,21 @@ class WebhooksController < ApplicationController
       end
     end
 
-    customer_happyness_index = CompanyIndex.new
+    customer_happyness_index = CompanyIndex.find_or_create_by(code: "customer_happyness", reference_date: base_date)
     customer_happyness_index.name = "Índice Deadline"
     customer_happyness_index.description = "Quanto mais POSITIVO melhor, negativo significa projetos atrasados"
     count = overdue_projects.length + overdue_done_projects.length + done_projects.length
     sum = (done_projects.length * 3) + (overdue_projects.length * -3) + (overdue_done_projects.length * -1)
     customer_happyness_index.value = (100.0 * sum) / (count > 0 ? (count * 3.0) : 1)
+    customer_happyness_index.calculation_params = { done_weigth: 3, overdue_weigth: -3, overdue_done_weigth: -1 }
+    customer_happyness_index.save
     # puts customer_happyness_index.to_json
 
-    hours_use_index = CompanyIndex.new
+    hours_use_index = CompanyIndex.find_or_create_by(code: "hours_use", reference_date: base_date)
     hours_use_index.name = "Índice Uso Horas"
     hours_use_index.description = "ABAIXO de 100 melhor, acima de 100 significa uso demasiado de horas para conclusão de projeto"
     hours_use_index.value = (100.0 * project_usedhours_rates.sum) / (project_usedhours_rates.length > 0 ? project_usedhours_rates.length : 1)
+    hours_use_index.save
     # puts hours_rate_index.to_json
 
     [customer_happyness_index, hours_use_index]
