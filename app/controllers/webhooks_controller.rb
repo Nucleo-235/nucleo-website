@@ -48,7 +48,7 @@ class WebhooksController < ApplicationController
     end_date_str = end_date.strftime("%Y-%m-%d")
 
     data_field = 'Data'
-    filter = "AND(OR(Status = 'Iniciado', Status = 'Enviado'), IS_AFTER({#{data_field}},DATETIME_PARSE('#{begin_date_str}', 'YYYY-MM-DD')), IS_BEFORE({#{data_field}},DATETIME_PARSE('#{end_date_str}', 'YYYY-MM-DD')))"
+    filter = "AND(NOT(Status = ''), IS_AFTER({#{data_field}},DATETIME_PARSE('#{begin_date_str}', 'YYYY-MM-DD')), IS_BEFORE({#{data_field}},DATETIME_PARSE('#{end_date_str}', 'YYYY-MM-DD')))"
     filter_string = ERB::Util.u(filter)
     url = "https://api.airtable.com/v0/appdfAwtINoSYGqqD/Projetos?view=Grid%20view&filterByFormula=#{filter_string}"
     auth = "Bearer #{ENV['AIRTABLE_API']}"
