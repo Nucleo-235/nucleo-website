@@ -40,7 +40,7 @@ class WebhooksController < ApplicationController
       sales_indexes = calculate_sales_indexes(base_date, 3.month)
       execution_indexes = calculate_execution_indexes(base_date, 2.month)
 
-      send_indexes(sales_indexes, execution_indexes)
+      send_indexes(base_date, sales_indexes, execution_indexes)
       render json: { message: "indexes sent" }, status: :ok
     else
       render json: { message: "no indexes sent, not today" }, status: :ok
@@ -242,9 +242,9 @@ class WebhooksController < ApplicationController
     end
   end
 
-  def send_indexes(sales_indexes, execution_indexes)
-    IndexesMailer.sales(sales_indexes).deliver
-    IndexesMailer.execution(execution_indexes).deliver
+  def send_indexes(base_date, sales_indexes, execution_indexes)
+    IndexesMailer.sales(sales_indexes, base_date).deliver
+    IndexesMailer.execution(execution_indexes, base_date).deliver
   end
 
   def read_spreadsheet(credentials, spreadsheet_id, range)
