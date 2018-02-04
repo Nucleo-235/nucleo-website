@@ -31,8 +31,14 @@ class WebhooksController < ApplicationController
 
   def indexes
     if Time.new.wday == 1 || params[:force] == "1"
-      sales_indexes = calculate_sales_indexes(Time.new, 3.month)
-      execution_indexes = calculate_execution_indexes(Time.new, 2.month)
+      original_date = Time.new
+
+      # sempre segundas
+      diff_days = original_date.wday > 0 ? (original_date.wday - 1) : 6
+      base_date = Time.new(original_date.year, original_date.month, original_date.day).advance(days: -1 * diff_days)
+
+      sales_indexes = calculate_sales_indexes(base_date, 3.month)
+      execution_indexes = calculate_execution_indexes(base_date, 2.month)
 
       send_indexes(sales_indexes, execution_indexes)
       render json: { message: "indexes sent" }, status: :ok
