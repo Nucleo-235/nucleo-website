@@ -31,10 +31,10 @@ class WebhooksController < ApplicationController
 
   def indexes
     if Time.new.wday == 1 || params[:force] == "1"
-      sales_indexes = calculate_sales_indexes(Time.new, 2.month)
+      sales_indexes = calculate_sales_indexes(Time.new, 3.month)
       execution_indexes = calculate_execution_indexes(Time.new, 2.month)
 
-      send_indexes(sales_indexes + execution_indexes)
+      send_indexes(sales_indexes, execution_indexes)
       render json: { message: "indexes sent" }, status: :ok
     else
       render json: { message: "no indexes sent, not today" }, status: :ok
@@ -47,37 +47,94 @@ class WebhooksController < ApplicationController
     end_date = base_date + time_span
     end_date_str = end_date.strftime("%Y-%m-%d")
 
+    airtable_results = get_airtable_results("https://api.airtable.com/v0/appdfAwtINoSYGqqD/Projetos?view=Grid%20view", begin_date_str, end_date_str)
+    started = airtable_results[:started]
+    approved = airtable_results[:approved]
+
+    estimate_ideal_count = ENV["ESTIMATE_IDEAL_COUNT"]
+    estimate_ideal_value = ENV["ESTIMATE_IDEAL_VALUE"]
+    order_ideal_count = ENV["ORDER_IDEAL_COUNT"]
+    order_ideal_value = ENV["ORDER_IDEAL_VALUE"]
+    started_ideal_counts = estimate_ideal_count.split(",").map { |e| e.to_f }
+    started_ideal_values = estimate_ideal_value.split(",").map { |e| e.to_f }
+    approved_ideal_counts = order_ideal_count.split(",").map { |e| e.to_f }
+    approved_ideal_values = order_ideal_value.split(",").map { |e| e.to_f }
+
+    started_index = CompanyIndex.find_or_create_by(code: "order_started_count_3_months", reference_date: base_date)
+    started_index.name = "Qtd Orçada"
+    started_index.description = "Faixa deve estar na faixa #{estimate_ideal_count}"
+    started_index.value = started.count
+    started_index.calculation_params = { range: started_ideal_counts }
+    started_index.level = sales_level(started_index)
+    started_index.value_prefix = ""
+    started_index.value_precision = 0
+    started_index.save
+
+    started_value_index = CompanyIndex.find_or_create_by(code: "order_started_value_3_months", reference_date: base_date)
+    started_value_index.name = "$ Orçada"
+    started_value_index.description = "Faixa deve estar na faixa #{estimate_ideal_value}"
+    started_value_index.value = airtable_order_value(started).sum
+    started_value_index.calculation_params = { range: started_ideal_values }
+    started_value_index.level = sales_level(started_value_index)
+    started_value_index.value_prefix = "R$ "
+    started_value_index.value_precision = 2
+    started_value_index.save
+
+    approved_index = CompanyIndex.find_or_create_by(code: "order_approved_count_3_months", reference_date: base_date)
+    approved_index.name = "Qtd Aprovada"
+    approved_index.description = "Faixa deve estar na faixa #{order_ideal_count}"
+    approved_index.value = approved.count
+    approved_index.calculation_params = { range: approved_ideal_counts }
+    approved_index.level = sales_level(approved_index)
+    approved_index.value_prefix = ""
+    approved_index.value_precision = 0
+    approved_index.save
+
+    approved_value_index = CompanyIndex.find_or_create_by(code: "order_approved_value_3_months", reference_date: base_date)
+    approved_value_index.name = "$ Aprovada"
+    approved_value_index.description = "Faixa deve estar na faixa #{order_ideal_value}"
+    approved_value_index.value = airtable_order_value(approved).sum
+    approved_value_index.calculation_params = { range: approved_ideal_values }
+    approved_value_index.level = sales_level(approved_value_index)
+    approved_value_index.value_prefix = "R$ "
+    approved_value_index.value_precision = 2
+    approved_value_index.save
+
+    [started_index, started_value_index, approved_index, approved_value_index]
+  end
+
+  def sales_level(index)
+    range = index.calculation_params[:range].sort { |a, z| z <=> a }
+    range_step = 100 / range.count
+    range.each_with_index do |value, i|
+      return 100 - (range_step * i) if index.value >= value
+    end
+    return 0
+  end
+
+  def airtable_order_value(results)
+    results.map do |result| 
+      fields = result["fields"]
+      fields["Valor Aprovado"] && fields["Valor Aprovado"] > 0 ? fields["Valor Aprovado"] : fields["Valor Final"]
+    end
+  end
+
+  def get_airtable_results(base_url, begin_date_str, end_date_str)
+    auth = "Bearer #{ENV['AIRTABLE_API']}"
+
     data_field = 'Data'
     filter = "AND(NOT(Status = ''), IS_AFTER({#{data_field}},DATETIME_PARSE('#{begin_date_str}', 'YYYY-MM-DD')), IS_BEFORE({#{data_field}},DATETIME_PARSE('#{end_date_str}', 'YYYY-MM-DD')))"
     filter_string = ERB::Util.u(filter)
-    url = "https://api.airtable.com/v0/appdfAwtINoSYGqqD/Projetos?view=Grid%20view&filterByFormula=#{filter_string}"
-    auth = "Bearer #{ENV['AIRTABLE_API']}"
+    url = "#{base_url}&filterByFormula=#{filter_string}"
     started = get_from_airtable(url)
 
     data_field = 'Data Aprovação'
     filter = "AND(Status = 'Aprovado', IS_AFTER({#{data_field}},DATETIME_PARSE('#{begin_date_str}', 'YYYY-MM-DD')), IS_BEFORE({#{data_field}},DATETIME_PARSE('#{end_date_str}', 'YYYY-MM-DD')))"
     filter_string = ERB::Util.u(filter)
-    url = "https://api.airtable.com/v0/appdfAwtINoSYGqqD/Projetos?view=Grid%20view&filterByFormula=#{filter_string}"
-    auth = "Bearer #{ENV['AIRTABLE_API']}"
+    url = "#{base_url}&filterByFormula=#{filter_string}"
     approved = get_from_airtable(url)
 
-    started_index = CompanyIndex.find_or_create_by(code: "order_started", reference_date: base_date)
-    started_index.name = "Índice Orçamentos"
-    started_index.description = "Entre 50 e 100 MELHOR, menor significa poucos orçamentos, acima de 100 significam orçamentos atrapalhando a produtividade (sendo #{ENV["ESTIMATE_IDEAL_COUNT"].to_f.ceil.to_i} o ideal o ideal a cada 2 meses)"
-    started_index.value = (100.0 * started.count) / ENV["ESTIMATE_IDEAL_COUNT"].to_f
-    started_index.calculation_params = { ESTIMATE_IDEAL_COUNT: ENV["ESTIMATE_IDEAL_COUNT"].to_f }
-    started_index.save
-    # puts customer_happyness_index.to_json
-
-    approved_index = CompanyIndex.find_or_create_by(code: "order_approved", reference_date: base_date)
-    approved_index.name = "Índice Fechados"
-    approved_index.description = "Entre 50 e 100 MELHOR, menor significa poucos projetos fechados, acima de 100 talvez signifique projetos demais fechados (sendo #{ENV["ORDER_IDEAL_COUNT"].to_f.ceil.to_i} o ideal a cada 2 meses)"
-    approved_index.value = (100.0 * approved.count) / ENV["ORDER_IDEAL_COUNT"].to_f
-    approved_index.calculation_params = { ORDER_IDEAL_COUNT: ENV["ORDER_IDEAL_COUNT"].to_f }
-    approved_index.save
-    # puts hours_rate_index.to_json
-
-    [started_index, approved_index]
+    { started: started, approved: approved }
   end
 
   def get_from_airtable(url)
@@ -179,8 +236,9 @@ class WebhooksController < ApplicationController
     end
   end
 
-  def send_indexes(indexes)
-    IndexesMailer.list(indexes).deliver
+  def send_indexes(sales_indexes, execution_indexes)
+    IndexesMailer.sales(sales_indexes).deliver
+    IndexesMailer.execution(execution_indexes).deliver
   end
 
   def read_spreadsheet(credentials, spreadsheet_id, range)

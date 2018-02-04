@@ -1,0 +1,33 @@
+css:
+  .level-100 { color: #459B03; }
+  .level-90 { color: #5C9A02; }
+  .level-80 { color: #739A02; }
+  .level-75 { color: #7E9A02; }
+  .level-70 { color: #8A9902; }
+  .level-60 { color: #999102; }
+  .level-50 { color: #997902; }
+  .level-40 { color: #986202; }
+  .level-30 { color: #984A02; }
+  .level-25 { color: #983F02; }
+  .level-20 { color: #973302; }
+  .level-10 { color: #971C02; }
+  .level-0 { color: #970401; }
+  .level .value {
+    font-weight: bold;
+  }
+  .level .normal {
+    font-weight: normal;
+  }
+
+h1 Índices de Vendas da Semana Núcleo
+
+- @indexes.each do |index|
+  div
+    h4 style="display:inline;width:120px;margin-right:10px;" = index.name
+    h2 style="display:inline;" class="level level-#{index.level}"
+      span.value = index_formatted(index, index.value)
+      span.normal = " de #{index_formatted(index, index.calculation_params[:range][index.calculation_params[:range].count - 1])}"
+      span.normal 
+        | -> Nivel 
+      span.value = level_name(index.level)
+  p = index.description
