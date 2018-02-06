@@ -137,3 +137,16 @@ function setNewProjectValues(clonedElement, newData) {
     element.find('.thumb_image-value img').attr('src', newData.thumb_image);
   }
 }
+
+$( document ).ready(function() {
+  $(window).on('hashchange', function() {
+    //.. work ..
+    if (typeof gtag !== 'undefined') {
+      var path = window.RELATIVE_PAGE_PATH();
+      console.log('gtag value', path);
+      gtag('config', window.GA_CODE, {'page_path': window.RELATIVE_PAGE_PATH()});
+    } else {
+      console.log('value', window.RELATIVE_PAGE_PATH());
+    }
+  });
+});

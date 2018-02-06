@@ -78,5 +78,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.delivery_method = :ses
 
-  GA.tracker = ENV['GOOGLE_ANALYTICS_CODE'] if ENV['GOOGLE_ANALYTICS_CODE'].present?
+  # GA.tracker = ENV['GOOGLE_ANALYTICS_CODE'] if ENV['GOOGLE_ANALYTICS_CODE'].present?
 end
