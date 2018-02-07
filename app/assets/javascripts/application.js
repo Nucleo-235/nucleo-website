@@ -19,6 +19,7 @@
 //= require utils
 //= require cloning
 //= require desktop
+//= require jquery.waypoints
 
 $(document).ready(function() {
   /* Activating Inplace Editor */
@@ -139,14 +140,42 @@ function setNewProjectValues(clonedElement, newData) {
 }
 
 $( document ).ready(function() {
-  $(window).on('hashchange', function() {
-    //.. work ..
+  function logPage(path) {
     if (typeof gtag !== 'undefined') {
-      var path = window.RELATIVE_PAGE_PATH();
-      console.log('gtag value', path);
-      gtag('config', window.GA_CODE, {'page_path': window.RELATIVE_PAGE_PATH()});
+      console.log('logPage', path);
+      gtag('config', window.GA_CODE, {'page_path': path});
     } else {
-      console.log('value', window.RELATIVE_PAGE_PATH());
+      console.log('logPage local', path);
+    }
+  }
+
+  $('.open-menu').click(function(e) {
+    var newHash = "#menu";
+    if (newHash != lastViewHash) {
+      lastViewHash = newHash;
+      logPage(window.RELATIVE_PAGE_PATH_HASHED(newHash));
     }
   });
+
+  var lastViewHash = null;
+  $(window).on('hashchange', function() {
+    //.. work ..
+    if (window.location.hash != lastViewHash) {
+      lastViewHash = window.location.hash;
+      logPage(window.RELATIVE_PAGE_PATH());
+    }
+  });
+
+  var waypoints = [];
+  $('.waypoint').each(function(index) {
+    var waypoint = $(this).waypoint(function(direction) {
+      var newHash = "#" + this.id;
+      if (this.id && newHash != lastViewHash) {
+        lastViewHash = newHash;
+        logPage(window.RELATIVE_PAGE_PATH_HASHED(newHash));
+      }
+      }, { offset: '50%' }
+    );
+    waypoints.push(waypoint);
+  })
 });

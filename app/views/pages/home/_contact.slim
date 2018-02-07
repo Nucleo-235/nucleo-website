@@ -1,4 +1,4 @@
-section#contact class="#{@forecast_type ? 'forecast '+ @forecast_type : ''} #{@forecast_is_night ? 'night' : 'day'} #{@forecast_cloud && @forecast_cloud > 0.5 ? 'with-clouds' : 'no-clouds'}"
+section#contact class="waypoint #{@forecast_type ? 'forecast '+ @forecast_type : ''} #{@forecast_is_night ? 'night' : 'day'} #{@forecast_cloud && @forecast_cloud > 0.5 ? 'with-clouds' : 'no-clouds'}"
   .content
     .location
       h3 = @location[:name]

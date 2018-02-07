@@ -32,6 +32,7 @@ gem 'jquery-easing-rails'
 gem 'font-awesome-rails'
 gem 'bourbon'
 gem 'weather-icons-rails'
+gem 'jquery-waypoints-rails', '~> 2.0', '>= 2.0.5'
 
 gem 'noty-rails'
 gem 'simple_form'
