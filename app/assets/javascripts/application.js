@@ -19,7 +19,6 @@
 //= require utils
 //= require cloning
 //= require desktop
-//= require jquery.waypoints
 
 $(document).ready(function() {
   /* Activating Inplace Editor */
@@ -140,6 +139,9 @@ function setNewProjectValues(clonedElement, newData) {
 }
 
 $( document ).ready(function() {
+  var lastViewHash = null;
+  var lastScrollHash = null;
+
   function logPage(path) {
     if (typeof gtag !== 'undefined') {
       console.log('logPage', path);
@@ -149,33 +151,75 @@ $( document ).ready(function() {
     }
   }
 
-  $('.open-menu').click(function(e) {
-    var newHash = "#menu";
+  function logIfNew(newHash) {
     if (newHash != lastViewHash) {
       lastViewHash = newHash;
       logPage(window.RELATIVE_PAGE_PATH_HASHED(newHash));
     }
+  }
+
+  function logScroll(scrollHash) {
+    lastScrollHash = scrollHash;
+    setTimeout(function() {
+      logIfNew(lastScrollHash);
+    }, 100);
+  }
+
+  $('.open-menu').click(function(e) {
+    logIfNew("#menu");
   });
 
-  var lastViewHash = null;
   $(window).on('hashchange', function() {
     //.. work ..
-    if (window.location.hash != lastViewHash) {
-      lastViewHash = window.location.hash;
-      logPage(window.RELATIVE_PAGE_PATH());
-    }
+    logIfNew(window.location.hash);
   });
 
-  var waypoints = [];
-  $('.waypoint').each(function(index) {
-    var waypoint = $(this).waypoint(function(direction) {
-      var newHash = "#" + this.id;
-      if (this.id && newHash != lastViewHash) {
-        lastViewHash = newHash;
-        logPage(window.RELATIVE_PAGE_PATH_HASHED(newHash));
-      }
-      }, { offset: '50%' }
-    );
-    waypoints.push(waypoint);
-  })
+  var menu = $('nav#menu');
+  var portifa = $('#portfolio');
+  var scrollDelay = 800;
+  var timeout = null;
+  $(window).bind('scroll',function(){
+    clearTimeout(timeout);
+    timeout = setTimeout(function(){
+      // console.log('scrolling stopped');
+
+      if (menu.hasClass('shown') || portifa.hasClass('shown'))
+        return; // no need to check scrolling
+      
+      $('.waypoint').each(function(index) {
+        if (isPartialScrolledIntoView(this, 0.50)) {
+          // console.log("isPartialScrolledIntoView", this.id)
+          logScroll("#" + this.id);
+        }
+      });
+    }, scrollDelay);
+  });
 });
+
+
+
+function isPartialScrolledIntoView(elem, percentage)
+{
+    var docViewHeight = $(window).height();
+    var docViewTop = $(window).scrollTop();
+    var docViewBottom = docViewTop + docViewHeight;
+
+    var elemHeight = $(elem).height();
+    var elemTop = $(elem).offset().top;
+    var elemBottom = elemTop + elemHeight;
+
+    var isTopWithin = elemTop >= docViewTop;
+    var isBottomWithin = elemBottom <= docViewBottom;
+
+    if ((isTopWithin && isBottomWithin) || (!isTopWithin && !isBottomWithin)) {
+      return true;
+    } else {
+      if (isTopWithin) {
+        // console.log('isTopWithin', (elemBottom - (elemHeight * percentage)) <= docViewBottom);
+        return (elemBottom - (elemHeight * percentage)) <= docViewBottom;
+      } else {
+        // console.log('isBottomWithin', (elemTop + (elemHeight * percentage)) >= docViewTop);
+        return (elemTop + (elemHeight * percentage)) >= docViewTop;
+      }
+    }
+}
