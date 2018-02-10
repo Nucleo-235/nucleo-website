@@ -6,13 +6,13 @@ nav#menu
     li
       a href="#main" = localized_value_string_read(@global_page, 'titles.main', 'Home')
     li
-      a.open-portfolio href="#portfolio" = localized_value_string_read(@global_page, 'menu.items.portfolio', 'Trabalho')
+      a.open-portfolio href="#portfolio" = localized_value_string_read(@global_page, 'menu.items.portfolio', 'Portfolio')
     li
       a href="#about" = localized_value_string_read(@global_page, 'titles.about', 'Quem Somos')
     li
       a href="#contact" = localized_value_string_read(@global_page, 'titles.contact', 'Contato')
-    li
-      a.open-lab href="#lab" = localized_value_string_read(@global_page, 'titles.lab', 'Nucleo Lab')
+    / li
+      / a.open-lab href="#lab" = localized_value_string_read(@global_page, 'titles.lab', 'Nucleo Lab')
   ul.social
     li
       a href="http://facebook.com/nucleo235" target="_blank"

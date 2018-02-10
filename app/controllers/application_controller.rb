@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_action :hide_analytics, if: :devise_controller?
+  before_action :show_analytics, unless: :devise_controller?
   before_action :set_locale, unless: :devise_controller?
   before_action :persist_locale, unless: :devise_controller?
   before_action :authenticate_user!, unless: :devise_controller?
@@ -170,5 +172,13 @@ class ApplicationController < ActionController::Base
       route_control = controller_name ? controller_name : 'root'
       route_action = action_name ? action_name : 'home'
       @current_page = LocalizableValue::LocalizedPage.current_page(route_control, route_action)
+    end
+
+    def hide_analytics
+      @can_show_analytics = false
+    end
+
+    def show_analytics
+      @can_show_analytics = true
     end
 end
