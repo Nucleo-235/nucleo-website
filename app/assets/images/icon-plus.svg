@@ -1,0 +1,35 @@
+<svg width="44.08" height="44.08" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <style>.cls-1{fill:#ffffff;} .cls-2{fill:#ffffff;stroke:#ffffff;}</style>
+ </defs>
+ <title>Asset 1</title>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g fill="white" id="Layer_2">
+   <g id="Layer_1-2">
+    <rect id="svg_1" height="3.53" width="3.53" x="20.28" class="cls-1"/>
+    <rect id="svg_2" height="3.53" width="3.53" x="14.1" class="cls-1"/>
+    <rect id="svg_3" height="3.53" width="3.53" x="26.45" class="cls-1"/>
+    <rect id="svg_4" height="3.53" width="3.53" y="26.43" x="40.55" class="cls-1"/>
+    <path id="svg_5" d="m39.67,0l-7.05,0l0,3.53l7.05,0a0.89,0.89 0 0 1 0.88,0.88l0,7l3.53,0l0,-7a4.42,4.42 0 0 0 -4.41,-4.41z" class="cls-1"/>
+    <rect id="svg_6" height="3.53" width="3.53" y="14.09" x="40.55" class="cls-1"/>
+    <rect id="svg_7" height="3.53" width="3.53" y="40.55" x="14.1" class="cls-1"/>
+    <rect id="svg_8" height="3.53" width="3.53" y="20.26" x="40.55" class="cls-1"/>
+    <rect id="svg_9" height="3.53" width="3.53" y="26.43" class="cls-1"/>
+    <path id="svg_10" d="m3.53,39.67l0,-7.07l-3.53,0l0,7.07a4.42,4.42 0 0 0 4.41,4.41l7.05,0l0,-3.53l-7.05,0a0.89,0.89 0 0 1 -0.88,-0.88z" class="cls-1"/>
+    <rect id="svg_11" height="3.53" width="3.53" y="14.09" class="cls-1"/>
+    <rect id="svg_12" height="3.53" width="3.53" y="40.55" x="20.28" class="cls-1"/>
+    <path id="svg_13" d="m40.55,39.67a0.89,0.89 0 0 1 -0.88,0.88l-7.05,0l0,3.53l7.05,0a4.42,4.42 0 0 0 4.41,-4.41l0,-7.07l-3.53,0l0,7.07z" class="cls-1"/>
+    <rect id="svg_14" height="3.53" width="3.53" y="40.55" x="26.45" class="cls-1"/>
+    <path id="svg_15" d="m3.53,4.41a0.89,0.89 0 0 1 0.88,-0.88l7.05,0l0,-3.53l-7.05,0a4.42,4.42 0 0 0 -4.41,4.41l0,7l3.53,0l0,-7z" class="cls-1"/>
+    <rect id="svg_16" height="3.53" width="3.53" y="20.26" class="cls-1"/>
+   </g>
+  </g>
+  <line class="cls-2" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_17" y2="35.102515" x2="21.9775" y1="8.977487" x1="22.1025" stroke-width="4" fill="none"/>
+  <line transform="rotate(90 22.040000915527344,22.039999008178714) " class="cls-2" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_18" y2="35.102513" x2="21.9775" y1="8.977485" x1="22.1025" stroke-width="4" fill="none"/>
+ </g>
+</svg>
