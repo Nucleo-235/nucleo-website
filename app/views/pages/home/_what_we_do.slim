@@ -1,0 +1,34 @@
+section#what_we_do.waypoint
+  .content
+    / h2 = localized_value_string(@current_page, 'what_we_do.subtitle', 'O que fazemos?')
+    ul
+      li.product.websites
+        a.open-portfolio.product-container href="#portfolio" data-event-id="what-we-do-websites"
+          .title
+            img src="#{image_path('what_we_do/site.png')}"
+            h3 = localized_value_string(@current_page, 'what_we_do.websites.title', 'Websites')
+          .text = localized_value_text(@current_page, 'what_we_do.websites.text', 'Criamos websites baseados em temas prontos ou com design personalizados, de acordo com cada cliente.')
+        .actions
+          a.open-portfolio data-event-id="what-we-do-websites-action" href="#portfolio" = localized_value_string_read(@current_page, 'what_we_do.see_jobs', 'Veja nosso trabalho')
+      li.product.mobile_apps
+        a.open-portfolio.product-container href="#portfolio" data-event-id="what-we-do-mobile_apps"
+          .title
+            img src="#{image_path('what_we_do/mobile.png')}"
+            h3 = localized_value_string(@current_page, 'what_we_do.mobile_apps.title', 'Aplicativos')
+          .text = localized_value_text(@current_page, 'what_we_do.mobile_apps.text', 'Desenvolvemos idéias em aplicativos, sempre junto com você para melhores resultados.')
+        .actions
+          a.open-portfolio data-event-id="what-we-do-mobile_apps-action" href="#portfolio" = localized_value_string_read(@current_page, 'what_we_do.see_jobs', 'Veja nosso trabalho')
+      li.product.systems
+        a.open-portfolio.product-container href="#portfolio" data-event-id="what-we-do-systems"
+          .title
+            img src="#{image_path('what_we_do/sistema.png')}"
+            h3 = localized_value_string(@current_page, 'what_we_do.systems.title', 'Sistemas')
+          .text = localized_value_text(@current_page, 'what_we_do.systems.text', 'Se precisa organizar seu negócio chegou no lugar certo. Fazemos sistemas de controle, intranets, painéis de administração. Fale com a gente.')
+        .actions
+          a.open-portfolio data-event-id="what-we-do-systems-action" href="#portfolio" = localized_value_string_read(@current_page, 'what_we_do.see_jobs', 'Veja nosso trabalho')
+      li.more
+        .more-container
+          a.open-portfolio href="#portfolio" data-event-id="what-we-do-more"
+            img src="#{image_path('icon-plus.svg')}"
+          .actions
+            a.open-portfolio data-event-id="what-we-do-more-action" href="#portfolio" = localized_value_string_read(@current_page, 'what_we_do.portfolio', 'Nosso Portfolio')

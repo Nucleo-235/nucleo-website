@@ -194,6 +194,23 @@ $( document ).ready(function() {
       });
     }, scrollDelay);
   });
+
+  $("#what_we_do ul li .open-portfolio").click(function() {
+    var item = $(this);
+    var dataEventId = item.attr("data-event-id");
+    console.log('event open-portfolio', dataEventId);
+    gtag('event', 'open-portfolio', { 'source': dataEventId, });
+  });
+
+  $("#contact .content .links .email").click(function() {
+    console.log('event email-clicked');
+    gtag('event', 'email-clicked', { 'source': "contact", });
+  });
+
+  $("#contact .content .links .telephone").click(function() {
+    console.log('event phone-clicked');
+    gtag('event', 'telephone-clicked', { 'source': "contact", });
+  });
 });
 
 

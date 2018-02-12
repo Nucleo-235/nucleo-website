@@ -218,6 +218,14 @@ var desktopStrategy = {
     });
 
     this.initBackToTop();
+
+    var maxHeight = 0;
+    $("#what_we_do ul li").each(function(i) {
+      var itemHeight = $(this).outerHeight();
+      if (itemHeight > maxHeight)
+        maxHeight = itemHeight;
+    })
+    $("#what_we_do ul li").outerHeight(maxHeight);
   },
   onTurningOff: function() {
 
