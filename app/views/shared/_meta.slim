@@ -1,0 +1,16 @@
+- @meta_title = "Nucleo - #{localized_string(@global_page, 'main.subtitle', 'Creative Development').value}"
+- @meta_about = localized_string(@global_page, 'about.content', "**É assim como nos vemos:**\
+        fabricantes de aplicativos, artistas, cientistas, aspirantes a guitarristas e bateristas, tecnólogos, antropólogos. Nós gostamos de dar um mergulho profundo em sua marca, nadar ao redor de seus números, repensar sua experiência ou até seu negócio do zero. Porque nosso pensamento é livre, mas preparado para enfrentar qualquer desafio.").value
+- @meta_desc = "#{localized_string(@global_page, 'main.services', 'Apps, sites, chatbots, blockchain e sistemas').value}.\r\n#{@meta_about}"
+
+
+title = @meta_title
+meta content="#{@meta_desc}" name="description" /
+/! Twitter Card data
+meta name="twitter:card" value="#{@meta_title} - #{@meta_desc}" /
+/! Open Graph data
+meta content="#{@meta_title}" property="og:title" /
+meta content="website" property="og:type" /
+meta content="#{request.original_url}" property="og:url" /
+meta content="#{image_url('cover.png')}" property="og:image" /
+meta content="#{@meta_desc}" property="og:description" /
