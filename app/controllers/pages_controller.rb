@@ -13,8 +13,6 @@ class PagesController < ApplicationController
       @new_project = Project.new
     end
 
-    @show_sumo = params[:utm_campaign] == "site_express"
-
     set_location
   end
 end
