@@ -53,7 +53,10 @@ class WebhooksController < ApplicationController
     end_date = base_date + time_span
     end_date_str = end_date.strftime("%Y-%m-%d")
 
-    airtable_results = get_airtable_results("https://api.airtable.com/v0/appdfAwtINoSYGqqD/Projetos?view=Grid%20view", begin_date_str, end_date_str)
+    
+    airtable_results_1 = get_airtable_results("https://api.airtable.com/v0/appbeOMD1bNtDORGv/Projetos?view=Grid%20view", begin_date_str, end_date_str)
+    airtable_results_2 = get_airtable_results("https://api.airtable.com/v0/appdfAwtINoSYGqqD/Projetos?view=Grid%20view", begin_date_str, end_date_str)
+    airtable_results = join_airtable_results([airtable_results_1, airtable_results_2])
     started = airtable_results[:started]
     approved = airtable_results[:approved]
 
@@ -123,6 +126,15 @@ class WebhooksController < ApplicationController
       fields = result["fields"]
       fields["Valor Aprovado"] && fields["Valor Aprovado"] > 0 ? fields["Valor Aprovado"] : fields["Valor Final"]
     end
+  end
+
+  def join_airtable_results(results_lists)
+    final_result = { started: [], approved: [] }
+    results_lists.each do |results|
+      final_result[:started] = final_result[:started] + results[:started]
+      final_result[:approved] = final_result[:approved] + results[:approved]
+    end
+    final_result
   end
 
   def get_airtable_results(base_url, begin_date_str, end_date_str)
