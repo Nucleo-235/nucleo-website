@@ -54,9 +54,10 @@ class WebhooksController < ApplicationController
     end_date_str = end_date.strftime("%Y-%m-%d")
 
     
-    airtable_results_1 = get_airtable_results("https://api.airtable.com/v0/appbeOMD1bNtDORGv/Projetos?view=Grid%20view", begin_date_str, end_date_str)
-    airtable_results_2 = get_airtable_results("https://api.airtable.com/v0/appdfAwtINoSYGqqD/Projetos?view=Grid%20view", begin_date_str, end_date_str)
-    airtable_results = join_airtable_results([airtable_results_1, airtable_results_2])
+    airtable_results_2017 = get_airtable_results("https://api.airtable.com/v0/appbeOMD1bNtDORGv/Projetos?view=Grid%20view", begin_date_str, end_date_str)
+    airtable_results_2018_01to03 = get_airtable_results("https://api.airtable.com/v0/appdfAwtINoSYGqqD/Projetos?view=Grid%20view", begin_date_str, end_date_str)
+    airtable_results_2018_03to = get_airtable_results("https://api.airtable.com/v0/appUY5izA64IFGRd1/Projetos?view=Grid%20view", begin_date_str, end_date_str)
+    airtable_results = join_airtable_results([airtable_results_2017, airtable_results_2018_01to03, airtable_results_2018_03to])
     started = airtable_results[:started]
     approved = airtable_results[:approved]
 
