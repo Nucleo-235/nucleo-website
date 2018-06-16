@@ -266,8 +266,7 @@ class WebhooksController < ApplicationController
     service.authorization = credentials
 
     response = service.get_spreadsheet_values(spreadsheet_id, range)
-    result = yield response.values
-    result
+    yield response.values
   end
 
   def authorize_google_sheets
