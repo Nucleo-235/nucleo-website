@@ -46,6 +46,11 @@ class ApplicationController < ActionController::Base
     # logger.debug @current_temperature
   end
 
+  def after_localizable_value_changed(value)
+    @global_page.reset_cache
+    @current_page.reset_cache
+  end
+
   private
     def set_temperature_from_api
       logger.debug "--------SET_TEMPERATURE_FROM_API----------"

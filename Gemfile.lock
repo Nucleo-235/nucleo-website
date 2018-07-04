@@ -254,7 +254,7 @@ GEM
     letter_opener (1.4.1)
       launchy (~> 2.2)
     little-plugger (1.1.4)
-    localizable_value (0.3.0)
+    localizable_value (0.3.1)
     logging (2.2.2)
       little-plugger (~> 1.1)
       multi_json (~> 1.10)
@@ -503,13 +503,13 @@ DEPENDENCIES
   hashie (= 3.4.4)
   high_voltage (~> 2.2.1)
   http_accept_language
-  inplace_editing
+  inplace_editing (>= 0.4.7)
   jquery-easing-rails
   jquery-rails
   jquery-waypoints-rails (~> 2.0, >= 2.0.5)
   kaminari
   letter_opener
-  localizable_value
+  localizable_value (>= 0.3.1)
   madmimi
   mail_form
   noty-rails
