@@ -43,7 +43,7 @@ gem 'cocoon'
 gem 'best_in_place', '~> 3.0.1'
 gem 'redcarpet', '>= 3.0.0'
 gem 'inplace_editing', '>= 0.4.7'
-gem 'localizable_value', '>= 0.3.1'
+gem 'localizable_value', '>= 0.3.2'
 
 gem 'devise'
 gem 'omniauth'

@@ -14,4 +14,5 @@ section#contact class="waypoint #{@forecast_type ? 'forecast '+ @forecast_type :
         Brasil")
     .links
       = localized_value_link_attr(@current_page, 'contact.email', 'Mande-nos um e-mail em contato@nucleo.house', { href: 'mailto:contato@nucleo.house', class: 'email' })
-      = localized_value_link_attr(@current_page, 'contact.telephone', '+55 11 3042-2354', { href: 'tel:+55 11 3042-2354', class: 'telephone' })
+      .telephone
+        = localized_value_text(@current_page, 'contact.telephone', '+55 11 3042-2354')
