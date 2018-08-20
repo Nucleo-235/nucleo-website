@@ -157,8 +157,8 @@
           width: 50%;
           border: none;
 
-          &:first-child {
-            border-right: $base-white 3px solid;
+          &:last-child {
+            border-left: $base-white 3px solid;
             width: calc(50% - 4px);
           }
         }
