@@ -32,7 +32,7 @@
     top: $header-height;
     bottom: 0px;
     padding: 0px;
-    background-color: transparentize($base-white, 0.1);
+    background-color: $base-white;
     z-index: 101;
 
     opacity: 1;
@@ -266,12 +266,12 @@
           margin-right: 5px;
           margin-bottom: 3px;
           text-align: center;
-          min-width: 32%;
-          width: 32%;
-          max-width: 32%;
-          min-width: calc(33% - 5px);
-          width: calc(33% - 5px);
-          max-width: calc(33% - 5px);
+          min-width: 23%;
+          width: 23%;
+          max-width: 24%;
+          min-width: calc(25% - 5px);
+          width: calc(25% - 5px);
+          max-width: calc(25% - 5px);
 
           &.disabled.editable {
             opacity: 0.5;
@@ -429,18 +429,19 @@
             margin-right: 10px;
             margin-bottom: 10px;
             text-align: center;
-            min-width: 32%;
-            width: 32%;
-            max-width: 32%;
-            min-width: calc(33% - 10px);
-            width: calc(33% - 10px);
-            max-width: calc(33% - 10px);
+            min-width: 23%;
+            width: 23%;
+            max-width: 24%;
+            min-width: calc(25% - 5px);
+            width: calc(25% - 5px);
+            max-width: calc(25% - 5px);
             span {
               float:none;
               margin-bottom: 5px;
               padding-left: 0px;
               width: auto;
               max-width: 100%;
+              font-size: 14px;
             }
             img {
               float: none;
