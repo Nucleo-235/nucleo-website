@@ -53,7 +53,7 @@ class WebhooksController < ApplicationController
     end_date = base_date + time_span
     end_date_str = end_date.strftime("%Y-%m-%d")
 
-    airtable_base_ids = ['appbeOMD1bNtDORGv','appdfAwtINoSYGqqD', 'appUY5izA64IFGRd1', 'appSPjyQ6qSGrYcyy']
+    airtable_base_ids = ['appDUFqsL0ttGBYr9','appbeOMD1bNtDORGv','appdfAwtINoSYGqqD', 'appUY5izA64IFGRd1', 'appSPjyQ6qSGrYcyy']
     airtable_base_results = airtable_base_ids.map do |base_id|  
       get_airtable_results("https://api.airtable.com/v0/" + base_id + "/Projetos?view=Grid%20view", begin_date_str, end_date_str)
     end
