@@ -19,3 +19,29 @@ javascript:
     window.GA_CODE = "#{ENV['GOOGLE_ANALYTICS_CODE']}";
     gtag('config', window.GA_CODE, { 'send_page_view': false });
     gtag('config', window.GA_CODE, {'page_path': window.RELATIVE_PAGE_PATH()});
+- if @can_show_analytics && ENV['GOOGLE_ADWORDS_CODE'].present? && !user_signed_in?
+  javascript:
+    gtag('config', "#{ENV['GOOGLE_ADWORDS_CODE']}");
+  - if ENV['GOOGLE_ADWORDS_EVENT'].present? && !user_signed_in?
+    javascript:
+      // Event snippet for Conversão para site conversion page In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button.
+      function gtag_report_conversion(url) { var callback = function () { if (typeof(url) != 'undefined') { window.location = url; } }; gtag('event', 'conversion', { 'send_to': "#{ENV['GOOGLE_ADWORDS_CODE']}/#{ENV['GOOGLE_ADWORDS_EVENT']}", 'event_callback': callback }); return false; } </script>
+    - if @show_sumo
+      javascript:
+        $(document).ready(function() {
+          var tries = 0;
+          function checkSumoMe() {
+            var sumoButtons = $('.sumome-contactform-pullouttab');
+            if (sumoButtons.length > 0) {
+              sumoButtons.bind( "click", function() {
+                gtag_report_conversion("#{root_url}/#contact-form");
+              });
+            } else {
+              if (tries < 10) {
+                tries++;
+                setTimeout(function() { checkSumoMe(); }, 500);
+              }
+            }
+          }
+          setTimeout(function() { checkSumoMe(); }, 500);
+        });
