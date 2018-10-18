@@ -37,9 +37,9 @@ javascript:
                 gtag_report_conversion("#{root_url}/#contact-form");
               });
             } else {
-              if (tries < 10) {
+              if (tries < 50) {
                 tries++;
-                setTimeout(function() { checkSumoMe(); }, 500);
+                setTimeout(function() { checkSumoMe(); }, 250);
               }
             }
           }
