@@ -125,7 +125,7 @@ class WebhooksController < ApplicationController
   def airtable_order_value(results)
     final_results = results.map do |result| 
       fields = result["fields"]
-      fields["Valor Aprovado"] && fields["Valor Aprovado"] > 0 ? fields["Valor Aprovado"] : (fields["Valor Final"] || 0)
+      fields["Valor Aprovado"] && fields["Valor Aprovado"] > 0 ? fields["Valor Aprovado"] : fields["Valor Final"]
     end
     # puts final_results.to_json
     final_results
