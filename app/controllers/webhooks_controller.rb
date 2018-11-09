@@ -58,8 +58,8 @@ class WebhooksController < ApplicationController
       get_airtable_results("https://api.airtable.com/v0/" + base_id + "/Projetos?view=Grid%20view", begin_date_str, end_date_str)
     end
     airtable_results = join_airtable_results(airtable_base_results)
-    started = airtable_results[:started]
-    approved = airtable_results[:approved]
+    started = airtable_results[:started] || []
+    approved = airtable_results[:approved] || []
 
     estimate_ideal_count = ENV["ESTIMATE_IDEAL_COUNT"]
     estimate_ideal_value = ENV["ESTIMATE_IDEAL_VALUE"]
