@@ -72,7 +72,7 @@ class WebhooksController < ApplicationController
 
     started_index = CompanyIndex.find_or_create_by(code: "order_started_count_3_months", reference_date: base_date)
     started_index.name = "Qtd Orçada"
-    started_index.description = "Faixa deve estar na faixa #{estimate_ideal_count} a cada 3 meses"
+    started_index.description = "Valor deve estar na faixa #{estimate_ideal_count} a cada 3 meses"
     started_index.value = started.count
     started_index.calculation_params = { range: started_ideal_counts }
     started_index.level = sales_level(started_index)
@@ -82,7 +82,7 @@ class WebhooksController < ApplicationController
 
     started_value_index = CompanyIndex.find_or_create_by(code: "order_started_value_3_months", reference_date: base_date)
     started_value_index.name = "$ Orçada"
-    started_value_index.description = "Faixa deve estar na faixa #{estimate_ideal_value} a cada 3 meses"
+    started_value_index.description = "Valor deve estar na faixa #{estimate_ideal_value} a cada 3 meses"
     started_value_index.value = airtable_order_value(started).sum
     started_value_index.calculation_params = { range: started_ideal_values }
     started_value_index.level = sales_level(started_value_index)
@@ -92,7 +92,7 @@ class WebhooksController < ApplicationController
 
     approved_index = CompanyIndex.find_or_create_by(code: "order_approved_count_3_months", reference_date: base_date)
     approved_index.name = "Qtd Aprovada"
-    approved_index.description = "Faixa deve estar na faixa #{order_ideal_count} a cada 3 meses"
+    approved_index.description = "Valor deve estar na faixa #{order_ideal_count} a cada 3 meses"
     approved_index.value = approved.count
     approved_index.calculation_params = { range: approved_ideal_counts }
     approved_index.level = sales_level(approved_index)
@@ -102,7 +102,7 @@ class WebhooksController < ApplicationController
 
     approved_value_index = CompanyIndex.find_or_create_by(code: "order_approved_value_3_months", reference_date: base_date)
     approved_value_index.name = "$ Aprovada"
-    approved_value_index.description = "Faixa deve estar na faixa #{order_ideal_value} a cada 3 meses"
+    approved_value_index.description = "Valor deve estar na faixa #{order_ideal_value} a cada 3 meses"
     approved_value_index.value = airtable_order_value(approved).sum
     approved_value_index.calculation_params = { range: approved_ideal_values }
     approved_value_index.level = sales_level(approved_value_index)
@@ -110,7 +110,19 @@ class WebhooksController < ApplicationController
     approved_value_index.value_precision = 2
     approved_value_index.save
 
-    [started_index, started_value_index, approved_index, approved_value_index]
+    detailed_indexes = [started_index, started_value_index, approved_index, approved_value_index]
+
+    overall_index = CompanyIndex.find_or_create_by(code: "overall_3_months", reference_date: base_date)
+    overall_index.name = "Geral"
+    overall_index.description = "Índice geral baseado nos índices detalhados"
+    overall_index.value = detailed_indexes.inject(0){|sum,e| sum + e.level }
+    overall_index.calculation_params = {  }
+    overall_index.level = overall_index.value / detailed_indexes.length
+    overall_index.value_prefix = ""
+    overall_index.value_precision = 0
+    overall_index.save
+
+    { overall: overall_index, detailed: detailed_indexes }
   end
 
   def sales_level(index)
