@@ -9,6 +9,16 @@ javascript:
   window.PAGE_PATH = function() { return trimChar(window.location.hostname + window.location.pathname + window.location.search + window.location.hash, "#"); };
   window.RELATIVE_PAGE_PATH = function() { return trimChar(window.location.pathname + window.location.search + window.location.hash, "#"); };
   window.RELATIVE_PAGE_PATH_HASHED = function(hash) { return trimChar(window.location.pathname + window.location.search + hash, "#"); };
+- if @can_show_analytics
+  /! Google Tag Manager
+  javascript:
+    | (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    | new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    | j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    | 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    | })(window,document,'script','dataLayer','GTM-WZG5J9F');
+  /! End Google Tag Manager
+
 - if @can_show_analytics && ENV['GOOGLE_ANALYTICS_CODE'].present? && !user_signed_in?
   script async="" src="https://www.googletagmanager.com/gtag/js?id=#{ENV['GOOGLE_ANALYTICS_CODE']}" 
   javascript:
