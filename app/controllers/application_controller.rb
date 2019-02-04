@@ -188,6 +188,7 @@ class ApplicationController < ActionController::Base
       @can_show_analytics = true
 
       # @show_sumo = params[:utm_campaign] == "site_express"
-      @show_sumo = !(current_user && current_user.type == Admin.name && params[:view_as] != "user")
+      # @show_sumo = !(current_user && current_user.type == Admin.name && params[:view_as] != "user")
+      @show_sumo = false
     end
 end

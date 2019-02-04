@@ -1,0 +1,18 @@
+= simple_form_for @general_contact do |f|
+  .form-inputs
+    .form-group
+      label
+        = localized_value_string(@current_page, 'contact_form.name', 'Seu Nome')
+      = f.input_field :name, required: true
+    .form-group
+      label
+        = localized_value_string(@current_page, 'contact_form.email', 'Seu E-mail')
+      = f.input_field :email, as: :email, required: true
+    .form-group
+      label
+        = localized_value_string(@current_page, 'contact_form.message', 'Sua Mensagem')
+      = f.input_field :message, as: :text, required: true
+  .form-actions
+    .form-group-btn
+      = localized_value_element(@current_page, 'contact_form.send', 'Enviar', 'Texto Botão:') do |args|
+        input type="submit" value="#{@current_page.get_value('contact_form.send', 'Enviar').value}"

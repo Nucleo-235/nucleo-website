@@ -65,6 +65,8 @@ gem "aws-ses", "~> 0.6.0", :require => 'aws/ses'
 gem 'figaro'
 gem 'puma'
 
+gem 'mail_form'
+
 gem 'google-api-client'
 gem 'rest-client'
 
