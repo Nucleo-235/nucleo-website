@@ -1,4 +1,11 @@
 class GeneralContactsController < ApplicationController
+  skip_before_action :show_analytics
+  skip_before_action :set_locale
+  skip_before_action :persist_locale
+  skip_before_action :authenticate_user!
+  skip_before_action :set_editor_config
+  skip_before_action :set_localizable_page
+
   def create
     @contact = GeneralContact.new(params[:general_contact])
     @contact.request = request
