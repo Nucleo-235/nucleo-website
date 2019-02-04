@@ -9,14 +9,14 @@ javascript:
   window.PAGE_PATH = function() { return trimChar(window.location.hostname + window.location.pathname + window.location.search + window.location.hash, "#"); };
   window.RELATIVE_PAGE_PATH = function() { return trimChar(window.location.pathname + window.location.search + window.location.hash, "#"); };
   window.RELATIVE_PAGE_PATH_HASHED = function(hash) { return trimChar(window.location.pathname + window.location.search + hash, "#"); };
-- if @can_show_analytics
+- if @can_show_analytics && ENV['GOOGLE_TAG_MANAGER'].present? && !user_signed_in?
   /! Google Tag Manager
   javascript:
-    | (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    | new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    | j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    | 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    | })(window,document,'script','dataLayer','GTM-WZG5J9F');
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer',"#{ENV['GOOGLE_TAG_MANAGER']}");
   /! End Google Tag Manager
 
 - if @can_show_analytics && ENV['GOOGLE_ANALYTICS_CODE'].present? && !user_signed_in?
@@ -59,15 +59,15 @@ javascript:
     /! Facebook Pixel Code
     javascript:
       !function(f,b,e,v,n,t,s)
-      | {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      | n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      | if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      | n.queue=[];t=b.createElement(e);t.async=!0;
-      | t.src=v;s=b.getElementsByTagName(e)[0];
-      | s.parentNode.insertBefore(t,s)}(window, document,'script',
-      | 'https://connect.facebook.net/en_US/fbevents.js');
-      | fbq('init', "#{ENV['FACEBOOK_PIXEL']}");
-      | fbq('track', 'PageView');
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', "#{ENV['FACEBOOK_PIXEL']}");
+      fbq('track', 'PageView');
     noscript
       img height="1" src="https://www.facebook.com/tr?id=#{ENV['FACEBOOK_PIXEL']}&ev=PageView&noscript=1" style="display:none" width="1" /
     /! End Facebook Pixel Code

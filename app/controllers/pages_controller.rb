@@ -6,6 +6,8 @@ class PagesController < ApplicationController
   def home
     @partners = Partner.all
     @people = Person.where.not(type: Partner.name)
+
+    @general_contact = GeneralContact.new
     
     @projects = Project.all.order(:sort_order)
     if @can_edit
@@ -13,6 +15,6 @@ class PagesController < ApplicationController
       @new_project = Project.new
     end
 
-    set_location
+    # set_location
   end
 end

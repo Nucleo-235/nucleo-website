@@ -42,6 +42,14 @@
   color: $base-white;
   overflow: hidden;
 
+  &.no-forecast {
+    background-image: image_url('weather-no-forecast-bg-mobile.png');
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+  }
+
   &.forecast {
     // color: #3d3d3d;
     color: $base-white;
@@ -65,6 +73,31 @@
 
   .content {
     position: relative;
+    overflow: hidden;
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+    .contact-form {
+      margin-bottom: 40px;
+
+      .form-inputs {
+        input, textarea {
+          background: transparent;
+          border: $base-white solid 1px;
+          width: 100%;
+          font-family: $body-text-font-family;
+          padding: 7px;
+        }
+      }
+      button, input[type="button"], input[type="submit"] {
+        background-color: #05b0df;
+        width: 100%;
+        border: none;
+        padding: 7px;
+      }
+    }
+
     .location {
       position: absolute;
       z-index: 11;
@@ -99,68 +132,118 @@
         font-family: $title-text-font-family;
       }
     }
-    .address, .links {
-      position: relative;
-      margin: 0px;
+    .address, .links, .nucleo-info {
       z-index: 12;
+
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      margin: 0px;
+      position: relative;
+      text-align: left;
+
       font-size: 20px;
-      background-color: transparentize($base-black, 0.8);
       color: $base-white;
+      border: none;
+    }
+
+    .nucleo-info {
+      img {
+        width: 100%;
+        max-width: 60%;
+        height: auto;
+        margin-bottom: 20px;
+        
+      }
     }
     .address {
-      padding: 10px 15px;
-      margin-top: 310px;
-      display: block;
-      width: 100%;
-      text-align: center;
-
-      border: $base-white 3px solid;
+      font-size: 22px;
     }
     .links {
-      padding: 0px;
-      display: block;
-      width: 100%;
-      border: none;
-
       a {
         @include standard_link_button(transparent, $base-white);
       }
 
       & > * {
-        border: $base-white 3px solid;
-        border-top:none;
-        padding: 10px 15px;
-        width: 100%;
         display: inline-block;
-        text-align: center;
+        text-align: left;
         vertical-align: top;
+      }
+    }
+
+  }
+
+  @include above_mobile_portrait() {
+    &.no-forecast {
+      background-image: image_url('weather-no-forecast-bg.png');
+    }
+    .content {
+      h2 {
+        margin-top: 0px;
+        margin-bottom: 70px;
+      }
+      .contact-form {
+        width: 75%;
+        max-width: 75%;
+        float: left;
+        margin-bottom: 0px;
+
+        .form-inputs, .form-actions {
+          width: 70%;
+        }
+        .form-inputs {
+          .form-group > * {
+            display: block;
+          }
+        }
+        .form-group-btn {
+          text-align: right;
+          button, input[type="button"], input[type="submit"] {
+            padding-left: 45px;
+            padding-right: 45px;
+            width: auto;
+          }
+        }
+      }
+      .address, .links, .nucleo-info {
+        width: 25%;
+        max-width: 25%;
+        float: right;
+      }
+      .address {
+        text-align: left;
+      }
+      .links {
+        & > * {
+          width: 100%;
+        }
+      }
+
+      .nucleo-info {
+        img {
+          max-width: 100%;
+          
+        }
       }
     }
   }
 
-  @include above_mobile_portrait() {
+  @include mobile_only() {
     .content {
-      .address {
-        padding: 15px 30px;
-        margin-top: 160px;
-        width: 60%;
-        text-align: left;
-      }
+      padding-top: 20px;
+      padding-bottom: 80px;
+      
       .links {
-        width: 60%;
-        border-right: $base-white 3px solid;
-        border-left: $base-white 3px solid;
-        border-bottom: $base-white 3px solid;
-
-        & > * {
-          padding: 15px 30px;
-          width: 50%;
-          border: none;
-
-          &:last-child {
-            border-left: $base-white 3px solid;
-            width: calc(50% - 4px);
+        a {
+          display: inline-block;
+        }
+        a:not(:last-child) {
+          &::after {
+            content: " | ";
           }
+        }
+        br {
+          display: none;
         }
       }
     }
