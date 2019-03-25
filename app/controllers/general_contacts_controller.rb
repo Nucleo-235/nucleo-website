@@ -31,11 +31,12 @@ class GeneralContactsController < ApplicationController
       
       puts 'Obrigado por enviar sua mensagem. Entraremos em contato em breve!'
       flash.now[:notice] = 'Obrigado por enviar sua mensagem. Entraremos em contato em breve!'
+      render :template => "pages/home"
     else
       puts 'Não foi possível enviar a mensagem.'
       puts @contact.errors.to_json
       flash.now[:error] = 'Não foi possível enviar a mensagem.'
+      redirect_to root_path, error: 'Não foi possível enviar a mensagem.'
     end
-    render :template => "pages/home"
   end
 end
