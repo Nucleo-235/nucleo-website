@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   end
   resources :partners
   resources :customers
-  resources :general_contacts, only: [:create], :path => "contato"
 
   scope "(:locale)", locale: /pt-BR|en|es/ do
+    resources :general_contacts, only: [:create], :path => "contato"
     root to: 'pages#home'
   end
   devise_for :users
