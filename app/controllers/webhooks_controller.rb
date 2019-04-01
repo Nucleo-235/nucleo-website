@@ -137,7 +137,11 @@ class WebhooksController < ApplicationController
   def airtable_order_value(results)
     final_results = results.map do |result| 
       fields = result["fields"]
-      fields["Valor Aprovado"] && fields["Valor Aprovado"] > 0 ? fields["Valor Aprovado"] : fields["Valor Final"]
+      if  fields["Valor Aprovado"] && fields["Valor Aprovado"] > 0 
+        fields["Valor Aprovado"]
+      else
+        fields["Valor Final"] && fields["Valor Final"] > 0 ? fields["Valor Final"] : 0
+      end
     end
     # puts final_results.to_json
     final_results
@@ -156,13 +160,13 @@ class WebhooksController < ApplicationController
     auth = "Bearer #{ENV['AIRTABLE_API']}"
 
     data_field = 'Data'
-    filter = "AND(NOT(Status = ''), IS_AFTER({#{data_field}},DATETIME_PARSE('#{begin_date_str}', 'YYYY-MM-DD')), IS_BEFORE({#{data_field}},DATETIME_PARSE('#{end_date_str}', 'YYYY-MM-DD')))"
+    filter = "AND(NOT(Status = ''), NOT({#{data_field}} = ''), IS_AFTER({#{data_field}},DATETIME_PARSE('#{begin_date_str}', 'YYYY-MM-DD')), IS_BEFORE({#{data_field}},DATETIME_PARSE('#{end_date_str}', 'YYYY-MM-DD')))"
     filter_string = ERB::Util.u(filter)
     url = "#{base_url}&filterByFormula=#{filter_string}"
     started = get_from_airtable(url)
 
     data_field = 'Data Aprovação'
-    filter = "AND(Status = 'Aprovado', IS_AFTER({#{data_field}},DATETIME_PARSE('#{begin_date_str}', 'YYYY-MM-DD')), IS_BEFORE({#{data_field}},DATETIME_PARSE('#{end_date_str}', 'YYYY-MM-DD')))"
+    filter = "AND(Status = 'Aprovado', NOT({#{data_field}} = ''), IS_AFTER({#{data_field}},DATETIME_PARSE('#{begin_date_str}', 'YYYY-MM-DD')), IS_BEFORE({#{data_field}},DATETIME_PARSE('#{end_date_str}', 'YYYY-MM-DD')))"
     filter_string = ERB::Util.u(filter)
     url = "#{base_url}&filterByFormula=#{filter_string}"
     approved = get_from_airtable(url)
