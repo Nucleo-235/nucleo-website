@@ -24,12 +24,4 @@ class IndexesMailer < ApplicationMailer
     mail_from = ENV['MAILER_FROM'] || 'kikecomp@gmail.com'
     mail(from: "Nucleo Reporter <#{mail_from}>", to: ENV['ADMIN_MAIL'], subject: @subject)
   end
-
-  def followups_waiting(projects, base_date)
-    @projects = projects
-    @subject = "Follow-Ups aguardando resposta"
-    @base_date = base_date
-    mail_from = ENV['MAILER_FROM'] || 'kikecomp@gmail.com'
-    mail(from: "Nucleo Reporter <#{mail_from}>", to: ENV['ADMIN_MAIL'], subject: @subject)
-  end
 end

@@ -1,0 +1,21 @@
+css:
+  .level .value {
+    font-weight: bold;
+  }
+  .level .normal {
+    font-weight: normal;
+  }
+
+h1 = @subject
+p = "Data de Referência: #{br_date(@base_date)}"
+
+- if @projects_data[:started_last_period] && @projects_data[:started_last_period].length > 0 && @projects_data[:delivered_last_period] && @projects_data[:delivered_last_period].length > 0
+  h2 Semana Passada
+  = render partial: 'projects_mailer/project', locals: { projects: @projects_data[:started_last_period], title: "Aprovados para iniciar" }
+  = render partial: 'projects_mailer/project', locals: { projects: @projects_data[:delivered_last_period], title: "Entregues" }
+  br /
+
+h2 Geral
+= render partial: 'projects_mailer/project', locals: { projects: @projects_data[:started], title: "Aprovados mas não iniciados" }
+= render partial: 'projects_mailer/project', locals: { projects: @projects_data[:inprogress], title: "Em execução" }
+= render partial: 'projects_mailer/project', locals: { projects: @projects_data[:delivered], title: "Entregues/Finalizados" }

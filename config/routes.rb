@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   get 'webhooks/social_links', to: 'webhooks#social_links'
   get 'webhooks/indexes', to: 'webhooks#indexes'
+  get 'webhooks/projects', to: 'webhooks#projects'
 
   match '*path', via: :get, to: redirect('/')
 end
