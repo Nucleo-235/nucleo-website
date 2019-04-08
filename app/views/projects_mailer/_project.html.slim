@@ -1,0 +1,18 @@
+- if projects && projects.length > 0
+  div
+    h3 = title
+    table style="width:100%; max-width:100%;"
+      tr
+        th Nome
+        th Cliente
+        th Data Aprovado
+        th Horas (Semanas est.)
+        th Valor
+      - projects.each do |project|
+        - fields = project["fields"]
+        tr
+          td = fields["Codigo"]
+          td = fields["Nome Cliente"]
+          td = fields["Data Aprovação"] ? br_parsedate(fields["Data Aprovação"]) : br_parsedate(fields["Data"])
+          td = fields["Horas"] && fields["Horas"] > 0 ? "#{fields["Horas"].ceil}h (#{(fields["Horas"]/20).ceil} sem)" : "-"
+          td = brl(fields[:final_value])

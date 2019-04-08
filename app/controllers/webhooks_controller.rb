@@ -35,6 +35,23 @@ class WebhooksController < ApplicationController
     end
   end
 
+  def projects
+    if Time.new.mday == 5 || params[:force] == "1"
+      original_date = Time.new
+
+      # sempre segundas
+      diff_days = original_date.wday > 0 ? (original_date.wday - 1) : 6
+      base_date = Time.new(original_date.year, original_date.month, original_date.day).advance(days: -1 * diff_days)
+
+      projects = get_projects(base_date)
+      ProjectsMailer.all_projects(projects, base_date).deliver
+
+      render json: { message: "indexes sent" }, status: :ok
+    else
+      render json: { message: "no indexes sent, not today" }, status: :ok
+    end
+  end
+
   def calculate_sales_indexes(base_date)
     time_span = 3.month
     begin_date = base_date - time_span
@@ -172,13 +189,22 @@ class WebhooksController < ApplicationController
 
   def get_followups(base_date)
     time_span = 9.month
-    time_span_end = 3.weeks
+    time_span_end = 1.weeks
     begin_date = base_date - time_span
     begin_date_str = begin_date.strftime("%Y-%m-%d")
     end_date = base_date - time_span_end
     end_date_str = end_date.strftime("%Y-%m-%d")
 
     airtable_results = SalesService.get_all_followups(begin_date_str, end_date_str)
+  end
+
+  def get_projects(base_date)
+    begin_date_str = (base_date - 1.week).strftime("%Y-%m-%d")
+    end_date_str = base_date.strftime("%Y-%m-%d")
+    major_begin_date_str = (base_date - 3.months).strftime("%Y-%m-%d")
+    major_end_date_str = base_date.strftime("%Y-%m-%d")
+
+    airtable_results = ProjectsService.get_all_projects(begin_date_str, end_date_str, major_begin_date_str, major_end_date_str)
   end
 
   def render_link_results(links, status = :ok)
@@ -209,7 +235,6 @@ class WebhooksController < ApplicationController
     IndexesMailer.execution(execution_indexes, base_date).deliver if execution_indexes
     if followups
       IndexesMailer.followups_required(followups[:required], base_date).deliver if followups[:required].length > 0
-      IndexesMailer.followups_waiting(followups[:waiting], base_date).deliver if followups[:waiting].length > 0
     end
   end
 
