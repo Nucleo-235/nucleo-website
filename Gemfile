@@ -66,6 +66,7 @@ gem 'figaro'
 gem 'puma'
 
 gem 'mail_form'
+gem "recaptcha", '4.9.0'
 
 gem 'google-api-client'
 gem 'rest-client'

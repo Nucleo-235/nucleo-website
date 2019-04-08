@@ -82,12 +82,22 @@
       margin-bottom: 40px;
 
       .form-inputs {
-        input, textarea {
+        input, textarea, select {
           background: transparent;
           border: $base-white solid 1px;
           width: 100%;
           font-family: $body-text-font-family;
           padding: 7px;
+        }
+        select {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          
+          background-image: image_url('icon-down-white.png');
+          background-repeat: no-repeat;
+          background-position: right center;
+          border-radius: 0px;
         }
       }
       button, input[type="button"], input[type="submit"] {
