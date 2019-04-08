@@ -1,0 +1,27 @@
+css:
+  .level .value {
+    font-weight: bold;
+  }
+  .level .normal {
+    font-weight: normal;
+  }
+
+h1 = @subject
+p = "Data de Referência: #{br_date(@base_date)}"
+
+div
+  table style="width:100%; max-width:100%;"
+    tr
+      th Nome
+      th Cliente
+      th Data de Envio
+      th Data ult Atualização
+      th Valor
+    - @projects.each do |project|
+      - fields = project["fields"]
+      tr
+        td = fields["Codigo"]
+        td = fields["Nome Cliente"]
+        td = br_parsedate(fields["Data"])
+        td = fields["Data Status"] ? br_parsedate(fields["Data Status"]) : "-"
+        td = brl(fields[:final_value])

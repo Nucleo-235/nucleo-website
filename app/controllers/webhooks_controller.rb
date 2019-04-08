@@ -25,26 +25,24 @@ class WebhooksController < ApplicationController
       diff_days = original_date.wday > 0 ? (original_date.wday - 1) : 6
       base_date = Time.new(original_date.year, original_date.month, original_date.day).advance(days: -1 * diff_days)
 
-      sales_indexes = calculate_sales_indexes(base_date, 3.month)
+      sales_indexes = calculate_sales_indexes(base_date)
+      followups = get_followups(base_date)
 
-      send_indexes(base_date, sales_indexes, nil)
+      send_indexes(base_date, sales_indexes, nil, followups)
       render json: { message: "indexes sent" }, status: :ok
     else
       render json: { message: "no indexes sent, not today" }, status: :ok
     end
   end
 
-  def calculate_sales_indexes(base_date, time_span)
+  def calculate_sales_indexes(base_date)
+    time_span = 3.month
     begin_date = base_date - time_span
     begin_date_str = begin_date.strftime("%Y-%m-%d")
-    end_date = base_date + time_span
+    end_date = base_date
     end_date_str = end_date.strftime("%Y-%m-%d")
 
-    airtable_base_ids = ['apph5wSohoj1CeRmC', 'apphxrTaZcPENxejr', 'appDUFqsL0ttGBYr9', 'appSPjyQ6qSGrYcyy']
-    airtable_base_results = airtable_base_ids.map do |base_id|  
-      SalesService.get_airtable_results("https://api.airtable.com/v0/" + base_id + "/Projetos?view=Grid%20view", begin_date_str, end_date_str)
-    end
-    airtable_results = SalesService.join_airtable_results(airtable_base_results)
+    airtable_results = SalesService.get_all_sales_results(begin_date_str, end_date_str)
     started = airtable_results[:started] || []
     approved = airtable_results[:approved] || []
 
@@ -172,6 +170,17 @@ class WebhooksController < ApplicationController
     [customer_happyness_index, hours_use_index]
   end
 
+  def get_followups(base_date)
+    time_span = 9.month
+    time_span_end = 3.weeks
+    begin_date = base_date - time_span
+    begin_date_str = begin_date.strftime("%Y-%m-%d")
+    end_date = base_date - time_span_end
+    end_date_str = end_date.strftime("%Y-%m-%d")
+
+    airtable_results = SalesService.get_all_followups(begin_date_str, end_date_str)
+  end
+
   def render_link_results(links, status = :ok)
     render json: { message: (links.count > 0 ? "mail sent" : "no mail sent") }, status: status
   end
@@ -195,9 +204,13 @@ class WebhooksController < ApplicationController
     end
   end
 
-  def send_indexes(base_date, sales_indexes, execution_indexes = nil)
+  def send_indexes(base_date, sales_indexes, execution_indexes = nil, followups = nil)
     IndexesMailer.sales(sales_indexes, base_date).deliver
     IndexesMailer.execution(execution_indexes, base_date).deliver if execution_indexes
+    if followups
+      IndexesMailer.followups_required(followups[:required], base_date).deliver if followups[:required].length > 0
+      IndexesMailer.followups_waiting(followups[:waiting], base_date).deliver if followups[:waiting].length > 0
+    end
   end
 
 end

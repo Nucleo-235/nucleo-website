@@ -28,4 +28,14 @@ module ApplicationHelper
   def index_formatted(index, value)
     number_to_currency(value, precision: index.value_precision, unit: index.value_prefix)
   end
+
+  def brl(value)
+    number_to_currency(value, precision: 2, unit: "R$ ")
+  end
+  def br_parsedate(str_value)
+    DateTime.parse(str_value, "%Y-%m-%d").strftime("%d/%m/%Y")
+  end
+  def br_date(value)
+    value.strftime("%d/%m/%Y")
+  end
 end
