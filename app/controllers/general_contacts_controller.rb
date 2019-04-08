@@ -26,7 +26,9 @@ class GeneralContactsController < ApplicationController
     @general_contact = GeneralContact.new(params[:general_contact])
     @general_contact.request = request
 
-    if @general_contact.deliver
+    if !verify_recaptcha(model: @general_contact)
+      redirect_to root_path, error: 'Não foi possível enviar a mensagem.'
+    elsif @general_contact.deliver
       @general_contact = GeneralContact.new
       
       puts 'Obrigado por enviar sua mensagem. Entraremos em contato em breve!'

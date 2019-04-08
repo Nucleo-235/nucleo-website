@@ -1,3 +1,5 @@
+- project_types = ['App', 'Chatbot', 'Dashboard', 'Site', 'Blockchain', 'Intranet', 'Outro']
+- budgets = ['De R$ 6.000,00 a 10.000,00', 'De R$ 10.000,00 a 20.000,00', 'Acima de R$ 20.000,00']
 = simple_form_for @general_contact do |f|
   .form-inputs
     .form-group
@@ -10,8 +12,17 @@
       = f.input_field :email, as: :email, required: true
     .form-group
       label
+        = localized_value_string(@current_page, 'contact_form.project_type', 'Seu Projeto é um ...')
+      = f.input_field :project_type, as: :select, collection: project_types, required: true
+    .form-group
+      label
+        = localized_value_string(@current_page, 'contact_form.budget', 'Quanto deseja investir?')
+      = f.input_field :budget, as: :select, collection: budgets, required: true
+    .form-group
+      label
         = localized_value_string(@current_page, 'contact_form.message', 'Sua Mensagem')
       = f.input_field :message, as: :text, required: true
+    = recaptcha_tags
   .form-actions
     .form-group-btn
       = localized_value_element(@current_page, 'contact_form.send', 'Enviar', 'Texto Botão:') do |args|
