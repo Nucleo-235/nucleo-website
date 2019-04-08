@@ -18,38 +18,30 @@ class WebhooksController < ApplicationController
   end
 
   def indexes
-    if Time.new.wday == 1 || params[:force] == "1"
-      original_date = Time.new
+    original_date = Time.new
 
-      # sempre segundas
-      diff_days = original_date.wday > 0 ? (original_date.wday - 1) : 6
-      base_date = Time.new(original_date.year, original_date.month, original_date.day).advance(days: -1 * diff_days)
+    # sempre segundas
+    diff_days = original_date.wday > 0 ? (original_date.wday - 1) : 6
+    base_date = Time.new(original_date.year, original_date.month, original_date.day).advance(days: -1 * diff_days)
 
-      sales_indexes = calculate_sales_indexes(base_date)
-      followups = get_followups(base_date)
+    sales_indexes = calculate_sales_indexes(base_date)
+    followups = get_followups(base_date)
 
-      send_indexes(base_date, sales_indexes, nil, followups)
-      render json: { message: "indexes sent" }, status: :ok
-    else
-      render json: { message: "no indexes sent, not today" }, status: :ok
-    end
+    send_indexes(base_date, sales_indexes, nil, followups)
+    render json: { message: "indexes sent" }, status: :ok
   end
 
   def projects
-    if Time.new.mday == 5 || params[:force] == "1"
-      original_date = Time.new
+    original_date = Time.new
 
-      # sempre segundas
-      diff_days = original_date.wday > 0 ? (original_date.wday - 1) : 6
-      base_date = Time.new(original_date.year, original_date.month, original_date.day).advance(days: -1 * diff_days)
+    # sempre segundas
+    diff_days = original_date.wday > 0 ? (original_date.wday - 1) : 6
+    base_date = Time.new(original_date.year, original_date.month, original_date.day).advance(days: -1 * diff_days)
 
-      projects = get_projects(base_date)
-      ProjectsMailer.all_projects(projects, base_date).deliver
+    projects = get_projects(base_date)
+    ProjectsMailer.all_projects(projects, base_date).deliver
 
-      render json: { message: "indexes sent" }, status: :ok
-    else
-      render json: { message: "no indexes sent, not today" }, status: :ok
-    end
+    render json: { message: "projects sent" }, status: :ok
   end
 
   def calculate_sales_indexes(base_date)
