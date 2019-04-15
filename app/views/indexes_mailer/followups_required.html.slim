@@ -14,12 +14,15 @@ div
     tr
       th Nome
       th Cliente
+      th Data da Proposa
       th Data ultimo Contato
       th Valor
     - @projects.each do |project|
       - fields = project["fields"]
       tr
-        td = fields["Codigo"]
+        td 
+          a href="#{fields[:view_url]}" = fields["Codigo"]
         td = fields["Nome Cliente"]
+        td = br_parsedate(fields["Data"])
         td = br_parsedate(fields["Data Contato"])
         td = brl(fields[:final_value])
