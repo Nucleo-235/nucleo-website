@@ -11,7 +11,8 @@
       - projects.each do |project|
         - fields = project["fields"]
         tr
-          td = fields["Codigo"]
+          td 
+            a href="#{fields[:view_url]}" = fields["Codigo"]
           td = fields["Nome Cliente"]
           td = fields["Data Aprovação"] ? br_parsedate(fields["Data Aprovação"]) : br_parsedate(fields["Data"])
           td = fields["Horas"] && fields["Horas"] > 0 ? "#{fields["Horas"].ceil}h (#{(fields["Horas"]/20).ceil} sem)" : "-"
