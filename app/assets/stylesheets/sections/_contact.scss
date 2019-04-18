@@ -98,6 +98,10 @@
           background-repeat: no-repeat;
           background-position: right center;
           border-radius: 0px;
+          option {
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+          }
         }
       }
       button, input[type="button"], input[type="submit"] {
