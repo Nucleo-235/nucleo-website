@@ -40,10 +40,10 @@ module SalesService
     end
 
     def get_followups(base_url, base_id, begin_date_str, end_date_str)
-      data_field = 'Data Contato'
+      data_field = 'Data Próximo'
       filter = "AND(Status = 'Enviado', NOT({#{data_field}} = ''), IS_AFTER({#{data_field}},DATETIME_PARSE('#{begin_date_str}', 'YYYY-MM-DD')), IS_BEFORE({#{data_field}},DATETIME_PARSE('#{end_date_str}', 'YYYY-MM-DD')))"
       filter_string = ERB::Util.u(filter)
-      sort_string = "#{ERB::Util.u("sort[0][field]")}=#{ERB::Util.u("Data Contato")}&#{ERB::Util.u("sort[0][direction]")}=#{ERB::Util.u("desc")}"
+      sort_string = "#{ERB::Util.u("sort[0][field]")}=#{ERB::Util.u("Prob de Aprovar")}&#{ERB::Util.u("sort[0][direction]")}=#{ERB::Util.u("desc")}&#{ERB::Util.u("sort[1][field]")}=#{ERB::Util.u("Data Próximo")}&#{ERB::Util.u("sort[1][direction]")}=#{ERB::Util.u("desc")}"
       url = "#{base_url}?filterByFormula=#{filter_string}&#{sort_string}"
       required = AirtableService.get_from_airtable(url, base_id)
       SalesService.set_final_values(required)
