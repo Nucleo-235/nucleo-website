@@ -184,7 +184,7 @@ class WebhooksController < ApplicationController
     time_span_end = 1.weeks
     begin_date = base_date - time_span
     begin_date_str = begin_date.strftime("%Y-%m-%d")
-    end_date = base_date - time_span_end
+    end_date = base_date + time_span_end
     end_date_str = end_date.strftime("%Y-%m-%d")
 
     airtable_results = SalesService.get_all_followups(begin_date_str, end_date_str)

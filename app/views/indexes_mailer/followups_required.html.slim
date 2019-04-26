@@ -12,11 +12,12 @@ p = "Data de Referência: #{br_date(@base_date)}"
 div
   table style="width:100%; max-width:100%;"
     tr
-      th Nome
-      th Cliente
-      th Data da Proposa
-      th Data ultimo Contato
-      th Valor
+      th style="text-align:left;" Nome
+      th style="text-align:left;" Cliente
+      th style="text-align:left;" Data da Proposta
+      th style="text-align:left;" Previsão / próx Contato
+      th style="text-align:right;" Prob de Aprovar
+      th style="text-align:right;" Valor
     - @projects.each do |project|
       - fields = project["fields"]
       tr
@@ -24,5 +25,6 @@ div
           a href="#{fields[:view_url]}" = fields["Codigo"]
         td = fields["Nome Cliente"]
         td = br_parsedate(fields["Data"])
-        td = br_parsedate(fields["Data Contato"])
-        td = brl(fields[:final_value])
+        td = br_parsedate(fields["Data Próximo"])
+        td style="text-align:right;" = fields["Prob de Aprovar"] && fields["Prob de Aprovar"] > 0 ? "#{fields["Prob de Aprovar"]}%" : ""
+        td style="text-align:right; padding-left:10px;" = brl(fields[:final_value])
