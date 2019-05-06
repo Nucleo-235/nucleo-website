@@ -24,8 +24,8 @@ class WebhooksController < ApplicationController
     diff_days = original_date.wday > 0 ? (original_date.wday - 1) : 6
     base_date = Time.new(original_date.year, original_date.month, original_date.day).advance(days: -1 * diff_days)
 
-    sales_indexes = calculate_sales_indexes(base_date)
-    followups = get_followups(base_date)
+    sales_indexes = calculate_sales_indexes(base_date) if !params[:followups_only].present?
+    followups = get_followups(base_date) if !params[:sales_only].present?
 
     send_indexes(base_date, sales_indexes, nil, followups)
     render json: { message: "indexes sent" }, status: :ok
@@ -181,7 +181,7 @@ class WebhooksController < ApplicationController
 
   def get_followups(base_date)
     time_span = 9.month
-    time_span_end = 1.weeks
+    time_span_end = 5.days
     begin_date = base_date - time_span
     begin_date_str = begin_date.strftime("%Y-%m-%d")
     end_date = base_date + time_span_end
@@ -223,7 +223,7 @@ class WebhooksController < ApplicationController
   end
 
   def send_indexes(base_date, sales_indexes, execution_indexes = nil, followups = nil)
-    IndexesMailer.sales(sales_indexes, base_date).deliver
+    IndexesMailer.sales(sales_indexes, base_date).deliver if sales_indexes
     IndexesMailer.execution(execution_indexes, base_date).deliver if execution_indexes
     if followups
       IndexesMailer.followups_required(followups[:required], base_date).deliver if followups[:required].length > 0
