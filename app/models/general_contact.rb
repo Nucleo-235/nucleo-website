@@ -11,7 +11,7 @@ class GeneralContact < MailForm::Base
     {
       :subject => "Website Nucleo - Contato",
       # :to => "comercial@gafor.com.br",
-      :to => (ENV['ADMIN_MAIL'] || "hrangel@nucleo235.com.br"),
+      :to => (ENV['ADMIN_CONTACT_MAIL'] || "hrangel@nucleo235.com.br"),
       :from => ('Website Nucleo <' + (ENV['MAILER_FROM'] || 'sender@nucleo.house') + '>'),
       :reply_to => %("#{name}" <#{email}>)
     }
