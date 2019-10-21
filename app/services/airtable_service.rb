@@ -2,6 +2,7 @@ module AirtableService
   class << self
     def airtable_base_ids
       [
+        { key: 'appFQdXjS4cH23IAv', view_url: 'https://airtable.com/tblytlgLs3CMFxQB8' },,
         { key: 'apph5wSohoj1CeRmC', view_url: 'https://airtable.com/tblaIEbQRnJ6fIZnf' },
         { key: 'apphxrTaZcPENxejr', view_url: 'https://airtable.com/tblaazcCzbfJq1mk4' },
         { key: 'appDUFqsL0ttGBYr9', view_url: 'https://airtable.com/tblwxNJUlZTyj56sM' },
