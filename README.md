@@ -47,26 +47,25 @@ df -h
 ```
 mkdir "logs-$(date +"%Y-%m-%d")"
 cd "logs-$(date +"%Y-%m-%d")"
-
 mkdir nucleo
+mkdir lucas
+mkdir gauss
+
 cd nucleo
 cp /home/deploy-nucleo/nucleo-website/shared/log/* ./ -R
-cd ..
-mkdir lucas
-cd lucas
+cd ../lucas
 cp /home/deploy-lucas/lucas-website/shared/log/* ./ -R
-cd ..
-mkdir gauss
-cd gauss
+cd ../gauss
 cp /home/deploy-gauss/gauss-website/shared/log/* ./ -R
-cd ..
+cd ../..
 cd ..
 tar -czvf "logs-$(date +"%Y-%m-%d").tar.gz" ./"logs-$(date +"%Y-%m-%d")"
 ```
 
 2 - Locally
 ```
-scp root@45.55.211.201:/root/"logs-$(date +"%Y-%m-%d").tar.gz" ./log/"logs-$(date +"%Y-%m-%d").tar.gz"
+
+scp root@174.138.92.213:/root/"logs-$(date +"%Y-%m-%d").tar.gz" ./log/"logs-$(date +"%Y-%m-%d").tar.gz"
 tar -xzvf log/"logs-$(date +"%Y-%m-%d").tar.gz" -C log
 ```
 
