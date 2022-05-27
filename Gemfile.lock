@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/paulwittmann/rails-erd.git
+  remote: https://github.com/paulwittmann/rails-erd.git
   revision: 9ccb094fa29b095d5549271f48c65af8bb53f749
   branch: mavericks
   specs:
@@ -208,7 +208,9 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mimemagic (0.3.2)
+    mimemagic (0.4.3)
+      nokogiri (~> 1)
+      rake
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     money (6.8.1)
@@ -262,7 +264,7 @@ GEM
     public_suffix (2.0.5)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
-    rack (1.6.5)
+    rack (1.6.13)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.5)
